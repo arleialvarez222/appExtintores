@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    margin: 10px;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+h4 {
+    margin-top: 20px;
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+
+.formulario {
+    justify-content: space-between;
+}
+
+label {
+    margin-left: 0px;
+    margin-top: 10px;
+}
+
+.btnform-servicio {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.btn-servicio {
+    width: 100px;
+    height: 35px;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+
+/* estilos tabla */
+
+.table-service {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.icono-table {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 10px;
+    font-size: 20px;
+    border-radius: 3px;
+}
+
+
+/* fin estilos tabla */
+
+@media(max-width: 700px) and (min-width:200px) {
+    table {
+        width: 100%;
+        font-size: .9em;
+    }
+    table tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid grey;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    table td[data-titulo] {
+        display: flex;
+    }
+    table td[data-titulo]::before {
+        content: attr( data-titulo);
+        width: 80px;
+        color: silver;
+        font-weight: bold;
+    }
+    table thead {
+        display: none;
+    }
+}

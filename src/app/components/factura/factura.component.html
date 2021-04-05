@@ -1,0 +1,137 @@
+<div class="contenedor">
+    <h2>Facturación de servicio</h2>
+    <div class="formulario">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="cliente" class="form-label">Cliente</label>
+                    <select id="cliente" class="form-control">
+                    <option selected>Seleccionar...</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="empleado" class="form-label">Empleado</label>
+                    <select id="empleado" class="form-control">
+                    <option selected>Seleccionar...</option>
+                    <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="fechaS" class="form-label">Fecha servicio</label>
+                    <input type="date" class="form-control" id="fechaS">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="fechaM" class="form-label">Fecha mantenimiento</label>
+                    <input type="date" class="form-control" id="fechaM">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="fechaV" class="form-label">Fecha vencimiento</label>
+                    <input type="date" class="form-control" id="fechaV">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="estado" class="form-label">Estado</label>
+                    <input type="text" class="form-control" id="estado">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="abono" class="form-label">Abono</label>
+                    <input type="number" class="form-control" id="abono">
+                </div>
+            </div>
+
+            <div>
+                <h4>Seleccionar servicio
+                </h4>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="descripcion">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="peso" class="form-label">Peso extintor</label>
+                    <select id="peso" class="form-control">
+                <option selected>Seleccionar...</option>
+                <option>...</option>
+              </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="tipo" class="form-label">Tipo extintor</label>
+                    <select id="tipo" class="form-control">
+                <option selected>Seleccionar...</option>
+                <option>...</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input type="number" class="form-control" id="cantidad">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="valor" class="form-label">Valor</label>
+                    <input type="number" class="form-control" id="valor">
+                </div>
+            </div>
+
+            <div class="btnform-servicio">
+                <button type="button" class="btn btn-outline-primary btn-servicio">Agregar</button>
+                <button type="button" class="btn btn-outline-secondary btn-servicio">Guardar</button>
+            </div>
+        </form>
+        <div class="row table-service">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"> # </th>
+                        <th scope="col"> Descripción </th>
+                        <th scope="col"> Peso </th>
+                        <th scope="col"> Tipo </th>
+                        <th scope="col"> Cantidad </th>
+                        <th scope="col"> Total </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"> 1 </th>
+                        <td data-titulo="descripción"> recarga de extintor </td>
+                        <td data-titulo="peso"> 5L </td>
+                        <td data-titulo="tipo"> ABC </td>
+                        <td data-titulo="cantida"> 1 </td>
+                        <td data-titulo="total"> $12.000 </td>
+                        <td>
+                            <i class="pi pi-pencil btn-outline-primary icono-table"></i>
+                            <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> 2 </th>
+                        <td data-titulo="descripción"> recarga de extintor </td>
+                        <td data-titulo="peso"> 10L </td>
+                        <td data-titulo="tipo"> solkaflan </td>
+                        <td data-titulo="cantidad"> 2 </td>
+                        <td data-titulo="total"> $32.000 </td>
+                        <td>
+                            <i class="pi pi-pencil btn-outline-primary icono-table"></i>
+                            <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>$44.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

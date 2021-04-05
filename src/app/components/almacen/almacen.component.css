@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.titulo-prin {
+    text-transform: uppercase;
+    margin: 10px 20px;
+}
+
+
+/* estilos tabla */
+
+.table-service {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.icono-table {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 10px;
+    font-size: 20px;
+    border-radius: 3px;
+}
+
+
+/* fin estilos tabla */
