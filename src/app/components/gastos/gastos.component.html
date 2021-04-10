@@ -2,79 +2,109 @@
 
     <div>
         <h2 class="titulo-prin">
-            <span>Lista de gastos</span>
+            Lista de gastos
         </h2>
     </div>
     <div class="btn">
-        <button type="button" class="btn btn-primary btn-stock">Agregar gasto</button>
+        <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-gasto">
+    <i class="pi pi-euro icono-btn"></i>Agregar gasto</button>
     </div>
-    <!-- <div class="table-service">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"> # </th>
-                    <th scope="col"> Descripción </th>
-                    <th scope="col"> Fecha </th>
-                    <th scope="col"> Cantidad </th>
-                    <th scope="col"> Total </th>
+
+    <div class="card">
+        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+            <ng-template pTemplate="header">
+                <tr class="header">
+                    <th class="identificador"> # </th>
+                    <th> Descripción </th>
+                    <th> Fecha </th>
+                    <th> Cantidad </th>
+                    <th> Total </th>
+                    <th></th>
                 </tr>
-            </thead>
-            <tbody>
+            </ng-template>
+            <ng-template pTemplate="body" let paises>
                 <tr>
-                    <th scope="row"> 1 </th>
-                    <td> repuestos camioneta </td>
-                    <td> 12/12/2021 </td>
-                    <td> 2 </td>
-                    <td> $18.000 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
+                    <td data-titulo="#"> 1</td>
+                    <td data-titulo="Descripción"> 2</td>
+                    <td data-titulo="Fecha"> 3</td>
+                    <td data-titulo="Cantidad"> 6</td>
+                    <td data-titulo="Total"> 7</td>
+                    <td class="td-iconos">
+                        <i (click)="editarGasto('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i class="pi pi-trash btn-outline-danger icono-table"></i>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row"> 2 </th>
-                    <td> gasolina camioneta </td>
-                    <td> 15/09/2021 </td>
-                    <td> 1 </td>
-                    <td> $89.000 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
+            </ng-template>
+        </p-table>
+    </div>
 
+    <!-- dialogos -->
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-euro "></i> AGREGAR GASTO
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="fecha">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="cantidad" class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="valor" class="form-label">Valor</label>
+                        <input type="number" class="form-control" id="valor">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
 
-
-
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, officiis animi. Maxime suscipit inventore vitae nisi, optio consectetur consequuntur eligendi cumque asperiores magnam pariatur! Consectetur, hic laboriosam! Id, consectetur eligendi.</p>
-</div>
+    <p-dialog [(visible)]="editGasto" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-euro "></i> EDITAR PRECIO
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="descripcion1" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion1">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fecha1" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="fecha1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="cantidad1" class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad1">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="valor1" class="form-label">Valor</label>
+                        <input type="number" class="form-control" id="valor1">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>

@@ -4,18 +4,32 @@
     box-sizing: border-box;
 }
 
+.contenedor {
+    margin: 15px;
+}
+
 .titulo-prin {
     text-transform: uppercase;
-    margin: 10px;
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-top: 15px;
+}
+
+.titulo-h3 i {
+    margin-right: 6px;
 }
 
 
 /* estilos tabla */
 
-.table-service {
+.card {
     margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    margin-bottom: 10px;
 }
 
 .icono-table {
@@ -31,31 +45,89 @@
 
 /* fin estilos tabla */
 
+p-dialog {
+    padding-bottom: 10px;
+}
+
 
 /* responsive */
 
-@media(max-width: 700px) and (min-width:180px) {
-    table {
+@media screen and (max-width: 700px) and (min-width:180px) {
+    p-table {
         width: 100%;
         font-size: .9em;
     }
-    table tr {
+    p-table tr {
         display: flex;
         flex-direction: column;
         border: 1px solid grey;
         padding: 1em;
         margin-bottom: 1em;
     }
-    table td[data-titulo] {
+    p-table td[data-titulo] {
         display: flex;
     }
-    table td[data-titulo]::before {
+    p-table td[data-titulo]::before {
         content: attr( data-titulo);
         width: 80px;
         color: silver;
+        margin-left: -5px;
         font-weight: bold;
     }
-    table thead {
+    p-table .header {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) and (min-width:180px) {
+    .table-detalle {
+        width: 100%;
+        font-size: .9em;
+    }
+    .table-detalle tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid grey;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    .table-detalle td[data-detalle] {
+        display: flex;
+    }
+    .table-detalle td[data-detalle]::before {
+        content: attr( data-detalle);
+        width: 100px;
+        color: silver;
+        font-weight: bold;
+    }
+    .table-detalle .header1 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px) and (min-width:180px) {
+    .table-detalle {
+        width: 100%;
+        font-size: .6em;
+    }
+    .table-detalle tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid grey;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    .table-detalle td[data-detalle] {
+        display: flex;
+    }
+    .table-detalle td[data-detalle]::before {
+        content: attr( data-detalle);
+        width: 100px;
+        color: silver;
+        font-size: .6em;
+        font-weight: bold;
+    }
+    .table-detalle .header1 {
         display: none;
     }
 }

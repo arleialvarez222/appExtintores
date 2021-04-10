@@ -1,60 +1,96 @@
-<div class="container">
+<div class="contenedor">
 
     <div>
         <h2 class="titulo-prin">
-            <span>Lista de precios</span>
+            Lista de precios
         </h2>
     </div>
     <div class="btn">
-        <button type="button" class="btn btn-primary btn-stock">Agregar stock</button>
+        <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-precio">
+      <i class="pi pi-dollar icono-btn"></i>Agregar precio</button>
     </div>
 
-    <div class="table-service">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"> # </th>
-                    <th scope="col"> Descripción </th>
-                    <th scope="col"> Valor </th>
-                    <th scope="col"> Iva </th>
-                    <th scope="col"> Valor Total </th>
+    <div class="card">
+        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+            <ng-template pTemplate="header">
+                <tr class="header">
+                    <th class="identificador"> # </th>
+                    <th> Descripción </th>
+                    <th> Valor </th>
+                    <th> Iva </th>
+                    <th> Valor total </th>
+                    <th></th>
                 </tr>
-            </thead>
-            <tbody>
+            </ng-template>
+            <ng-template pTemplate="body" let paises>
                 <tr>
-                    <th scope="row"> 1 </th>
-                    <td> recarga de extintor 5L </td>
-                    <td> $15.000 </td>
-                    <td> $3.000 </td>
-                    <td> $18.000 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
+                    <td data-titulo="#"> 1</td>
+                    <td data-titulo="Descripción"> 2</td>
+                    <td data-titulo="Valor"> 3</td>
+                    <td data-titulo="Iva"> 6</td>
+                    <td data-titulo="Valor total"> 7</td>
+                    <td class="td-iconos">
+                        <i (click)="editarPrecio('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i class="pi pi-trash btn-outline-danger icono-table"></i>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row"> 2 </th>
-                    <td> recarga de extintor 10L </td>
-                    <td> $25.000 </td>
-                    <td> $4.000 </td>
-                    <td> $29.000 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"> 3 </th>
-                    <td> venta de extintor 5L </td>
-                    <td> $30.000 </td>
-                    <td> $6.000 </td>
-                    <td> $36.000 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            </ng-template>
+        </p-table>
     </div>
-</div>
+
+    <!-- dialogos -->
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-dollar "></i> AGREGAR PRECIO
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="valor" class="form-label">Valor</label>
+                        <input type="number" class="form-control" id="valor">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="iva" class="form-label">Iva</label>
+                        <input type="number" class="form-control" id="iva">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
+
+    <p-dialog [(visible)]="editarPrice" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-dollar "></i> EDITAR PRECIO
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="descripcion1" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="valor1" class="form-label">Valor</label>
+                        <input type="text" class="form-control" id="valor1">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>

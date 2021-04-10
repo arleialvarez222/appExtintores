@@ -2,54 +2,72 @@
 
     <div>
         <h2 class="titulo-prin">
-            <span>Lista de créditos</span>
+            Lista de créditos
         </h2>
     </div>
-    <div class="table-service">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"> # </th>
-                    <th scope="col"> Cliente </th>
-                    <th scope="col"> Descripción </th>
-                    <th scope="col"> Fecha </th>
-                    <th scope="col"> Total </th>
-                    <th scope="col"> Abono </th>
-                    <th scope="col"> Deuda </th>
-                    <th scope="col"> Estado </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"> 1 </th>
-                    <td> Jose Rendon </td>
-                    <td> recarga de extintor </td>
-                    <td> 12/12/2021 </td>
-                    <td> $30.000 </td>
-                    <td> $18.000 </td>
-                    <td> $12.000 </td>
-                    <td> pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"> 2 </th>
-                    <td> Jose Rendon </td>
-                    <td> recarga de extintor </td>
-                    <td> 12/12/2021 </td>
-                    <td> $30.000 </td>
-                    <td> $18.000 </td>
-                    <td> $12.000 </td>
-                    <td> pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
 
-            </tbody>
-        </table>
+
+    <div class="card">
+        <p-table [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+            <ng-template pTemplate="header">
+                <tr class="header">
+                    <th> # </th>
+                    <th> Cliente </th>
+                    <th> Descripción </th>
+                    <th> Fecha </th>
+                    <th> Total </th>
+                    <th> Abono </th>
+                    <th> Deuda </th>
+                    <th> Estado </th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    <td data-titulo="#">dcsd</td>
+                    <td data-titulo="Fecha">cdvcd</td>
+                    <td data-titulo="Clente">vdvdv</td>
+                    <td data-titulo="Total">vvsdv</td>
+                    <td data-titulo="Estado">sdvdvd</td>
+                    <td data-titulo="Estado">sdvdvd</td>
+                    <td data-titulo="Estado">sdvdvd</td>
+                    <td data-titulo="Estado">sdvdvd</td>
+                    <td>
+                        <i (click)="showPositionDialog('center')" class="pi pi-list btn-outline-primary icono-table"></i>
+                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
+
+    <div class="p-col">
+        <p-button (click)="showPositionDialog('center')" icon="pi pi-arrow-right" label="Left" styleClass="p-button-warning"></p-button>
+    </div>
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            ABONOS
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="abono" class="form-label">Abono</label>
+                        <input type="number" class="form-control" id="abono">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select id="estado" class="form-control">
+                      <option selected>Seleccionar...</option>
+                      <option>...</option>
+                      </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
 </div>

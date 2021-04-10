@@ -2,59 +2,208 @@
 
     <div>
         <h2 class="titulo-prin">
-            <span>Lista de clientes</span>
+            Lista de clientes
         </h2>
     </div>
     <div class="btn">
-        <button type="button" class="btn btn-primary btn-stock">Agregar cliente</button>
+        <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-client">
+          <i class="pi pi-user-plus icono-btn"></i>Agregar cliente</button>
     </div>
-    <div class="table-service">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"> # </th>
-                    <th scope="col"> Nombre </th>
-                    <th scope="col"> Apellido </th>
-                    <th scope="col"> Descripción </th>
-                    <th scope="col"> Documento </th>
-                    <th scope="col"> Dirección </th>
-                    <th scope="col"> Teléfono </th>
-                    <th scope="col"> Email </th>
-                    <th scope="col"> Nit </th>
+
+    <div class="card">
+        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+            <ng-template pTemplate="header">
+                <tr class="header">
+                    <th class="identificador"> # </th>
+                    <th> Nombre </th>
+                    <th> Apellido </th>
+                    <th> Descripción </th>
+                    <th> Documento </th>
+                    <th> Dirección </th>
+                    <th> Teléfono </th>
+                    <th> Email </th>
+                    <th> Nit </th>
+                    <th></th>
                 </tr>
-            </thead>
-            <tbody>
+            </ng-template>
+            <ng-template pTemplate="body" let paises>
                 <tr>
-                    <th scope="row"> 1 </th>
-                    <td> Fabian </td>
-                    <td> Garcia </td>
-                    <td> panaderia central </td>
-                    <td> 21 458 795 </td>
-                    <td> Clle 14 24 A </td>
-                    <td> 830 4578 </td>
-                    <td> fabian@gmail.com </td>
-                    <td> 154-48796 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
+                    <td data-titulo="#"> 1</td>
+                    <td data-titulo="Nombre"> 2</td>
+                    <td data-titulo="Apellido"> 3</td>
+                    <td data-titulo="Descripción"> 4</td>
+                    <td data-titulo="Documento"> 5</td>
+                    <td data-titulo="Dirección"> 6</td>
+                    <td data-titulo="Teléfono"> 7</td>
+                    <td data-titulo="Email"> 8</td>
+                    <td data-titulo="Nit"> 9</td>
+                    <td class="td-iconos">
+                        <i (click)="editarClient('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                        <i (click)="detalleExtintor('center')" class="pi pi-list btn-outline-success icono-table"></i>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row"> 2 </th>
-                    <td> Fabian </td>
-                    <td> Garcia </td>
-                    <td> panaderia central </td>
-                    <td> 21 458 795 </td>
-                    <td> Clle 14 24 A </td>
-                    <td> 830 4578 </td>
-                    <td> fabian@gmail.com </td>
-                    <td> 154-48796 </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            </ng-template>
+        </p-table>
     </div>
+
+    <!-- dialogos -->
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-user-plus "></i> AGREGAR CLIENTE
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="documento" class="form-label">Documento</label>
+                        <input type="number" class="form-control" id="documento">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" id="telefono">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nit" class="form-label">Nit</label>
+                        <input type="number" class="form-control" id="nit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
+
+    <p-dialog [(visible)]="editarCliente" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-user-edit "></i> EDITAR CLIENTE
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nombre1" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="apellido1" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="documento1" class="form-label">Documento</label>
+                        <input type="number" class="form-control" id="documento1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="descripcion1" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="telefono1" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" id="telefono1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="direccion1" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email1" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nit1" class="form-label">Nit</label>
+                        <input type="number" class="form-control" id="nit1">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
+
+    <p-dialog [(visible)]="detailExtintor" [position]="positionDetail" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-list "></i> DETALLE DE EXTINTORES
+            </h3>
+        </ng-template>
+        <p-table [value]="paises" class="table-detalle">
+            <ng-template pTemplate="header">
+                <tr class="header1">
+                    <th class="identificador-detalle"> # </th>
+                    <th> Tipo </th>
+                    <th> Peso </th>
+                    <th> Cantidad </th>
+                    <th> Fecha S </th>
+                    <th> Fecha M/to </th>
+                    <th> Fecha V </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    <td data-detalle="#">#</td>
+                    <td data-detalle="Tipo">2</td>
+                    <td data-detalle="Peso">2</td>
+                    <td data-detalle="Cantidad">2</td>
+                    <td data-detalle="Fecha S">2</td>
+                    <td data-detalle="Fecha M">2</td>
+                    <td data-detalle="Fecha V">2</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
 </div>

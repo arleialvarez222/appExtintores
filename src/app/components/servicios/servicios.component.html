@@ -1,192 +1,70 @@
 <div class="contenedor">
 
     <div>
-        <h2 class="titulo-prin">
-            <span>Lista de servicios</span>
-        </h2>
+        <h1 class="titulo-prin">Lista de servicios</h1>
     </div>
-    <div class="table-service">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col"> Fecha </th>
-                    <th scope="col"> Cliente </th>
-                    <th scope="col"> Total </th>
-                    <th scope="col"> Estado </th>
-                    <th scope="col"></th>
+    <div class="card">
+        <p-table [value]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+            <ng-template pTemplate="header">
+                <tr class="header">
+                    <th> # </th>
+                    <th> Fecha </th>
+                    <th> Cliente </th>
+                    <th> Total </th>
+                    <th> Estado </th>
+                    <th></th>
                 </tr>
-            </thead>
-            <tbody>
+            </ng-template>
+            <ng-template pTemplate="body" let-paises>
                 <tr>
-                    <th scope="row">1</th>
-                    <td data-titulo="Fecha"> 08/08/2021 </td>
-                    <td data-titulo="Cliente"> Jose Ramon </td>
-                    <td data-titulo="Total"> $10.000 </td>
-                    <td data-titulo="Estado"> Cancelado </td>
+                    <td data-titulo="#">{{paises.nombre}}</td>
+                    <td data-titulo="Fecha">{{paises.capital}}</td>
+                    <td data-titulo="Clente">{{paises.codigo}}</td>
+                    <td data-titulo="Total">{{paises.region}}</td>
+                    <td data-titulo="Estado">{{paises.area}}</td>
                     <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td data-titulo="Fecha"> 07/08/2021 </td>
-                    <td data-titulo="Cliente"> Ivan Ramon </td>
-                    <td data-titulo="Total"> $20.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
+                        <i (click)="showPositionDialog('center')" class="pi pi-list btn-outline-primary icono-table"></i>
                         <i class="pi pi-trash btn-outline-danger icono-table"></i>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">9</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">10</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">11</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">12</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">13</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">14</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">15</th>
-                    <td data-titulo="Fecha"> 06/08/2021 </td>
-                    <td data-titulo="Cliente"> Arturo Ramon </td>
-                    <td data-titulo="Total"> $30.000 </td>
-                    <td data-titulo="Estado"> Pendiente </td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            </ng-template>
+        </p-table>
     </div>
-    <p-paginator [rows]="10" [totalRecords]="15" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
 
+
+    <p-dialog [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '70vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-list "></i> DETALLE DEL SERVICIO
+            </h3>
+        </ng-template>
+        <p-table [value]="paises" class="table-detalle">
+            <ng-template pTemplate="header">
+                <tr class="header1">
+                    <th> # </th>
+                    <th> IdServicio </th>
+                    <th> Descripción </th>
+                    <th> Tipo </th>
+                    <th> Peso </th>
+                    <th> Cantidad </th>
+                    <th> Valor Unit </th>
+                    <th> Total </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    <td data-detalle="#">1daddasfs</td>
+                    <td data-detalle="IdServicio">2</td>
+                    <td data-detalle="Descripción">2</td>
+                    <td data-detalle="Tipo">2</td>
+                    <td data-detalle="Peso">2</td>
+                    <td data-detalle="Cantidad">2</td>
+                    <td data-detalle="Valor Unit">2</td>
+                    <td data-detalle="Total">2</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <ng-template pTemplate="footer">
+        </ng-template>
+    </p-dialog>
 </div>

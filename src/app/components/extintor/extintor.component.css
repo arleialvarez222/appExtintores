@@ -6,51 +6,108 @@
 
 .titulo-prin {
     text-transform: uppercase;
-    margin: 10px 20px;
+    margin-top: 0px;
+    margin-left: 15px;
+    padding-top: 10px;
 }
 
-.btn-stock {
-    margin-left: 20px;
-    width: 150px;
-    height: 40px;
-    font-size: 15px;
+.btn-extintor {
+    width: 170px;
+    height: 35px;
+    margin-left: 15px;
+    font-size: 13px;
     text-transform: uppercase;
 }
+
+.btn-extintor-t {
+    width: 170px;
+    height: 35px;
+    margin-left: 15px;
+    margin-top: 58px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.icono-btn {
+    font-size: 12px;
+    margin-right: 6px;
+}
+
+
+/* estilos dialogo agregar  */
+
+.form-row label {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.titulo-h3 i {
+    margin-right: 6px;
+}
+
+
+/* fin estilos dialogo agregar  */
 
 
 /* estilos tabla */
 
-.table-service {
+.card {
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 15px;
+    margin-right: 20px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    margin-bottom: 10px;
 }
 
 .icono-table {
     width: 30px;
     height: 30px;
+    margin-right: 16px;
     text-align: center;
     line-height: 30px;
-    margin-right: 10px;
     font-size: 20px;
     border-radius: 3px;
 }
 
-.div-table {
-    margin-top: 15px;
-    margin-left: 20px;
+.identificador {
+    width: 100px;
 }
 
-.table-2 {
-    margin-left: 30px;
-}
-
-.table-tipo {
-    margin-top: 58px;
-}
-
-.btn-tipo {
-    margin-left: 30px;
+.td-iconos {
+    align-items: left;
+    justify-content: space-between;
 }
 
 
 /* fin estilos tabla */
+
+@media screen and (max-width: 800px) and (min-width:180px) {
+    .card {
+        margin: 10px;
+    }
+    p-table {
+        width: 100%;
+        font-size: .9em;
+    }
+    p-table tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid grey;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    p-table td[data-titulo] {
+        display: flex;
+    }
+    p-table td[data-titulo]::before {
+        content: attr( data-titulo);
+        width: 100px;
+        color: silver;
+        font-weight: bold;
+    }
+    p-table .header {
+        display: none;
+    }
+}

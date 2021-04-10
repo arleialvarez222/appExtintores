@@ -5,11 +5,11 @@
 }
 
 .contenedor {
-    margin: 10px;
+    margin: 15px;
 }
 
 h2 {
-    margin-top: 10px;
+    padding-top: 15px;
     margin-left: 5px;
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -45,47 +45,61 @@ label {
 
 /* estilos tabla */
 
-.table-service {
+.card {
     margin-top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    margin-bottom: 10px;
 }
 
 .icono-table {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
+    margin-left: -10px;
+    margin-right: 16px;
     text-align: center;
-    line-height: 35px;
-    margin-right: 10px;
+    line-height: 30px;
     font-size: 20px;
     border-radius: 3px;
+}
+
+.identificador {
+    width: 50px;
+}
+
+.td-iconos {
+    align-items: left;
+    justify-content: space-between;
 }
 
 
 /* fin estilos tabla */
 
-@media(max-width: 700px) and (min-width:200px) {
-    table {
+@media screen and (max-width: 800px) and (min-width:180px) {
+    p-table {
         width: 100%;
         font-size: .9em;
     }
-    table tr {
+    p-table tr {
         display: flex;
         flex-direction: column;
         border: 1px solid grey;
         padding: 1em;
         margin-bottom: 1em;
     }
-    table td[data-titulo] {
+    p-table td[data-titulo] {
         display: flex;
     }
-    table td[data-titulo]::before {
+    p-table td[data-titulo]::before {
         content: attr( data-titulo);
-        width: 80px;
+        width: 100px;
         color: silver;
         font-weight: bold;
     }
-    table thead {
+    /*  p-table .header {
         display: none;
-    }
+    } */
 }

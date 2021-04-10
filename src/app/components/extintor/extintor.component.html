@@ -1,91 +1,109 @@
-<div class="container">
+<div class="contenedor">
     <div class="row">
         <div class="col-md-6">
-            <div class="row">
+            <div>
                 <h2 class="titulo-prin">
-                    <span>Lista de extintores</span>
+                    tipo y peso de extintores
                 </h2>
             </div>
-            <div class="row btn">
-                <button type="button" class="btn btn-primary btn-stock">Agregar peso</button>
+            <div class="btn">
+                <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-extintor">
+                <i class="pi pi-plus icono-btn"></i>Agregar peso</button>
             </div>
-            <div class="row div-table">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col"> # </th>
-                            <th scope="col"> Peso </th>
+
+            <div class="card">
+                <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+                    <ng-template pTemplate="header">
+                        <tr class="header">
+                            <th class="identificador"> # </th>
+                            <th> Peso </th>
+                            <th></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                    </ng-template>
+                    <ng-template pTemplate="body" let paises>
                         <tr>
-                            <th scope="row"> 1 </th>
-                            <td> 5L </td>
-                            <td>
-                                <i class="pi pi-list btn-outline-primary icono-table"></i>
+                            <td data-titulo="#"> 1</td>
+                            <td data-titulo="Peso"> 6</td>
+                            <td class="td-iconos">
                                 <i class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row"> 2 </th>
-                            <td> 10L </td>
-                            <td>
-                                <i class="pi pi-list btn-outline-primary icono-table"></i>
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row"> 3 </th>
-                            <td> 20L </td>
-                            <td>
-                                <i class="pi pi-list btn-outline-primary icono-table"></i>
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    </ng-template>
+                </p-table>
             </div>
         </div>
-        <div class="col-md-6 table-tipo">
-            <div class="row btn-tipo">
-                <button type="button" class="btn btn-primary btn-stock">Agregar tipo</button>
+
+        <div class="tipo col-md-6">
+
+            <div class="btn">
+                <button (click)="showPositionDialogTipo('center')" type="button" class="btn btn-primary btn-extintor-t">
+                <i class="pi pi-plus icono-btn"></i>Agregar tipo</button>
             </div>
-            <div class="row div-table">
-                <table class="table table-hover table-2">
-                    <thead>
-                        <tr>
-                            <th scope="col"> # </th>
-                            <th scope="col"> Tipo </th>
+
+            <div class="card">
+                <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+                    <ng-template pTemplate="header">
+                        <tr class="header">
+                            <th class="identificador"> # </th>
+                            <th> Tipo </th>
+                            <th></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                    </ng-template>
+                    <ng-template pTemplate="body" let paises>
                         <tr>
-                            <th scope="row"> 1 </th>
-                            <td> ABC </td>
-                            <td>
-                                <i class="pi pi-list btn-outline-primary icono-table"></i>
+                            <td data-titulo="#"> 1</td>
+                            <td data-titulo="tipo"> 6</td>
+                            <td class="td-iconos">
                                 <i class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row"> 2 </th>
-                            <td> solkaflan </td>
-                            <td>
-                                <i class="pi pi-list btn-outline-primary icono-table"></i>
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row"> 3 </th>
-                            <td> C02 </td>
-                            <td>
-                                <i class="pi pi-list btn-outline-primary icono-table"></i>
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    </ng-template>
+                </p-table>
             </div>
         </div>
     </div>
+
+
+    <!-- dialogos -->
+    <p-dialog [(visible)]="display" [position]="positionTipo" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-plus "></i> AGREGAR TIPO
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="tipo" class="form-label">Tipo</label>
+                        <input type="text" class="form-control" id="tipo">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
+
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <h3 class="titulo-h3">
+                <i class="pi pi-plus "></i> AGREGAR PESO
+            </h3>
+        </ng-template>
+        <div class="form">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="peso" class="form-label">Peso</label>
+                        <input type="number" class="form-control" id="peso">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p-footer>
+            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        </p-footer>
+    </p-dialog>
 </div>

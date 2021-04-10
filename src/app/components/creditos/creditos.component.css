@@ -4,36 +4,116 @@
     box-sizing: border-box;
 }
 
-.titulo-prin {
-    text-transform: uppercase;
-    margin: 10px 20px;
+.contenedor {
+    margin: 15px;
 }
 
-.btn-stock {
-    margin-left: 20px;
-    width: 150px;
-    height: 40px;
-    font-size: 15px;
+.titulo-prin {
     text-transform: uppercase;
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-top: 15px;
 }
+
+
+/* estilos abonos */
+
+.form-row label {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+
+/* fin estilos abonos */
 
 
 /* estilos tabla */
 
-.table-service {
+
+/* estilos tabla */
+
+.card {
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    margin-bottom: 10px;
 }
 
 .icono-table {
     width: 30px;
     height: 30px;
+    margin-left: -10px;
+    margin-right: 16px;
     text-align: center;
     line-height: 30px;
-    margin-right: 10px;
     font-size: 20px;
     border-radius: 3px;
 }
 
+.identificador {
+    width: 50px;
+}
+
+.td-iconos {
+    align-items: left;
+    justify-content: space-between;
+}
+
 
 /* fin estilos tabla */
+
+p-dialog {
+    display: flex;
+}
+
+.input-dialog {
+    height: 39px;
+    width: 100%;
+}
+
+.icono-btn {
+    margin-right: 6px;
+}
+
+@media screen and (max-width: 900px) and (min-width:180px) {
+    p-table {
+        width: 100%;
+        font-size: .9em;
+    }
+    p-table tr {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid grey;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    p-table td[data-titulo] {
+        display: flex;
+    }
+    p-table td[data-titulo]::before {
+        content: attr( data-titulo);
+        width: 80px;
+        color: silver;
+        font-weight: bold;
+    }
+    p-table .header1 {
+        display: none;
+    }
+    p-dialog {
+        width: 70vw;
+        height: 100%;
+        font-size: 0.6em;
+    }
+    .div-input {
+        margin-top: 25px;
+    }
+    .div-input label {
+        margin-bottom: 20px;
+    }
+    .div-templete {
+        margin-top: 20px;
+    }
+}
