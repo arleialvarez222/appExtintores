@@ -9,7 +9,7 @@ export class ServicePaisService {
 
   constructor(private http: HttpClient) { }
 
-  getPaises(){
+   getPaises(){
     return this.http.get('https://restcountries.eu/rest/v2/lang/es')
     .pipe(
       map( (resp:any[]) => {

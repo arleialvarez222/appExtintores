@@ -28,6 +28,15 @@ value6: string
     }
      )
   }
+
+
+
+
+
+
+
+
+
   showPositionDialog(position: string){
     this.position = position;
     this.displayPosition = true;

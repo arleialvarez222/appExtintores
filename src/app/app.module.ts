@@ -16,6 +16,8 @@ import { PreciosModule } from './components/precios/precios.module';
 import { ServiciosModule } from './components/servicios/servicios.module';
 import { AppRoutingModule } from './app-routing.module';
 
+//servicios
+
 //Components
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -45,7 +47,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ButtonModule,
 
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

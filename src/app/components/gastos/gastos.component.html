@@ -7,11 +7,10 @@
     </div>
     <div class="btn">
         <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-gasto">
-    <i class="pi pi-euro icono-btn"></i>Agregar gasto</button>
+        <i class="pi pi-plus icono-btn"></i>Agregar gasto</button>
     </div>
-
     <div class="card">
-        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+        <p-table [(value)]="gastos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
             <ng-template pTemplate="header">
                 <tr class="header">
                     <th class="identificador"> # </th>
@@ -22,62 +21,95 @@
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let paises>
+            <ng-template pTemplate="body" let-gastos>
                 <tr>
-                    <td data-titulo="#"> 1</td>
-                    <td data-titulo="Descripción"> 2</td>
-                    <td data-titulo="Fecha"> 3</td>
-                    <td data-titulo="Cantidad"> 6</td>
-                    <td data-titulo="Total"> 7</td>
+                    <td data-titulo="#"> {{ gastos.id}}</td>
+                    <td data-titulo="Descripción"> {{ gastos.descripcion }}</td>
+                    <td data-titulo="Fecha"> {{ gastos.fecha | date : 'dd-MM-yyyy'}}</td>
+                    <td data-titulo="Cantidad"> {{ gastos.cantidad }}</td>
+                    <td data-titulo="Total"> {{ gastos.total | currency }}</td>
                     <td class="td-iconos">
-                        <i (click)="editarGasto('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                        <i (click)="editGastoDb(gastos)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                        <i (click)="deletGastoDb(gastos)" class="pi pi-trash btn-outline-danger icono-table"></i>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 
+    <!--  <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">descripcion</th>
+                <th scope="col">fecha</th>
+                <th scope="col">cantidad</th>
+                <th scope="col">total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of gastos">
+                <th scope="row">{{ data.id }}</th>
+                <td>{{ data.descripcion }}</td>
+                <td>{{ data.fecha }}</td>
+                <td>{{ data.cantidad }}</td>
+                <td>{{ data.total }}</td>
+            </tr>
+            <tr>
+
+        </tbody>
+    </table> -->
+
+
     <!-- dialogos -->
-    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false">
         <ng-template pTemplate="header">
             <h3 class="titulo-h3">
-                <i class="pi pi-euro "></i> AGREGAR GASTO
+                <i class="pi pi-plus "></i> AGREGAR GASTO
             </h3>
         </ng-template>
         <div class="form">
             <form>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <input [value]="gastosModel.descripcion" (input)="gastosModel.descripcion = $event.target.value" type="text" class="form-control" id="descripcion">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="fecha" class="form-label">Fecha</label>
-                        <input type="date" class="form-control" id="fecha">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input [value]="gastosModel.fecha" (input)="gastosModel.fecha = $event.target.value" type="date" class="form-control" id="fecha">
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="cantidad" class="form-label">Cantidad</label>
+                            <input [value]="gastosModel.cantidad" (input)="gastosModel.cantidad = $event.target.value" type="number" class="form-control" id="cantidad">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="valor" class="form-label">Valor</label>
-                        <input type="number" class="form-control" id="valor">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label for="valor" class="form-label">Valor</label>
+                            <input [value]="gastosModel.total" (input)="gastosModel.total = $event.target.value" type="number" class="form-control" id="valor">
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
         <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+            <p-button type="button" (click)="postGastos()" icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+            <p-button type="button" (click)="cerrarDialog()" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary "></p-button>
         </p-footer>
     </p-dialog>
 
     <p-dialog [(visible)]="editGasto" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
         <ng-template pTemplate="header">
             <h3 class="titulo-h3">
-                <i class="pi pi-euro "></i> EDITAR PRECIO
+                <i class="pi pi-pencil "></i> EDITAR GASTO
             </h3>
         </ng-template>
         <div class="form">
@@ -85,26 +117,31 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="descripcion1" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion1">
+                        <input [value]="gastosEdit.descripcion" (input)="gastosEdit.descripcion = $event.target.value" type="text" class="form-control" id="descripcion1">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fecha1" class="form-label">Fecha</label>
-                        <input type="date" class="form-control" id="fecha1">
+                        <input [value]="gastosEdit.fecha" (input)="gastosEdit.fecha = $event.target.value" type="date" class="form-control" id="fecha1">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="cantidad1" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad1">
+                        <input [value]="gastosEdit.cantidad" (input)="gastosEdit.cantidad = $event.target.value" type="number" class="form-control" id="cantidad1">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="valor1" class="form-label">Valor</label>
-                        <input type="number" class="form-control" id="valor1">
+                        <input [value]="gastosEdit.total" (input)="gastosEdit.total = $event.target.value" type="number" class="form-control" id="valor1">
                     </div>
                 </div>
             </form>
         </div>
         <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+            <p-button type="button" (click)="saveEditGasto()" icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+            <!-- <p-button type="button" (click)="cerrarDialogEdit()" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary "></p-button> -->
         </p-footer>
     </p-dialog>
+
+    <p-toast></p-toast>
+
+</div>
