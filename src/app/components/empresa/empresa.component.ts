@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { EmpresaModel } from './modelEmpresa';
+import { EmpresaService } from '../../services/empresa.service';
+
 
 @Component({
   selector: 'app-empresa',
@@ -9,10 +12,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmpresaComponent implements OnInit {
 
-  constructor() { }
+empresa = []
+  constructor( private _empresaService: EmpresaService ) { }
 
   ngOnInit(): void {
+    this.verEmpresas()
   }
 
+  verEmpresas(){
+    this._empresaService.consultarEmpresa().subscribe(data => {
+      let resp
+      resp = data
+      this.empresa = resp?.data
+      console.log(this.empresa)
+    })
+  }
 
+  editarEmpresa(){
+
+  }
 }

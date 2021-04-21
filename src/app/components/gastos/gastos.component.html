@@ -37,50 +37,36 @@
         </p-table>
     </div>
 
-    <!--  <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">descripcion</th>
-                <th scope="col">fecha</th>
-                <th scope="col">cantidad</th>
-                <th scope="col">total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let data of gastos">
-                <th scope="row">{{ data.id }}</th>
-                <td>{{ data.descripcion }}</td>
-                <td>{{ data.fecha }}</td>
-                <td>{{ data.cantidad }}</td>
-                <td>{{ data.total }}</td>
-            </tr>
-            <tr>
-
-        </tbody>
-    </table> -->
-
-
     <!-- dialogos -->
-    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false">
+    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
         <ng-template pTemplate="header">
             <h3 class="titulo-h3">
                 <i class="pi pi-plus "></i> AGREGAR GASTO
             </h3>
         </ng-template>
         <div class="form">
-            <form>
+            <form name="form" id="form" #f="ngForm">
                 <div class="form-row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="descripcion" class="form-label">Descripción</label>
-                            <input [value]="gastosModel.descripcion" (input)="gastosModel.descripcion = $event.target.value" type="text" class="form-control" id="descripcion">
+                            <input type="text" name="descripcion" id="descripcion" class="form-control" autocomplete="off" [(ngModel)]="gastosModel.descripcion" #descripcion="ngModel" required="true">
+                            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                                <div *ngIf="descripcion.errors.required" class="alert alert-danger">
+                                    El campo descripcion es obligatorio
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="fecha" class="form-label">Fecha</label>
-                            <input [value]="gastosModel.fecha" (input)="gastosModel.fecha = $event.target.value" type="date" class="form-control" id="fecha">
+                            <input type="date" name="fecha" id="fecha" class="form-control" autocomplete="off" [(ngModel)]="gastosModel.fecha" #fecha="ngModel" required="true">
+                            <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+                                <div *ngIf="fecha.errors.required" class="alert alert-danger">
+                                    El campo fecha es obligatorio
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,36 +74,52 @@
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="cantidad" class="form-label">Cantidad</label>
-                            <input [value]="gastosModel.cantidad" (input)="gastosModel.cantidad = $event.target.value" type="number" class="form-control" id="cantidad">
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" [(ngModel)]="gastosModel.cantidad" #cantidad="ngModel" required="true">
+                            <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)">
+                                <div *ngIf="cantidad.errors.required" class="alert alert-danger">
+                                    El campo cantidad es obligatorio
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
                             <label for="valor" class="form-label">Valor</label>
-                            <input [value]="gastosModel.total" (input)="gastosModel.total = $event.target.value" type="number" class="form-control" id="valor">
+                            <input type="number" name="total" id="valor" class="form-control" autocomplete="off" [(ngModel)]="gastosModel.total" #total="ngModel" required="true">
+                            <div *ngIf="total.invalid && (total.dirty || total.touched)">
+                                <div *ngIf="total.errors.required" class="alert alert-danger">
+                                    El campo total es obligatorio
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <p-footer>
-            <p-button type="button" (click)="postGastos()" icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
-            <p-button type="button" (click)="cerrarDialog()" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary "></p-button>
+            <p-button type="submit" id="boton" (click)="postGastos(f)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="!f.form.valid"></p-button>
+
+            <p-button type="button" (click)="cerrarDialog(f)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
         </p-footer>
     </p-dialog>
 
-    <p-dialog [(visible)]="editGasto" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p-dialog [(visible)]="editGasto" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
         <ng-template pTemplate="header">
             <h3 class="titulo-h3">
                 <i class="pi pi-pencil "></i> EDITAR GASTO
             </h3>
         </ng-template>
         <div class="form">
-            <form>
+            <form name="form" id="form" #forma="ngForm">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="descripcion1" class="form-label">Descripción</label>
-                        <input [value]="gastosEdit.descripcion" (input)="gastosEdit.descripcion = $event.target.value" type="text" class="form-control" id="descripcion1">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" name="descripcion" id="descripcion" class="form-control" id="descripcion1" autocomplete="off" [(ngModel)]="gastosEdit.descripcion" #descripcion="ngModel" required="true">
+                        <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                            <div *ngIf="descripcion.errors.required" class="alert alert-danger">
+                                El campo descripcion es obligatorio
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fecha1" class="form-label">Fecha</label>
@@ -137,11 +139,12 @@
             </form>
         </div>
         <p-footer>
-            <p-button type="button" (click)="saveEditGasto()" icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+            <p-button type="button" (click)="saveEditGasto(forma)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="!forma.form.valid"></p-button>
             <!-- <p-button type="button" (click)="cerrarDialogEdit()" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary "></p-button> -->
         </p-footer>
     </p-dialog>
 
     <p-toast></p-toast>
+
 
 </div>

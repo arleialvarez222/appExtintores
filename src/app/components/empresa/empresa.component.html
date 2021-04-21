@@ -1,41 +1,51 @@
-<div class="container">
-
+<div class="contenedor">
     <div>
         <h2 class="titulo-prin">
             <span>Información de la empresa</span>
         </h2>
     </div>
-    <div class="img">
-        <img src="./assets/img/bomberos.jpeg" alt="icono bomberos de Amalfi">
-        <img src="./assets/img/contrariesgo.jpeg" alt="icono Contrariesgo">
-    </div>
+    <div class="row">
 
-    <div class="table-service">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Nit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Bomberos Amalfi</td>
-                    <td>Cll 23 45-65</td>
-                    <td>313 789 4562</td>
-                    <td>bomberosamalfi@gmail.com</td>
-                    <td>125-5487</td>
-                    <td>
-                        <i class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md-12">
+            <div class="img">
+                <div class="row img1">
+                    <div class="col-md-12">
+                        <img src="./assets/img/bomberos.jpeg" alt="icono bomberos de Amalfi">
+                        <img src="./assets/img/contrariesgo.jpeg" alt="icono Contrariesgo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <p-table [(value)]="empresa" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+                    <ng-template pTemplate="header">
+                        <tr class="header">
+                            <th class="identificador"> # </th>
+                            <th> Nombre </th>
+                            <th> Dirección </th>
+                            <th> Teléfono </th>
+                            <th> Email </th>
+                            <th> Nit </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-empresa>
+                        <tr>
+                            <td data-titulo="#"> {{ empresa.id }} </td>
+                            <td data-titulo="Nombre"> {{ empresa.nombre }} </td>
+                            <td data-titulo="Dirección"> {{ empresa.direccion }} </td>
+                            <td data-titulo="Teléfono"> {{ empresa.telefono }} </td>
+                            <td data-titulo="Email"> {{ empresa.email }} </td>
+                            <td data-titulo="Nit"> {{ empresa.nit }} </td>
+                            <td class="td-iconos">
+                                <i (click)="editarEmpresa('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
     </div>
 </div>

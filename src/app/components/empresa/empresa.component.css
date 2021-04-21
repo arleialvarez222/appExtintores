@@ -13,9 +13,13 @@
 /* estilos imagen */
 
 img {
-    width: 400px;
+    width: 370px;
     height: 300px;
     margin-left: 20px;
+}
+
+.img1 {
+    margin-bottom: 10px;
 }
 
 

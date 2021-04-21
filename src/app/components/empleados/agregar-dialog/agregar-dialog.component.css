@@ -1,0 +1,21 @@
+.btn-emple {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.icono-btn {
+    font-size: 13px;
+    margin-right: 6px;
+}
+
+p-toast {
+    z-index: 1;
+}
+
+h3 {
+    text-transform: uppercase;
+}
+
+h3 i {
+    margin-right: 5px;
+}
