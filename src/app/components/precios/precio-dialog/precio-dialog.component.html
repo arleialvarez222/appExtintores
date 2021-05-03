@@ -1,0 +1,29 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            <i class="pi pi-dollar "></i> AGREGAR PRECIO
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="descripcion">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="valor" class="form-label">Valor</label>
+                    <input type="number" class="form-control" id="valor">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="iva" class="form-label">Iva</label>
+                    <input type="number" class="form-control" id="iva">
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+    </p-footer>
+</p-dialog>

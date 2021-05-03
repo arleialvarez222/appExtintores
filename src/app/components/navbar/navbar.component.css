@@ -196,47 +196,6 @@ fin estilos menu lateral */
 /* fin estilos icono login */
 
 
-/* estilos buscador */
-
-.formulario {
-    margin-right: 0px;
-    text-align: center;
-    justify-content: center;
-}
-
-.formulario .div-form .form {
-    width: 250px;
-    height: 30px;
-    padding-left: 10px;
-}
-
-.formulario .div-form .boton {
-    background-color: #0573d3;
-    width: 45px;
-    height: 45px;
-    line-height: 52px;
-    text-align: center;
-    justify-content: center;
-}
-
-.formulario .div-form .boton:hover {
-    background-color: #2680cf;
-    border-radius: 50px;
-}
-
-.formulario .div-form .boton .icono-buscar {
-    color: #c7c7c7;
-    margin-top: 10;
-    margin-left: 0;
-    transition: .5s;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-
-/* fin estilos buscador */
-
-
 /* responsive */
 
 @media(min-width :500px) and (max-width:700px) {

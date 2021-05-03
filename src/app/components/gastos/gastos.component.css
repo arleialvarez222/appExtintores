@@ -11,6 +11,11 @@
     padding-top: 10px;
 }
 
+.contenedor-dos {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 .btn-gasto {
     width: 150px;
     height: 35px;
@@ -22,6 +27,16 @@
 .icono-btn {
     font-size: 12px;
     margin-right: 6px;
+}
+
+.table-header input {
+    height: 35px;
+    width: 200px;
+    display: flex;
+}
+
+::placeholder {
+    color: rgb(163, 159, 159);
 }
 
 
@@ -90,9 +105,38 @@ p-toast {
 }
 
 
+/* estilos buscador */
+
+.abc {
+    margin-right: 15px;
+}
+
+.div-boton {
+    margin-left: 5px;
+}
+
+.imput-buscar {
+    height: 35px;
+    padding-left: 10px;
+}
+
+.boton-buscar {
+    width: 70px;
+    height: 35px;
+}
+
+::placeholder {
+    padding-left: 5px;
+    color: rgb(163, 159, 159);
+}
+
+
 /* fin estilos tabla */
 
 @media screen and (max-width: 800px) and (min-width:180px) {
+    .div-boton {
+        margin-left: 15px;
+    }
     p-table {
         width: 100%;
         font-size: .9em;
@@ -146,5 +190,14 @@ p-toast {
     }
     p-toast {
         display: none;
+    }
+}
+
+@media screen and (max-width: 270px) and (min-width:180px) {
+    .table-header input {
+        width: 170px;
+    }
+    .table-header {
+        margin-left: -15px;
     }
 }

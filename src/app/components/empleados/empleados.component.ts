@@ -5,7 +5,8 @@ import { NgForm } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
 import { AgregarDialogComponent } from './agregar-dialog/agregar-dialog.component';
-import { EmployeeInterface } from './interface-empleado';
+import { EmployeeModels } from './models/model-empleado';
+import { EmpleadoInterface } from './models/interface-empleado';
 
 @Component({
   selector: 'app-empleados',
@@ -14,12 +15,12 @@ import { EmployeeInterface } from './interface-empleado';
   providers: [ HttpClient, NgForm, MessageService  ]
 })
 export class EmpleadosComponent implements OnInit {
-  public employee = new EmployeeInterface(0,0, '','','',0,'');
-  empleado =[];
-  employeesList: any[] = [];
+  public employee = new EmployeeModels(0,'', '','','',0,'');
+  empleado: EmpleadoInterface[] =[];
+  employeesList: EmployeeModels[] = [];
   position: string;
   displayPosition: boolean;
-  nombreEmpleado="";
+  buscarNombre = '';
   @ViewChild('agregarDialog') ad: AgregarDialogComponent;
   constructor(private _empleadoService: EmpleadoService,
               private messageService: MessageService) { }
@@ -38,11 +39,22 @@ export class EmpleadosComponent implements OnInit {
     })
   }
 
+  buscarEmpleado(){
+    this._empleadoService.buscarEmpleado(this.buscarNombre).subscribe(data =>{
+      let resp;
+      resp = data;
+      this.empleado = resp?.data;
+    },(error) => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al cargar los datos'});
+    })
+  }
+
+  //hijo a padre
   addItem(form: any){
     this.allEmpleado();
   }
 
-  deleteEmployee(employeeData: any){
+  deleteEmployee(employeeData: EmployeeModels){
     Swal.fire({
       title: '¿Seguro que quieres eliminar este dato?',
       icon: 'warning',
@@ -69,16 +81,9 @@ export class EmpleadosComponent implements OnInit {
       }
     })
   }
-
+//padre a hijo
   showPositionDialog(empleado){
     this.ad.showPositionDialog(empleado);
   }
 
-  buscarEmpleado(){
-    this._empleadoService.getAllEmployeeSearch(this.nombreEmpleado).subscribe(data => {
-      var result;
-      result = data;
-      this.employeesList = result;
-    })
-  }
 }

@@ -7,15 +7,19 @@ import { ButtonModule } from 'primeng/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { GastosService } from '../../services/gastos.service';
 
 import { GastosRoutingModule } from './gastos-routing.module';
 import { GastosComponent } from './gastos.component';
+import { DialogGastoComponent } from './dialog-gasto/dialog-gasto.component';
 
 @NgModule({
   declarations: [
     GastosComponent,
+    DialogGastoComponent,
   ],
   imports: [
     CommonModule,
@@ -24,10 +28,11 @@ import { GastosComponent } from './gastos.component';
     DialogModule,
     ButtonModule,
     HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
     ToastModule,
-    FormsModule
+    FormsModule,
+    InputTextModule,
+    PaginatorModule
 
   ],
   providers: [

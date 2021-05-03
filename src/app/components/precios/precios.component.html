@@ -5,11 +5,15 @@
             Lista de precios
         </h2>
     </div>
-    <div class="btn">
-        <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-precio">
-      <i class="pi pi-dollar icono-btn"></i>Agregar precio</button>
+    <div class="contenedor">
+        <div class="col-md-12">
+            <div class="btn">
+                <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-precio">
+                 <i class="pi pi-dollar icono-btn"></i>Agregar precio</button>
+            </div>
+            <app-precio-dialog (verPrecio)="addItem()"></app-precio-dialog>
+        </div>
     </div>
-
     <div class="card">
         <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
             <ng-template pTemplate="header">
@@ -39,35 +43,7 @@
     </div>
 
     <!-- dialogos -->
-    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="header">
-            <h3 class="titulo-h3">
-                <i class="pi pi-dollar "></i> AGREGAR PRECIO
-            </h3>
-        </ng-template>
-        <div class="form">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion">
-                    </div>
 
-                    <div class="form-group col-md-4">
-                        <label for="valor" class="form-label">Valor</label>
-                        <input type="number" class="form-control" id="valor">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="iva" class="form-label">Iva</label>
-                        <input type="number" class="form-control" id="iva">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
-        </p-footer>
-    </p-dialog>
 
     <p-dialog [(visible)]="editarPrice" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
         <ng-template pTemplate="header">

@@ -4,27 +4,28 @@
             Lista de empleados
         </h2>
     </div>
-    <div class="contenedor">
+    <div class="contenedor-dos">
         <div class="col-md-12">
             <div class="btn">
                 <button (click)="showPositionDialog(employee)" type="button" class="btn btn-primary btn-emple">
-                <i class="pi pi-user-plus icono-btn"></i>Agregar empleado</button>
+              <i class="pi pi-user-plus icono-btn"></i>Agregar empleado</button>
             </div>
             <app-agregar-dialog #agregarDialog (newEmployeeEvent)="addItem($event)"></app-agregar-dialog>
         </div>
     </div>
-    <div class="contenedor2">
-        <div class="col-md-12 formulario">
-            <form class="form-inline div-form">
-                <input class="form-control mr-sm-2 form" type="search" placeholder="Buscar..." aria-label="buscar...">
-                <small class="boton">
-          <i class="pi pi-search icono-buscar "></i>
-        </small>
-            </form>
+
+    <div class="row">
+        <div class="col-md-4 ml-3 mb-2 abc">
+            <input type="search " placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="buscarNombre" (input)="buscarNombre = $event.target.value">
+        </div>
+        <div class="col-md-1 div-boton">
+            <button class="btn btn-primary boton-buscar" (click)="buscarEmpleado()">Buscar</button>
         </div>
     </div>
+
     <div class="card">
-        <p-table [(value)]="empleado" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+        <p-table [(value)]="empleado" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowHover]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+
             <ng-template pTemplate="header">
                 <tr class="header">
                     <th class="identificador"> # </th>
@@ -39,9 +40,9 @@
             <ng-template pTemplate="body" let-empleado>
                 <tr>
                     <td data-titulo="#"> {{ empleado.id }} </td>
-                    <td data-titulo="Nombre"> {{ empleado.nombre }} </td>
-                    <td data-titulo="Apellido"> {{ empleado.apellido }} </td>
-                    <td data-titulo="Dirección"> {{ empleado.direccion }} </td>
+                    <td data-titulo="Nombre"> {{ empleado.nombre | titlecase }} </td>
+                    <td data-titulo="Apellido"> {{ empleado.apellido | titlecase }} </td>
+                    <td data-titulo="Dirección"> {{ empleado.direccion | titlecase }} </td>
                     <td data-titulo="Teléfono"> {{ empleado.telefono }} </td>
                     <td data-titulo="Email"> {{ empleado.email }} </td>
                     <td class="td-iconos">

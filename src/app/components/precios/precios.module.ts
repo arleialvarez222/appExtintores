@@ -6,11 +6,13 @@ import { ButtonModule } from 'primeng/button';
 
 import { PreciosRoutingModule } from './precios-routing.module';
 import { PreciosComponent } from './precios.component';
+import { PrecioDialogComponent } from './precio-dialog/precio-dialog.component';
 
 
 @NgModule({
   declarations: [
-    PreciosComponent
+    PreciosComponent,
+    PrecioDialogComponent
   ],
   imports: [
     CommonModule,

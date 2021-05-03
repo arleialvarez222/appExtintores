@@ -4,8 +4,9 @@ import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { EmpleadoService } from '../../services/empleado.service';
 
@@ -17,7 +18,7 @@ import { AgregarDialogComponent } from './agregar-dialog/agregar-dialog.componen
 @NgModule({
   declarations: [
     EmpleadosComponent,
-    AgregarDialogComponent
+    AgregarDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -26,8 +27,9 @@ import { AgregarDialogComponent } from './agregar-dialog/agregar-dialog.componen
     TableModule,
     ButtonModule,
     DialogModule,
-    ReactiveFormsModule,
-    ToastModule
+    FormsModule,
+    ToastModule,
+    InputTextModule
   ],
   providers: [
     EmpleadoService

@@ -22,6 +22,10 @@ export class PreciosComponent implements OnInit {
       this.paises = paises
     })
   }
+  addItem(){
+
+  }
+
   showPositionDialog(position: string){
     this.position = position
     this.displayPosition = true

@@ -1,0 +1,59 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            <i class="pi pi-plus "></i> AGREGAR GASTO
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form autocomplete="off" #form="ngForm">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input class="form-control" type="text" name="descripcion" id="descripcion" [class.is-invalid]="descripcion. invalid && descripcion.touched" [(ngModel)]="gastosModel.descripcion" #descripcion="ngModel" minlength="5" required>
+                        <small *ngIf="descripcion.invalid && descripcion.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
+                        <small *ngIf="descripcion.invalid && descripcion.hasError('minlength')" class="form-text text-danger">
+                          Debe contener almenos 5 caracteres
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input class="form-control" type="date" name="fecha" id="fecha" [class.is-invalid]="fecha. invalid && fecha.touched" [(ngModel)]="gastosModel.fecha" #fecha="ngModel" minlength="5" required>
+                        <small *ngIf="fecha.invalid && fecha.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="cantidad" class="form-label">Cantidad</label>
+                        <input class="form-control" type="number" name="cantidad" [class.is-invalid]="cantidad. invalid && cantidad.touched" [(ngModel)]="gastosModel.cantidad" #cantidad="ngModel" minlength="5" required>
+                        <small *ngIf="cantidad.invalid && cantidad.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="valor" class="form-label">Valor</label>
+                        <input class="form-control" type="number" name="total" id="valor" [class.is-invalid]="total. invalid && total.touched" [(ngModel)]="gastosModel.total" #total="ngModel" minlength="5" required>
+                        <small *ngIf="total.invalid && total.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button type="button" (click)="postGastos(form)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="form.invalid"></p-button>
+
+        <p-button type="button" (click)="cerrarDialog(form)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+    </p-footer>
+</p-dialog>

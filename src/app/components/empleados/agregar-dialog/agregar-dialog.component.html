@@ -9,67 +9,66 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" autocomplete="nope" [(ngModel)]="employee.nombre" #nombre="ngModel" required="true">
-                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
-                        <div *ngIf="nombre.errors.required" class="alert alert-danger">
-                            El campo nombre es obligatorio
-                        </div>
-                    </div>
+                    <input class="form-control" type="text" name="nombre" id="nombre" [class.is-invalid]="nombre. invalid && nombre.touched" [(ngModel)]="employee.nombre" #nombre="ngModel" minlength="3" required>
+                    <small *ngIf="nombre.invalid && nombre.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
+                    <small *ngIf="nombre.invalid && nombre.hasError('minlength')" class="form-text text-danger">
+                      Debe contener almenos 3 caracteres
+                    </small>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" name="apellido" id="apellido" class="form-control" autocomplete="nope" [(ngModel)]="employee.apellido" #apellido="ngModel" required="true">
-                    <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
-                        <div *ngIf="apellido.errors.required" class="alert alert-danger">
-                            El campo apellido es obligatorio
-                        </div>
-                    </div>
+                    <input class="form-control" type="text" name="apellido" id="apellido" [class.is-invalid]="apellido.invalid && apellido.touched" [(ngModel)]="employee.apellido" #apellido="ngModel" required minlength="3">
+                    <small *ngIf="apellido.invalid && apellido.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
+                    <small *ngIf="apellido.invalid && apellido.hasError('minlength')" class="form-text text-danger">
+                      Debe contener almenos 3 caracteres
+                    </small>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="number" name="telefono" id="telefono" class="form-control" autocomplete="nope" [(ngModel)]="employee.telefono" #telefono="ngModel" required="true">
-                    <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-                        <div *ngIf="telefono.errors.required" class="alert alert-danger">
-                            El campo teléfono es obligatorio
-                        </div>
-                    </div>
+                    <input class="form-control" type="number" name="telefono" id="telefono" [class.is-invalid]="telefono.invalid && telefono.touched" [(ngModel)]="employee.telefono" #telefono="ngModel" required minlength="6">
+                    <small *ngIf="telefono.invalid && telefono.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="direccion" class="form-label">Dirección</label>
-                    <input type="text" name="direccion" id="direccion" class="form-control" autocomplete="nope" [(ngModel)]="employee.direccion" #direccion="ngModel" required="true">
-                    <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
-                        <div *ngIf="direccion.errors.required" class="alert alert-danger">
-                            El campo direccion es obligatorio
-                        </div>
-                    </div>
+                    <input class="form-control" type="text" name="direccion" id="direccion" [class.is-invalid]="direccion.invalid && direccion.touched" [(ngModel)]="employee.direccion" #direccion="ngModel" required minlength="4">
+                    <small *ngIf="direccion.invalid && direccion.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
+                    <small *ngIf="direccion.invalid && direccion.hasError('minlength')" class="form-text text-danger">
+                      Debe contener almenos 4 caracteres
+                    </small>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" autocomplete="nope" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\[a-z]{2,4}$" [(ngModel)]="employee.email" #email="ngModel" required="true">
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                        <div *ngIf="email.errors.required" class="alert alert-danger">
-                            El campo email es obligatorio
-                        </div>
-                    </div>
+                    <input class="form-control" type="email" name="email" id="email" [class.is-invalid]="email.invalid && email.touched" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="employee.email" #email="ngModel" required>
+                    <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="idEmpresa" class="form-label">Empresa</label>
-                    <select name="idEmpresa" id="idEmpresa" class="form-control" autocomplete="nope" [(ngModel)]="employee.idEmpresa" #idEmpresa="ngModel" required="true">
-                          <option *ngFor="let item of empresa" value="{{item.id}}">{{item.nombre}} </option>
+                    <select class="form-control" name="idEmpresa" id="idEmpresa" [disabled]="empresa.length === 0" [class.is-invalid]="idEmpresa.invalid && idEmpresa.touched" [(ngModel)]="employee.idEmpresa" #idEmpresa="ngModel" required>
+                          <option *ngFor="let item of empresa" [value]="item.id">{{item.nombre}} </option>
                         </select>
                 </div>
             </div>
         </form>
     </div>
     <p-footer>
-        <p-button (click)="addPostEployee()" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="forma.invalid"></p-button>
+        <p-button (click)="addPostEployee(forma)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="forma.invalid"></p-button>
         <p-button type="button" (click)="cerrarDialog(forma)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
     </p-footer>
 </p-dialog>
