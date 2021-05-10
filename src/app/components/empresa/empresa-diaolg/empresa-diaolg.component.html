@@ -1,0 +1,72 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            <i class="pi pi-plus "></i> AGREGAR EMPRESA
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form autocomplete="off" #form="ngForm">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input class="form-control" type="text" name="nombre" id="nombre" [class.is-invalid]="nombre. invalid && nombre.touched" [(ngModel)]="empresaModel.nombre" #nombre="ngModel" minlength="5" required>
+                        <small *ngIf="nombre.invalid && nombre.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
+                        <small *ngIf="nombre.invalid && nombre.hasError('minlength')" class="form-text text-danger">
+                        Debe contener almenos 5 caracteres
+                      </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="direccion" class="form-label">Direccion</label>
+                        <input class="form-control" type="text" name="direccion" id="direccion" [class.is-invalid]="direccion. invalid && direccion.touched" [(ngModel)]="empresaModel.direccion" #direccion="ngModel" minlength="5" required>
+                        <small *ngIf="direccion.invalid && direccion.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input class="form-control" type="number" name="telefono" [class.is-invalid]="telefono. invalid && telefono.touched" [(ngModel)]="empresaModel.telefono" #telefono="ngModel" minlength="5" required>
+                        <small *ngIf="telefono.invalid && telefono.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" type="email" name="email" id="email" [class.is-invalid]="email.invalid && email.touched" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="empresaModel.email" #email="ngModel" required>
+                        <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="form-group ">
+                        <label for="nit" class="form-label">Nit</label>
+                        <input class="form-control" type="text" name="nit" [class.is-invalid]="nit. invalid && nit.touched" [(ngModel)]="empresaModel.nit" #nit="ngModel" required>
+                        <small *ngIf="nit.invalid && nit.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button type="button" (click)="postEmpresa(form)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="form.invalid"></p-button>
+
+        <p-button type="button" (click)="cerrarDialog(form)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+    </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>

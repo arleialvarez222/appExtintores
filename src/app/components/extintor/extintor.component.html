@@ -6,13 +6,16 @@
                     tipo y peso de extintores
                 </h2>
             </div>
-            <div class="btn">
-                <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-extintor">
-                <i class="pi pi-plus icono-btn"></i>Agregar peso</button>
+            <div class="contenedor1">
+                <div class="btn">
+                    <button (click)="showPositionDialogPeso(pesoExtintor)" type="button" class="btn btn-primary btn-extintor">
+                  <i class="pi pi-plus icono-btn"></i>Agregar peso</button>
+                </div>
+                <app-peso-extintor #pesoExtin (verpeso)="addItemPeso($event)"></app-peso-extintor>
             </div>
 
             <div class="card">
-                <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+                <p-table [(value)]="peso" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
                     <ng-template pTemplate="header">
                         <tr class="header">
                             <th class="identificador"> # </th>
@@ -20,12 +23,13 @@
                             <th></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let paises>
+                    <ng-template pTemplate="body" let-peso>
                         <tr>
-                            <td data-titulo="#"> 1</td>
-                            <td data-titulo="Peso"> 6</td>
+                            <td data-titulo="#"> {{ peso.id }} </td>
+                            <td data-titulo="Peso"> {{ peso.pesoXlibras }} </td>
                             <td class="td-iconos">
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                                <i (click)="showPositionDialogPeso(peso)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                                <i (click)="eliminarPeso(peso)" class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
                     </ng-template>
@@ -34,14 +38,15 @@
         </div>
 
         <div class="tipo col-md-6">
-
-            <div class="btn">
-                <button (click)="showPositionDialogTipo('center')" type="button" class="btn btn-primary btn-extintor-t">
+            <div class="contenedor2">
+                <div class="btn">
+                    <button (click)="showPositionDialog(tipoExtintor)" type="button" class="btn btn-primary btn-extintor-t">
                 <i class="pi pi-plus icono-btn"></i>Agregar tipo</button>
+                </div>
+                <app-tipo-extintor #tipoExtintorComponent (nuevoExtintor)="addItem($event)"></app-tipo-extintor>
             </div>
-
             <div class="card">
-                <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+                <p-table [(value)]="tipo" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
                     <ng-template pTemplate="header">
                         <tr class="header">
                             <th class="identificador"> # </th>
@@ -49,12 +54,13 @@
                             <th></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let paises>
+                    <ng-template pTemplate="body" let-tipo>
                         <tr>
-                            <td data-titulo="#"> 1</td>
-                            <td data-titulo="tipo"> 6</td>
+                            <td data-titulo="#"> {{ tipo.id }} </td>
+                            <td data-titulo="tipo"> {{ tipo.tipo_Extintor }} </td>
                             <td class="td-iconos">
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                                <i (click)="showPositionDialog(tipo)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                                <i (click)="eliminarTipo(tipo)" class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
                     </ng-template>
@@ -63,47 +69,7 @@
         </div>
     </div>
 
+    <p-toast></p-toast>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
-    <!-- dialogos -->
-    <p-dialog [(visible)]="display" [position]="positionTipo" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="header">
-            <h3 class="titulo-h3">
-                <i class="pi pi-plus "></i> AGREGAR TIPO
-            </h3>
-        </ng-template>
-        <div class="form">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="tipo" class="form-label">Tipo</label>
-                        <input type="text" class="form-control" id="tipo">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
-        </p-footer>
-    </p-dialog>
-
-    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="header">
-            <h3 class="titulo-h3">
-                <i class="pi pi-plus "></i> AGREGAR PESO
-            </h3>
-        </ng-template>
-        <div class="form">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="peso" class="form-label">Peso</label>
-                        <input type="number" class="form-control" id="peso">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
-        </p-footer>
-    </p-dialog>
 </div>

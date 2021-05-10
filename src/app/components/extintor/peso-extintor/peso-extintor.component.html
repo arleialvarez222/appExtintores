@@ -1,0 +1,25 @@
+<p-dialog [(visible)]="displayPeso" [position]="positionPeso" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            PESO EXTINTOR
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form name="formu" id="formu" novalidate #formu="ngForm" autocomplete="off">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="peso" class="form-label">Peso</label>
+                    <input class="form-control" type="number" name="peso" id="peso" [class.is-invalid]="pesoXlibras.invalid && pesoXlibras.touched" [(ngModel)]="pesoExt.pesoXlibras" #pesoXlibras="ngModel" required>
+                    <small *ngIf="pesoXlibras.invalid && pesoXlibras.touched" class="form-text text-danger">
+                      Este campo es requerido</small>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button type="button" (click)="nuevoPesoExtintor(formu)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="formu.invalid"></p-button>
+        <p-button type="button" (click)="cerrarDialog(formu)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+    </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>

@@ -7,6 +7,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { EmpleadoService } from '../../services/empleado.service';
 
@@ -29,7 +30,8 @@ import { AgregarDialogComponent } from './agregar-dialog/agregar-dialog.componen
     DialogModule,
     FormsModule,
     ToastModule,
-    InputTextModule
+    InputTextModule,
+    ConfirmDialogModule
   ],
   providers: [
     EmpleadoService

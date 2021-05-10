@@ -4,8 +4,16 @@
             <span>Información de la empresa</span>
         </h2>
     </div>
+    <div class="contenedor-dos">
+        <div class="col-md-12">
+            <div class="btn">
+                <button (click)="showPositionDialog(empresaModel)" type="button" class="btn btn-primary btn-empresa">
+            <i class="pi pi-user-plus icono-btn"></i>Agregar empresa</button>
+            </div>
+            <app-empresa-diaolg #agregarDialogEmpresa (verEmpresa)="addItem($event)"></app-empresa-diaolg>
+        </div>
+    </div>
     <div class="row">
-
         <div class="col-md-12">
             <div class="img">
                 <div class="row img1">
@@ -18,7 +26,7 @@
         </div>
         <div class="col-md-12">
             <div class="card">
-                <p-table [(value)]="empresa" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+                <p-table [(value)]="empresa" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowHover]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
                     <ng-template pTemplate="header">
                         <tr class="header">
                             <th class="identificador"> # </th>
@@ -39,8 +47,8 @@
                             <td data-titulo="Email"> {{ empresa.email }} </td>
                             <td data-titulo="Nit"> {{ empresa.nit }} </td>
                             <td class="td-iconos">
-                                <i (click)="editarEmpresa('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
-                                <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                                <i (click)="showPositionDialog(empresa)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                                <i (click)="eliminarEmpresaId(empresa)" class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
                     </ng-template>
@@ -48,4 +56,6 @@
             </div>
         </div>
     </div>
+    <p-toast></p-toast>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 </div>

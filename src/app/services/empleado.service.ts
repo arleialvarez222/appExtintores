@@ -1,38 +1,46 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EmployeeModels } from '../components/empleados/models/model-empleado';
-import { EmpleadoInterface } from '../components/empleados/models/interface-empleado';
+import { EmployeeModel } from '../components/empleados/models/model-empleado';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpleadoService {
-  private apiUrl: string = "https://localhost:44326/api/Empleados"
-  constructor(private _http: HttpClient) {
-  }
 
-  buscarEmpleado(nombre){
+  private apiEndpoint = `${environment.apiUrl}/api`;
+
+  constructor(private _http: HttpClient) {}
+
+  buscarEmpleado(nombre=null, apellido=null){
     let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.get<EmpleadoInterface>(`https://localhost:44326/api/Empleados?Nombres=${nombre}`, {headers: headers})
+    let baseUrl= `${this.apiEndpoint}/Empleados?`;
+    if(nombre!==null){
+      baseUrl +=`Nombres=${nombre}&`
+    }
+    if(apellido!==null){
+      baseUrl +=`Apellidos=${apellido}&`
+    }
+    return this._http.get<EmployeeModel>(baseUrl, {headers: headers})
   }
 
   getAllEmpleado(){
     let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.get<EmpleadoInterface>(this.apiUrl, {headers: headers})
+    return this._http.get<EmployeeModel>(`${this.apiEndpoint}/Empleados`, {headers: headers})
   }
 
-  addEmployee$(empleado){
+  addEmployee$(empleado: EmployeeModel){
     let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.post<EmpleadoInterface>(this.apiUrl,JSON.stringify(empleado), {headers: headers})
+    return this._http.post<EmployeeModel>(`${this.apiEndpoint}/Empleados`, JSON.stringify(empleado), {headers: headers})
   }
 
-  editEmployee(empleado){
+  editEmployee(empleado: EmployeeModel){
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.put<EmpleadoInterface>(this.apiUrl + '/' + empleado.id, JSON.stringify(empleado), {headers: headers})
+    return this._http.put<EmployeeModel>(`${this.apiEndpoint}/Empleados/${empleado.id}`, JSON.stringify(empleado), {headers: headers})
   }
 
   deleteEmployees(id){
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.delete<EmpleadoInterface>(this.apiUrl + '/' + id, {headers: headers})
+    return this._http.delete<EmployeeModel>(`${this.apiEndpoint}/Empleados/${id}`, {headers: headers})
   }
 }

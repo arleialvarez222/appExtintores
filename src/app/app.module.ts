@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ButtonModule} from 'primeng/button';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button';
 //Module
 import { AlmacenModule } from './components/almacen/almacen.module';
 import { ClientesModule } from './components/clientes/clientes.module';
@@ -14,6 +13,7 @@ import { FacturaModule } from './components/factura/factura.module';
 import { GastosModule } from './components/gastos/gastos.module';
 import { PreciosModule } from './components/precios/precios.module';
 import { ServiciosModule } from './components/servicios/servicios.module';
+import { ProductosModule } from './components/productos/productos.module';
 import { AppRoutingModule } from './app-routing.module';
 
 //servicios
@@ -40,12 +40,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ExtintorModule,
     FacturaModule,
     GastosModule,
+    ProductosModule,
     PreciosModule,
     ServiciosModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ButtonModule,
-
   ],
   providers: [
 

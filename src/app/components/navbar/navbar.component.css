@@ -7,7 +7,7 @@
 
 .contenedor {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     text-align: center;
     margin-top: -52px;
@@ -19,22 +19,17 @@
 }
 
 hr {
-    border: .2px solid #0c223a;
+    border: .2px solid #0471e6;
 }
 
 .clase-navbar {
-    background-color: #0573d3;
+    background-color: #01579b;
     height: 52px;
     width: 100%;
     display: flex;
     z-index: 1;
     justify-content: space-between;
     align-items: center;
-}
-
-.hr {
-    border-radius: 12px;
-    color: #fa0404;
 }
 
 
@@ -62,11 +57,11 @@ hr {
 
 .cont-menu {
     width: 100%;
-    max-width: 250px;
-    background: #0B1D30;
+    max-width: 200px;
+    background: #01579b;
     height: 100%;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     transition: all 500ms cubic-bezier(1, 0, 0, 1);
     transition-timing-function: cubic-bezier(1, 0, 0, 1);
     transform: translateX(-100%);
@@ -84,7 +79,7 @@ hr {
 .cont-menu nav a {
     display: block;
     text-decoration: none;
-    padding: 15px;
+    padding: 10px;
     margin-left: 10px;
     color: #c7c7c7;
     font-size: 16px;
@@ -94,7 +89,7 @@ hr {
 
 .cont-menu nav a:hover {
     border-left: 5px solid #c7c7c7;
-    background: #11263f;
+    background: #336eb6;
 }
 
 .cont-menu .label-icono {
@@ -108,13 +103,13 @@ hr {
     right: 10px;
     top: 6px;
     padding: 10px;
-    color: #fff;
+    color: #ffffff;
     font-size: 18px;
     cursor: pointer;
 }
 
 .cont-menu .label-icono .icono:hover {
-    background-color: #11263f;
+    background-color: #2f6cb6;
     border-radius: 50px;
 }
 
@@ -122,13 +117,18 @@ hr {
     position: absolute;
     left: 10px;
     margin-top: 17px;
-    color: #fff;
-    font-size: 18px;
+    color: #ffffff;
+    font-size: 15px;
     padding: 0px;
+}
+
+.cont-menu .nav-item a {
+    color: #ffffff;
 }
 
 .cont-menu .icon-nav {
     margin-right: 10px;
+    color: #ffffff;
 }
 
 
@@ -148,7 +148,7 @@ fin estilos menu lateral */
 }
 
 .div-menu .label-menu .icon-menu {
-    color: white;
+    color: #ffffff;
     margin-top: 0px;
     margin-left: 0px;
     transition: .5s;
@@ -157,7 +157,7 @@ fin estilos menu lateral */
 }
 
 .div-menu .label-menu:hover {
-    background-color: #2680cf;
+    background-color: #2f6cb6;
     color: #ffffff;
     border-radius: 50px;
 }
@@ -187,7 +187,7 @@ fin estilos menu lateral */
 }
 
 .login .div-login:hover {
-    background-color: #2680cf;
+    background-color: #2f6cb6;
     color: #ffffff;
     border-radius: 50px;
 }
@@ -201,21 +201,11 @@ fin estilos menu lateral */
 @media(min-width :500px) and (max-width:700px) {
     .cont-menu {
         width: 100%;
-        max-width: 300px;
+        max-width: 200px;
         height: 200vh;
     }
     .label-menu {
         margin-left: 10px;
-    }
-    .formulario {
-        width: 320px;
-    }
-    .formulario .div-form .form {
-        width: 250px;
-    }
-    .formulario .div-form .boton {
-        margin-left: 5px;
-        font-size: 10px;
     }
     .div-menu .label-menu .icon-menu {
         font-size: 20px;
@@ -225,22 +215,11 @@ fin estilos menu lateral */
 @media(min-width :400px) and (max-width:499px) {
     .cont-menu {
         width: 100%;
-        max-width: 300px;
+        max-width: 200px;
         height: 200vh;
     }
     .div-menu .label-menu {
         margin-left: 10px;
-    }
-    .formulario {
-        width: 240px;
-    }
-    .formulario .div-form .form {
-        width: 180px;
-    }
-    .formulario .div-form.boton {
-        width: 20px;
-        margin-left: 5px;
-        font-size: 10px;
     }
     .div-menu .label-menu .icon-menu {
         font-size: 20px;
@@ -248,28 +227,16 @@ fin estilos menu lateral */
 }
 
 @media(min-width :300px) and (max-width:399px) {
+    .cont-menu nav a {
+        font-size: 14px;
+    }
     .cont-menu {
         width: 100%;
-        max-width: 250px;
+        max-width: 200px;
         height: 200vh;
     }
     .label-menu {
         margin-left: 10px;
-    }
-    .formulario {
-        width: 185px;
-    }
-    .formulario .div-form .form {
-        width: 140px;
-    }
-    .formulario .div-form .boton {
-        width: 28px;
-        height: 28px;
-        line-height: 24px;
-        margin-left: 5px;
-    }
-    .formulario .div-form .boton .icono-buscar {
-        font-size: 13px;
     }
     .login .div-login .iconologin {
         font-size: 15px;
@@ -280,28 +247,22 @@ fin estilos menu lateral */
 }
 
 @media(min-width :240px) and (max-width:299px) {
+    .cont-menu nav a {
+        font-size: 14px;
+    }
     .cont-menu {
         width: 100%;
-        max-width: 250px;
+        max-width: 150px;
         height: 200vh;
+    }
+    .cont-menu .label-texto {
+        font-size: 12px;
+    }
+    .cont-menu .label-icono .icono {
+        margin-right: -5px;
     }
     .label-menu {
         margin-left: 10px;
-    }
-    .formulario {
-        width: 130px;
-    }
-    .formulario .div-form .form {
-        width: 90px;
-    }
-    .formulario .div-form .boton {
-        width: 28px;
-        height: 28px;
-        line-height: 24px;
-        margin-left: 5px;
-    }
-    .formulario .div-form .boton .icono-buscar {
-        font-size: 13px;
     }
     .login .div-login .iconologin {
         font-size: 15px;
@@ -315,28 +276,22 @@ fin estilos menu lateral */
 }
 
 @media(min-width :195px) and (max-width:239px) {
+    .cont-menu nav a {
+        font-size: 14px;
+    }
+    .cont-menu .label-texto {
+        font-size: 12px;
+    }
+    .cont-menu .label-icono .icono {
+        margin-right: -5px;
+    }
     .cont-menu {
         width: 100%;
-        max-width: 200px;
+        max-width: 150px;
         height: 200vh;
     }
     .label-menu {
         margin-left: 10px;
-    }
-    .formulario {
-        width: 120px;
-    }
-    .formulario .div-form .form {
-        width: 80px;
-    }
-    .formulario .div-form .boton {
-        width: 28px;
-        height: 28px;
-        line-height: 24px;
-        margin-left: 5px;
-    }
-    .formulario .div-form .boton .icono-buscar {
-        font-size: 13px;
     }
     .login .div-login {
         width: 20px;

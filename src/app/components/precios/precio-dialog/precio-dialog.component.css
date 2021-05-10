@@ -1,0 +1,8 @@
+p-button {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+p-toast {
+    z-index: 1;
+}

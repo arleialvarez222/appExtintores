@@ -3,7 +3,6 @@ import { MessageService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 import { GastosService } from '../../../services/gastos.service';
 import { GastosModel } from '../models/gastos.model';
-import { GastoInterface } from '../models/interface';
 
 @Component({
   selector: 'app-dialog-gasto',
@@ -13,7 +12,7 @@ import { GastoInterface } from '../models/interface';
 export class DialogGastoComponent implements OnInit {
 
   @Output() verEvento = new EventEmitter<GastosModel>()
-  public gastosModel = new GastosModel(0, '', '', 0, 0 );
+  public gastosModel = new GastosModel ();
   position: string;
   displayPosition: boolean = false;
 
@@ -63,10 +62,6 @@ export class DialogGastoComponent implements OnInit {
   //dialogos
   cerrarDialog(forma: NgForm) {
     this.displayPosition = false;
-    this.gastosModel.descripcion = ''
-    this.gastosModel.fecha = ''
-    this.gastosModel.cantidad = 0
-    this.gastosModel.total = 0
     forma.resetForm()
   }
 }

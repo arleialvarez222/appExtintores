@@ -1,23 +1,23 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { EmpleadoService } from '../../../services/empleado.service';
-import { EmployeeModels } from '../models/model-empleado';
+import { EmployeeModel } from '../models/model-empleado';
 import { MessageService } from 'primeng/api';
 import { EmpresaService } from '../../../services/empresa.service';
-import { EmpleadoInterface } from '../models/interface-empleado';
+import { EmpresaModel } from '../../empresa/models/modelEmpresa';
 
 @Component({
   selector: 'app-agregar-dialog',
   templateUrl: './agregar-dialog.component.html',
   styleUrls: ['./agregar-dialog.component.css'],
-  providers:[ HttpClient,  MessageService ]
+  providers:[ HttpClient,  MessageService, NgForm ]
 })
 export class AgregarDialogComponent implements OnInit {
 
-  @Output() newEmployeeEvent = new EventEmitter<EmployeeModels>()
-  empresa: any = []
-  public employee = new EmployeeModels(0,'', '','','',0,'')
+  @Output() newEmployeeEvent = new EventEmitter<EmployeeModel>()
+  empresa: EmpresaModel[] = []
+  public employee = new EmployeeModel()
   position:string
   displayPosition = false;
   constructor( private _empleadoService: EmpleadoService,
@@ -38,8 +38,8 @@ export class AgregarDialogComponent implements OnInit {
         this._empleadoService.editEmployee(this.employee).subscribe( data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Se actualizó con éxito'});
           this.newEmployeeEvent.emit(this.employee)
-          forma.resetForm()
-         this.displayPosition = false
+          forma.resetForm();
+         this.displayPosition = false;
         }, (error) =>{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar datos'});
         })
@@ -62,7 +62,7 @@ export class AgregarDialogComponent implements OnInit {
     })
   }
 
-  showPositionDialog(empleado: EmpleadoInterface) {
+  showPositionDialog(empleado: EmployeeModel) {
     let position: string
     this.position = position;
     this.displayPosition = true;
@@ -73,11 +73,6 @@ export class AgregarDialogComponent implements OnInit {
 
   cerrarDialog(forma: NgForm) {
     this.displayPosition = false;
-    this.employee.nombre = ''
-    this.employee.apellido = ''
-    this.employee.telefono = 0
-    this.employee.direccion = ''
-    this.employee.email = ''
-    forma.resetForm()
+    forma.resetForm();
   }
 }

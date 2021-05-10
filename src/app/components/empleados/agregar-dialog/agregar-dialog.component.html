@@ -5,7 +5,7 @@
         </h3>
     </ng-template>
     <div class="form">
-        <form name="form" id="form" novalidate #forma="ngForm" autocomplete="nope">
+        <form name="form" id="form" novalidate autocomplete="off" #forma="ngForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nombre" class="form-label">Nombre</label>
@@ -32,7 +32,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="telefono" class="form-label">Teléfono</label>
-                    <input class="form-control" type="number" name="telefono" id="telefono" [class.is-invalid]="telefono.invalid && telefono.touched" [(ngModel)]="employee.telefono" #telefono="ngModel" required minlength="6">
+                    <input class="form-control" type="number" name="telefono" id="telefono" min="7" max="15" [class.is-invalid]="telefono.invalid && telefono.touched" [(ngModel)]="employee.telefono" #telefono="ngModel" required>
                     <small *ngIf="telefono.invalid && telefono.touched" class="form-text text-danger">
                       Este campo es obligatorio
                     </small>
@@ -63,12 +63,15 @@
                     <select class="form-control" name="idEmpresa" id="idEmpresa" [disabled]="empresa.length === 0" [class.is-invalid]="idEmpresa.invalid && idEmpresa.touched" [(ngModel)]="employee.idEmpresa" #idEmpresa="ngModel" required>
                           <option *ngFor="let item of empresa" [value]="item.id">{{item.nombre}} </option>
                         </select>
+                    <small *ngIf="idEmpresa.invalid && idEmpresa.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
                 </div>
             </div>
         </form>
     </div>
     <p-footer>
-        <p-button (click)="addPostEployee(forma)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="forma.invalid"></p-button>
+        <p-button type="button" (click)="addPostEployee(forma)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="forma.invalid"></p-button>
         <p-button type="button" (click)="cerrarDialog(forma)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
     </p-footer>
 </p-dialog>

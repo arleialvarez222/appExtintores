@@ -1,48 +1,37 @@
 import { Injectable } from '@angular/core';
 import {  HttpClient, HttpHeaders } from '@angular/common/http';
-import { GastoInterface } from '../components/gastos/models/interface';
-import { map } from 'rxjs/Operators';
 import { GastosModel } from '../components/gastos/models/gastos.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GastosService {
-  private apiUrl: string ="https://localhost:44326/api/Gastos"
+  private apiEndpoint = `${environment.apiUrl}/api`;
 
   constructor(private _http: HttpClient) {}
 
   getBuscar(descripcion) {
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.get<GastoInterface>(`https://localhost:44326/api/Gastos?Descripcion=${descripcion}`,  {headers: headers})
-    .pipe(
-      map( resp => {
-          return resp.data.map(gast => GastosModel.gastoJson(gast))
-        }
-    ))
+    return this._http.get<GastosModel>(`${this.apiEndpoint}/Gastos?Descripcion=${descripcion}`, {headers: headers})
   }
 
   getAllGastos() {
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.get<GastoInterface>(this.apiUrl,  {headers: headers})
-    .pipe(
-      map( resp => {
-          return resp.data.map(gast => GastosModel.gastoJson(gast))
-        }
-    ))
+    return this._http.get<GastosModel>(`${this.apiEndpoint}/Gastos`,  {headers: headers})
   }
 
   addGastos(gastos: GastosModel){
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.post<GastosModel>(this.apiUrl, JSON.stringify(gastos), {headers: headers})
+    return this._http.post<GastosModel>(`${this.apiEndpoint}/Gastos`, JSON.stringify(gastos), {headers: headers})
   }
   putGastos(gastos: GastosModel){
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.put<GastosModel>(this.apiUrl + '/' + gastos.id, JSON.stringify(gastos), {headers: headers})
+    return this._http.put<GastosModel>(`${this.apiEndpoint}/Gastos/${gastos?.id}`, JSON.stringify(gastos), {headers: headers})
   }
   deleteGastos(id: GastosModel){
     let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.delete<GastosModel>(this.apiUrl + '/' + id, {headers: headers})
+    return this._http.delete<GastosModel>(`${this.apiEndpoint}/Gastos/${id}`, {headers: headers})
   }
 
 

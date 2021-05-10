@@ -1,29 +1,29 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EmpleadoService } from '../../services/empleado.service';
 import { NgForm } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import Swal from 'sweetalert2';
+import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { AgregarDialogComponent } from './agregar-dialog/agregar-dialog.component';
-import { EmployeeModels } from './models/model-empleado';
-import { EmpleadoInterface } from './models/interface-empleado';
+import { EmployeeModel } from './models/model-empleado';
 
 @Component({
   selector: 'app-empleados',
   templateUrl: './empleados.component.html',
   styleUrls: ['./empleados.component.css'],
-  providers: [ HttpClient, NgForm, MessageService  ]
+  providers: [ HttpClient, NgForm, MessageService, ConfirmationService  ]
 })
 export class EmpleadosComponent implements OnInit {
-  public employee = new EmployeeModels(0,'', '','','',0,'');
-  empleado: EmpleadoInterface[] =[];
-  employeesList: EmployeeModels[] = [];
+  public employee = new EmployeeModel();
+  empleado: EmployeeModel[] =[];
+  employeesList: EmployeeModel[] = [];
   position: string;
   displayPosition: boolean;
   buscarNombre = '';
   @ViewChild('agregarDialog') ad: AgregarDialogComponent;
+
   constructor(private _empleadoService: EmpleadoService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.allEmpleado();
@@ -50,37 +50,40 @@ export class EmpleadosComponent implements OnInit {
   }
 
   //hijo a padre
-  addItem(form: any){
+  addItem($event){
     this.allEmpleado();
   }
 
-  deleteEmployee(employeeData: EmployeeModels){
-    Swal.fire({
-      title: '¿Seguro que quieres eliminar este dato?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._empleadoService.deleteEmployees(employeeData.id).subscribe(
-          (data) => {
-            this.allEmpleado();
-            this.employeesList = this.employeesList.filter((item) => {
-              return item.id !== employeeData.id;
-            })
-          }, (error) => {
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo intentando eliminar'});
+  deleteEmployee(empleadoData){
+    this.confirmationService.confirm({
+      message: 'Esta seguro que decea eliminar este dato?',
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this._empleadoService.deleteEmployees(empleadoData.id).subscribe(
+        (data) => {
+          this.employeesList = this.employeesList.filter((item) => {
+            return item.id !== empleadoData.id
           })
-        Swal.fire(
-          'Exelente!',
-          'Dato eliminado',
-          'success'
-        )
+          this.buscarEmpleado();
+          this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
+        }, (error) => {
+          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
+        })
+      },
+      reject: (type) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Cancelado', detail:'Se canceló la operación'});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Operación cancelada'});
+              break;
+          }
       }
-    })
+    });
   }
+
 //padre a hijo
   showPositionDialog(empleado){
     this.ad.showPositionDialog(empleado);

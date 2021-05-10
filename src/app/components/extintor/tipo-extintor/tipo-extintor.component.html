@@ -1,0 +1,29 @@
+<p-dialog [(visible)]="display" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '40vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            TIPO EXTINTOR
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form name="form" id="form" novalidate #form="ngForm" autocomplete="off">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="tipo_Extintor" class="form-label">Tipo</label>
+                    <input class="form-control" type="text" name="tipo_Extintor" id="tipo_Extintor" [class.is-invalid]="tipo_Extintor?.invalid && tipo_Extintor?.touched" [(ngModel)]="tipoExt.tipo_Extintor" #tipo_Extintor="ngModel" minlength="3" required>
+                    <small *ngIf="tipo_Extintor?.invalid && tipo_Extintor?.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
+                    <small *ngIf="tipo_Extintor.invalid && tipo_Extintor.hasError('minlength')" class="form-text text-danger">
+                      Debe contener almenos 3 caracteres
+                    </small>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button type="button" (click)="nuevoTipoExtintor(form)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="form.invalid"></p-button>
+        <p-button type="button" (click)="cerrarDialog(form)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+    </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>

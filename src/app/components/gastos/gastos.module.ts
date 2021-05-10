@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { GastosService } from '../../services/gastos.service';
 
@@ -32,7 +33,8 @@ import { DialogGastoComponent } from './dialog-gasto/dialog-gasto.component';
     ToastModule,
     FormsModule,
     InputTextModule,
-    PaginatorModule
+    PaginatorModule,
+    ConfirmDialogModule
 
   ],
   providers: [

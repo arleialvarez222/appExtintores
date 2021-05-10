@@ -1,4 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { PreciosService } from 'src/app/services/precios.service';
+import { PreciosModel } from '../models/precio-models';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-precio-dialog',
@@ -6,17 +10,68 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./precio-dialog.component.css']
 })
 export class PrecioDialogComponent implements OnInit {
-  @Output() verPrecio = new EventEmitter<any>()
+  @Output() verPrecio = new EventEmitter<PreciosModel>();
+  public preciosModel = new PreciosModel();
+  productos = [];
   displayPosition: boolean;
   position: string;
 
-  constructor() { }
+
+  constructor(private _precioService: PreciosService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.mostrarProducto();
   }
 
-  showPositionDialog(position: string){
+  mostrarProducto(){
+    this._precioService.verProducto().subscribe(data => {
+      let respuesta;
+      respuesta = data;
+      this.productos = respuesta?.data
+    }, (error) => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos'});
+    })
+  }
+
+  agregarPrecio(form: NgForm){
+    if(form.invalid){
+        Object.values(form.controls).forEach(control => {
+          control.markAsTouched()
+        })
+    }else{
+      if(this.preciosModel.id > 0){
+        this._precioService.editarPrecio(this.preciosModel).subscribe(data => {
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+          this.verPrecio.emit(this.preciosModel)
+          form.resetForm();
+          this.displayPosition = false;
+        }, (error) => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo en la operación'});
+        })
+      }else{
+        this._precioService.guardarPrecio(this.preciosModel).subscribe(data => {
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Datos agregados con éxito'});
+              this.verPrecio.emit(this.preciosModel);
+              form.resetForm();
+        }, (error) => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Verificar que los campos esten completos'});
+        })
+      }
+    }
+  }
+
+  showPositionDialog(precios){
+    let position: string;
     this.position = position
     this.displayPosition = true
+    if(precios){
+      this.preciosModel = JSON.parse(JSON.stringify(precios))
+    }
+  }
+
+  cerrarDialog(form: NgForm) {
+    this.displayPosition = false;
+    form.resetForm();
   }
 }

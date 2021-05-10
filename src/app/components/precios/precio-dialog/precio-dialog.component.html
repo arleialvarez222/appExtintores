@@ -1,29 +1,41 @@
-<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
     <ng-template pTemplate="header">
         <h3 class="titulo-h3">
-            <i class="pi pi-dollar "></i> AGREGAR PRECIO
+            <i class="pi pi-dollar "></i> DATOS DE PRECIO
         </h3>
     </ng-template>
     <div class="form">
-        <form>
+        <form name="form" id="form" novalidate #form="ngForm">
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
+                    <label for="idProductos" class="form-label">Producto</label>
+                    <select class="form-control" name="idProductos" id="idProductos" [disabled]="productos.length === 0" [class.is-invalid]="idProductos.invalid && idProductos.touched" [(ngModel)]="preciosModel.idProductos" #idProductos="ngModel" required>
+                      <option *ngFor="let item of productos" [value]="item.id">{{item.tipoProducto}} </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-12">
                     <label for="descripcion" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="descripcion">
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" [class.is-invalid]="descripcion.invalid && descripcion.touched" [(ngModel)]="preciosModel.descripcion" #descripcion="ngModel" required>
+                    <small *ngIf="descripcion.invalid && descripcion.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label for="valor" class="form-label">Valor</label>
-                    <input type="number" class="form-control" id="valor">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="iva" class="form-label">Iva</label>
-                    <input type="number" class="form-control" id="iva">
+                    <input class="form-control" type="number" id="valor" name="valor" [class.is-invalid]="valor.invalid && valor.touched" [(ngModel)]="preciosModel.valor" #valor="ngModel" required>
+                    <small *ngIf="valor.invalid && valor.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                    </small>
                 </div>
             </div>
         </form>
     </div>
     <p-footer>
-        <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+        <p-button type="button" (click)="agregarPrecio(form)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="form.invalid"></p-button>
+
+        <p-button type="button" (click)="cerrarDialog(form)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
     </p-footer>
 </p-dialog>
+
+<p-toast></p-toast>
