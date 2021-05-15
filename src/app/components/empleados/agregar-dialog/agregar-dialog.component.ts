@@ -15,7 +15,7 @@ import { EmpresaModel } from '../../empresa/models/modelEmpresa';
 })
 export class AgregarDialogComponent implements OnInit {
 
-  @Output() newEmployeeEvent = new EventEmitter<EmployeeModel>()
+  @Output() newEmployeeEvent = new EventEmitter<EmployeeModel>();
   empresa: EmpresaModel[] = []
   public employee = new EmployeeModel()
   position:string

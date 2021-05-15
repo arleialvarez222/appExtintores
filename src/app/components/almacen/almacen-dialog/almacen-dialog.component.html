@@ -1,0 +1,57 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            <i class="pi pi-list "></i> AGREGAR PRODUCTO
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form name="form" id="form" novalidate autocomplete="off" #form="ngForm">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input class="form-control" type="date" name="fecha" id="fecha" [class.is-invalid]="fecha. invalid && fecha.touched" [(ngModel)]="inventariado.fecha" #fecha="ngModel" required>
+                        <small *ngIf="fecha.invalid && fecha.touched" class="form-text text-danger">
+                    Este campo es obligatorio
+                  </small>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="idProductos" class="form-label">Producto</label>
+                    <select class="form-control" name="idProductos" id="idProductos" [disabled]="producto?.length === 0" [class.is-invalid]="idProductos.invalid && idProductos.touched" [(ngModel)]="inventariado.idProductos" #idProductos="ngModel" required>
+                  <option *ngFor="let item of producto" [value]="item.id">{{item.tipoProducto}} </option>
+                  </select>
+                    <small *ngIf="idProductos.invalid && idProductos.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="tipo" class="form-label">Tipo extintor</label>
+                    <select class="form-control" name="tipo" id="tipo" [disabled]="tipoExt?.length === 0" [class.is-invalid]="tipo.invalid && tipo.touched" [(ngModel)]="inventariado.tipo" #tipo="ngModel" required>
+                <option *ngFor="let item2 of tipoExt" [value]="item2.id">{{item2.tipo_Extintor}} </option>
+                </select>
+                    <small *ngIf="tipo.invalid && tipo.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                </small>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="peso" class="form-label">Peso</label>
+                    <select id="peso" class="form-control">
+                      <option selected>Seleccionar...</option>
+                      <option>...</option>
+                       </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input type="number" class="form-control" id="cantidad">
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
+    </p-footer>
+</p-dialog>

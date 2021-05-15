@@ -1,0 +1,51 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            <i class="pi pi-list "></i> datos productos
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form name="formulario" id="formulario" novalidate autocomplete="off" #formulario="ngForm">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="tipoProducto" class="form-label">Producto</label>
+                    <input class="form-control" type="text" name="tipoProducto" id="tipoProducto" [class.is-invalid]="tipoProducto. invalid && tipoProducto.touched" [(ngModel)]="productoss.tipoProducto" #tipoProducto="ngModel" minlength="3" required>
+                    <small *ngIf="tipoProducto.invalid && tipoProducto.touched" class="form-text text-danger">
+                    Este campo es obligatorio
+                  </small>
+                    <small *ngIf="tipoProducto.invalid && tipoProducto.hasError('minlength')" class="form-text text-danger">
+                    Debe contener almenos 3 caracteres
+                  </small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="idPesoExtintor" class="form-label">Peso extintor</label>
+                    <select class="form-control" name="idPesoExtintor" id="idPesoExtintor" [disabled]="pesoE.length === 0" [class.is-invalid]="idPesoExtintor.invalid && idPesoExtintor.touched" [(ngModel)]="productoss.idPesoExtintor" #idPesoExtintor="ngModel" required>
+                        <option *ngFor="let item of pesoE" [value]="item.id">{{item.pesoXlibras}} </option>
+                      </select>
+                    <small *ngIf="idPesoExtintor.invalid && idPesoExtintor.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="idTipoExtintor" class="form-label">Tipo extintor</label>
+                    <select class="form-control" name="idTipoExtintor" id="idTipoExtintor" [disabled]="tipo.length === 0" [class.is-invalid]="idTipoExtintor.invalid && idTipoExtintor.touched" [(ngModel)]="productoss.idTipoExtintor" #idTipoExtintor="ngModel" required>
+                        <option *ngFor="let item of tipo" [value]="item.id">{{item.tipo_Extintor}} </option>
+                      </select>
+                    <small *ngIf="idTipoExtintor.invalid && idTipoExtintor.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button type="button" (click)="guardarProducto(formulario)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="formulario.invalid"></p-button>
+        <p-button type="button" (click)="cerrarDialog(formulario)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+    </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>

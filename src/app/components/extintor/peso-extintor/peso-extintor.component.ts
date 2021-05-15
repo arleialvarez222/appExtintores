@@ -34,6 +34,8 @@ export class PesoExtintorComponent implements OnInit {
           this.verpeso.emit(this.pesoExt);
           formu.resetForm();
           this.displayPeso = false;
+        }, (error) => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar datos'});
         })
       }else{
         this._extintorPeso.guardarPeso(this.pesoExt).subscribe(data => {

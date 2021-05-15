@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
+import { PreciosService } from '../../services/precios.service'
+
 import { PreciosRoutingModule } from './precios-routing.module';
 import { PreciosComponent } from './precios.component';
 import { PrecioDialogComponent } from './precio-dialog/precio-dialog.component';
@@ -28,6 +30,9 @@ import { PrecioDialogComponent } from './precio-dialog/precio-dialog.component';
     PaginatorModule,
     ToastModule,
     ConfirmDialogModule
+  ],
+  providers: [
+    PreciosService
   ]
 })
 export class PreciosModule { }

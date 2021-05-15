@@ -1,33 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ServicePaisService } from '../../services/service-pais.service';
+import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { NgForm } from '@angular/forms';
+import { InventarioModel } from './modelos/invantarioModel';
+import { InventarioService } from '../../services/inventario.service';
+import { AlmacenDialogComponent } from './almacen-dialog/almacen-dialog.component';
 
 @Component({
   selector: 'app-almacen',
   templateUrl: './almacen.component.html',
   styleUrls: ['./almacen.component.css'],
-  providers: [ HttpClient ]
+  providers: [ HttpClient, MessageService, ConfirmationService, NgForm ]
 })
 export class AlmacenComponent implements OnInit {
-
-    paises: any[] = []
-    position: string
-    displayPosition: boolean
-    positionEdit: string
-    editStock: boolean
-  constructor(private paisService: ServicePaisService) { }
+  public inventariado = new InventarioModel();
+  inventario: InventarioModel[] = [];
+  busquedaInventario = '';
+  position: string;
+  displayPosition: boolean = false;
+  @ViewChild('componentInventario') ad: AlmacenDialogComponent;
+  constructor(private _inventarioService: InventarioService,
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.paisService.getPaises().subscribe( paises => {
-      this.paises = paises
+    this.mostrarInventario();
+  }
+
+  mostrarInventario(){
+    this._inventarioService.verinventario().subscribe(data => {
+      let resp;
+      resp = data;
+      this.inventario = resp?.data;
     })
   }
-  showPositionDialog(position: string){
-    this.position = position
-    this.displayPosition = true
+
+  AddItem($event){
+    this.mostrarInventario();
   }
-  editarStock(positionEdit: string){
-    this.position = positionEdit
-    this.editStock = true
+
+  showPositionDialog(inventario){
+    this.ad.showPositionDialog(inventario);
   }
 }

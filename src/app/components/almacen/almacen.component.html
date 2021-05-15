@@ -1,36 +1,54 @@
 <div class="contenedor">
-
     <div>
         <h2 class="titulo-prin">
-            stock en almacén
+            inventario
         </h2>
     </div>
-    <div class="btn">
-        <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-almacen">
-  <i class="pi pi-plus icono-btn"></i>Agregar producto</button>
+    <div class="contenedor-dos">
+        <div class="col-md-12">
+            <div class="btn">
+                <button (click)="showPositionDialog(inventariado)" type="button" class="btn btn-primary btn-emple">
+              <i class="pi pi-plus icono-btn"></i>Agregar producto</button>
+            </div>
+            <app-almacen-dialog #componentInventario (verInventarioComponent)="AddItem($event)"></app-almacen-dialog>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 ml-3 mb-2 abc">
+            <input type="search " placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaInventario" (input)="busquedaInventario = $event.target.value">
+        </div>
+        <div class="col-md-1 div-boton">
+            <button class="btn btn-primary boton-buscar">Buscar</button>
+        </div>
     </div>
 
     <div class="card">
-        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+        <p-table [(value)]="inventario" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowHover]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+
             <ng-template pTemplate="header">
                 <tr class="header">
                     <th class="identificador"> # </th>
                     <th> Fecha </th>
-                    <th> Descripción </th>
-                    <th> Peso </th>
+                    <!-- <th> Descripción </th> -->
+                    <th> # Producto </th>
                     <th> Tipo </th>
+                    <th> Peso </th>
                     <th> Cantidad </th>
+                    <th> Fecha vencimiento </th>
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let paises>
+            <ng-template pTemplate="body" let-inventario>
                 <tr>
-                    <td data-titulo="#"> 1</td>
-                    <td data-titulo="Fecha"> </td>
-                    <td data-titulo="Descripción"> 3</td>
-                    <td data-titulo="Peso"> 6</td>
-                    <td data-titulo="Tipo"> 7</td>
-                    <td data-titulo="Cantidad"> 7</td>
+                    <td data-titulo="#"> {{ inventario.id }} </td>
+                    <td data-titulo="Fecha"> {{ inventario.fecha | date:'yyyy/M/d' }} </td>
+                    <!--      <td data-titulo="Descripción"> {{ inventario.descripcion | titlecase }} </td> -->
+                    <td data-titulo="IdProducto"> {{ inventario.idProductos }} </td>
+                    <td data-titulo="Peso"> {{ inventario.tipo }} </td>
+                    <td data-titulo="Tipo"> {{ inventario.pesoXlibras }} </td>
+                    <td data-titulo="Cantidad"> {{ inventario.cantidad }} </td>
+                    <td data-titulo="F.Vencimiento"> {{ inventario.fechaVencimiento | date:'yyyy/M/d' }} </td>
                     <td class="td-iconos">
                         <i (click)="editarStock('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i class="pi pi-trash btn-outline-danger icono-table"></i>
@@ -40,93 +58,6 @@
         </p-table>
     </div>
 
-    <!-- dialogos -->
-    <p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="header">
-            <h3 class="titulo-h3">
-                <i class="pi pi-list "></i> AGREGAR PRODUCTO
-            </h3>
-        </ng-template>
-        <div class="form">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="fecha" class="form-label">Fecha</label>
-                        <input type="date" class="form-control" id="fecha">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="tipo" class="form-label">Tipo</label>
-                        <select id="tipo" class="form-control">
-                        <option selected>Seleccionar...</option>
-                        <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="peso" class="form-label">Peso</label>
-                        <select id="peso" class="form-control">
-                        <option selected>Seleccionar...</option>
-                        <option>...</option>
-                         </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
-        </p-footer>
-    </p-dialog>
-
-    <p-dialog [(visible)]="editStock" [position]="positionEdit" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-        <ng-template pTemplate="header">
-            <h3 class="titulo-h3">
-                <i class="pi pi-pencil "></i> EDITAR PRODUCTO
-            </h3>
-        </ng-template>
-        <div class="form">
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="fecha" class="form-label">Fecha</label>
-                        <input type="date" class="form-control" id="fecha">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="tipo" class="form-label">Tipo</label>
-                        <select id="tipo" class="form-control">
-                    <option selected>Seleccionar...</option>
-                    <option>...</option>
-                    </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="peso" class="form-label">Peso</label>
-                        <select id="peso" class="form-control">
-                    <option selected>Seleccionar...</option>
-                    <option>...</option>
-                     </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <p-footer>
-            <p-button icon="pi pi-save" label="Guardar" styleClass="p-button-primary"></p-button>
-        </p-footer>
-    </p-dialog>
+    <p-toast></p-toast>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+</div>

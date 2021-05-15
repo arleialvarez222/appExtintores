@@ -4,56 +4,64 @@
     box-sizing: border-box;
 }
 
+.contenedor-dos {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 .titulo-prin {
     text-transform: uppercase;
     margin-top: 0px;
     margin-left: 15px;
-    padding-top: 10px;
 }
 
-.btn-almacen {
+.btn-emple {
     width: 170px;
-    height: 35px;
+    height: 30px;
     margin-left: 15px;
     font-size: 13px;
+    color: #ffffff;
     text-transform: uppercase;
 }
 
 .icono-btn {
-    font-size: 12px;
+    font-size: 13px;
     margin-right: 6px;
 }
 
 
-/* estilos dialogo agregar  */
+/* estilos buscador */
 
-.form-row label {
-    margin-bottom: 5px;
-    margin-top: 10px;
+.abc {
+    margin-right: 15px;
 }
 
-.titulo-h3 {
-    width: 100%;
-    height: 40px;
-    margin-bottom: -20px;
+.div-boton {
+    margin-left: 5px;
 }
 
-.titulo-h3 i {
-    margin-right: 6px;
+.imput-buscar {
+    height: 30px;
+    padding-left: 10px;
 }
 
-.identificador-detalle {
-    width: 30px;
+.boton-buscar {
+    width: 70px;
+    height: 30px;
+    color: #ffffff;
 }
 
-
-/* fin estilos dialogo agregar  */
+::placeholder {
+    padding-left: 5px;
+    color: rgb(163, 159, 159);
+}
 
 
 /* estilos tabla */
 
 .card {
-    margin-top: 20px;
+    display: flex;
+    margin-top: 10px;
     margin-left: 15px;
     margin-right: 15px;
     border-left: 0;
@@ -63,13 +71,14 @@
 }
 
 .icono-table {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-right: 16px;
     text-align: center;
-    line-height: 30px;
-    font-size: 20px;
+    line-height: 25px;
+    font-size: 18px;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .identificador {
@@ -85,6 +94,14 @@
 /* fin estilos tabla */
 
 @media screen and (max-width: 800px) and (min-width:180px) {
+    .div-boton {
+        margin-left: 15px;
+    }
+    .card {
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+    }
     p-table {
         width: 100%;
         font-size: .9em;
@@ -92,7 +109,7 @@
     p-table tr {
         display: flex;
         flex-direction: column;
-        border: 1px solid grey;
+        border-bottom: 1px solid grey;
         padding: 1em;
         margin-bottom: 1em;
     }
@@ -101,7 +118,7 @@
     }
     p-table td[data-titulo]::before {
         content: attr( data-titulo);
-        width: 100px;
+        width: 120px;
         color: silver;
         font-weight: bold;
     }
@@ -110,15 +127,32 @@
     }
 }
 
-@media screen and (max-width: 400px) and (min-width:180px) {
-    p-table {
-        width: 100%;
-        font-size: .9em;
+@media screen and (max-width: 520px) and (min-width:180px) {
+    .formulario .div-form .form {
+        width: 250px;
+        height: 30px;
+        margin-right: 10px;
     }
-    p-table tr {
-        display: flex;
+    .formulario .div-form .boton .icono-buscar {
+        color: #c7c7c7;
+        margin-top: 10;
+        transition: .5s;
+        font-size: 15px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 350px) and (min-width:180px) {
+    .formulario .div-form .form {
+        width: 200px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    p-table {
+        font-size: .8em;
+    }
+    p-table tr td {
         flex-direction: column;
-        border: 1px solid grey;
         padding: 1em;
         margin-bottom: 1em;
     }
@@ -128,12 +162,37 @@
     }
     p-table td[data-titulo]::before {
         content: attr( data-titulo);
-        width: 100px;
         color: silver;
-        font-size: .7em;
         font-weight: bold;
     }
     p-table .header {
         display: none;
+    }
+}
+
+@media screen and (max-width: 270px) and (min-width:180px) {
+    .table-header input {
+        width: 170px;
+    }
+    .table-header {
+        margin-left: -15px;
+    }
+    .titulo-prin {
+        text-transform: uppercase;
+        margin-top: 0px;
+        margin-left: 15px;
+        font-size: 16px;
+    }
+    .formulario .div-form .form {
+        width: 135px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    .formulario .div-form .boton .icono-buscar {
+        color: #c7c7c7;
+        margin-top: 10;
+        transition: .5s;
+        font-size: 15px;
+        cursor: pointer;
     }
 }
