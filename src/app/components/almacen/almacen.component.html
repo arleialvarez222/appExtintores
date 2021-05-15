@@ -19,12 +19,12 @@
             <input type="search " placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaInventario" (input)="busquedaInventario = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
-            <button class="btn btn-primary boton-buscar">Buscar</button>
+            <button (click)="buscarInventario()" class="btn btn-primary boton-buscar">Buscar</button>
         </div>
     </div>
 
     <div class="card">
-        <p-table [(value)]="inventario" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowHover]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+        <p-table [(value)]="inventario" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowHover]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]" styleClass="p-datatable-responsive-demo">
 
             <ng-template pTemplate="header">
                 <tr class="header">
@@ -45,19 +45,19 @@
                     <td data-titulo="Fecha"> {{ inventario.fecha | date:'yyyy/M/d' }} </td>
                     <!--      <td data-titulo="Descripción"> {{ inventario.descripcion | titlecase }} </td> -->
                     <td data-titulo="IdProducto"> {{ inventario.idProductos }} </td>
-                    <td data-titulo="Peso"> {{ inventario.tipo }} </td>
-                    <td data-titulo="Tipo"> {{ inventario.pesoXlibras }} </td>
+                    <td data-titulo="Tipo"> {{ inventario.tipo | titlecase }} </td>
+                    <td data-titulo="Peso"> {{ inventario.pesoXlibras }} </td>
                     <td data-titulo="Cantidad"> {{ inventario.cantidad }} </td>
                     <td data-titulo="F.Vencimiento"> {{ inventario.fechaVencimiento | date:'yyyy/M/d' }} </td>
                     <td class="td-iconos">
-                        <i (click)="editarStock('center')" class="pi pi-pencil btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                        <i (click)="showPositionDialog(inventario)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                        <i (click)="eliminarInventarios(inventario)" class="pi pi-trash btn-outline-danger icono-table"></i>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 
-    <p-toast></p-toast>
+    <p-toast [style]="{width: '80vw'}"></p-toast>
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 </div>

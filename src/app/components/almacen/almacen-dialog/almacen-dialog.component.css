@@ -1,0 +1,17 @@
+p-button {
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 330px) and (min-width:180px) {
+    p-button {
+        margin-bottom: 5px;
+    }
+}
+
+h3 {
+    text-transform: uppercase;
+}
+
+p-toast {
+    z-index: 1;
+}

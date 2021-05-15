@@ -15,6 +15,7 @@ import { AlmacenDialogComponent } from './almacen-dialog/almacen-dialog.componen
 export class AlmacenComponent implements OnInit {
   public inventariado = new InventarioModel();
   inventario: InventarioModel[] = [];
+  inventarioDelet: InventarioModel[] = [];
   busquedaInventario = '';
   position: string;
   displayPosition: boolean = false;
@@ -28,15 +29,53 @@ export class AlmacenComponent implements OnInit {
   }
 
   mostrarInventario(){
-    this._inventarioService.verinventario().subscribe(data => {
+    this._inventarioService.verInventario().subscribe(data => {
       let resp;
       resp = data;
       this.inventario = resp?.data;
     })
   }
 
+  buscarInventario(){
+    this._inventarioService.busacandoInventario(this.busquedaInventario).subscribe(data => {
+      let respuesta;
+      respuesta = data;
+      this.inventario = respuesta?.data;
+    })
+  }
+
   AddItem($event){
     this.mostrarInventario();
+  }
+
+  eliminarInventarios(eliminarData){
+    this.confirmationService.confirm({
+      message: 'Esta seguro que decea eliminar este dato?',
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this._inventarioService.eliminarInventario(eliminarData.id).subscribe(
+        (data) => {
+          this.inventarioDelet = this.inventarioDelet.filter((item) => {
+            return item.id !== eliminarData.id
+          })
+          this.mostrarInventario();
+          this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
+        }, (error) => {
+          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
+        })
+      },
+      reject: (type) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Cancelado', detail:'Se canceló la operación'});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Operación cancelada'});
+              break;
+          }
+      }
+    });
   }
 
   showPositionDialog(inventario){

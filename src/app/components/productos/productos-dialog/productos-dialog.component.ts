@@ -69,7 +69,7 @@ export class ProductosDialogComponent implements OnInit {
           this.verProducto.emit(this.productoss);
           formulario.resetForm();
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'FFallo!!!, revisar que los campos esten completos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo!!!, revisar que los campos esten completos'});
         }
         )
       }

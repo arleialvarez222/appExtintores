@@ -11,7 +11,7 @@
     </div>
 
     <div class="card">
-        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+        <p-table [(value)]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]" styleClass="p-datatable-responsive-demo">
             <ng-template pTemplate="header">
                 <tr class="header">
                     <th class="identificador"> # </th>

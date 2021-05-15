@@ -30,7 +30,7 @@ import { AlmacenDialogComponent } from './almacen-dialog/almacen-dialog.componen
     ConfirmDialogModule,
     PaginatorModule,
     ToastModule,
-    FormsModule
+    FormsModule,
   ],
   providers:[
     InventarioService,

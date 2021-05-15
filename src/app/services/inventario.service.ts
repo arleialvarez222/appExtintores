@@ -12,9 +12,29 @@ export class InventarioService {
 
   constructor(private _http: HttpClient) { }
 
-  verinventario(){
+  busacandoInventario(tipo){
+    let headers = new HttpHeaders({'content-type': 'application/json'})
+    return this._http.get<InventarioModel>(`${this.apiRuta}/Inventarios?Tipo=${tipo}`, {headers : headers})
+  }
+
+  verInventario(){
     let headers = new HttpHeaders({'content-type': 'application/json'})
     return this._http.get<InventarioModel>(`${this.apiRuta}/Inventarios`, {headers : headers})
+  }
+
+  guardarInventario(inventario: InventarioModel){
+    let headers = new HttpHeaders({'content-type': 'application/json'})
+    return this._http.post<InventarioModel>(`${this.apiRuta}/Inventarios`, {...inventario}, {headers : headers})
+  }
+
+  editarInventario(inventario: InventarioModel){
+    let headers = new HttpHeaders({'content-type': 'application/json'})
+    return this._http.put<InventarioModel>(`${this.apiRuta}/Inventarios/${inventario?.id}`, {...inventario}, {headers : headers})
+  }
+
+  eliminarInventario(id: InventarioModel){
+    let headers = new HttpHeaders({'content-type': 'application/json'})
+    return this._http.delete<InventarioModel>(`${this.apiRuta}/Inventarios/${id}`, {headers : headers})
   }
 
 }
