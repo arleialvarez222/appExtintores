@@ -1,0 +1,86 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px':     '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <h3 class="titulo-h3">
+            <i class="pi pi-list icono-dialog"></i> AGREGAR CLIENTE
+        </h3>
+    </ng-template>
+    <div class="form">
+        <form name="form" id="form" novalidate autocomplete="off" #form="ngForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input class="form-control" type="text" name="nombre" id="nombre" [class.is-invalid]="nombre. invalid && nombre.touched" [(ngModel)]="modeloCliente.nombre" #nombre="ngModel" required>
+                        <small *ngIf="nombre.invalid && nombre.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                      </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input class="form-control" type="text" name="apellido" id="apellido" [(ngModel)]="modeloCliente.apellido" #apellido="ngModel">
+                        <!--   <small *ngIf="apellido.invalid && apellido.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                      </small> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="docCliente" class="form-label">Documento</label>
+                    <input class="form-control" type="number" name="docCliente" id="docCliente" [(ngModel)]="modeloCliente.docCliente" #docCliente="ngModel">
+                    <!--  <small *ngIf="docCliente.invalid && docCliente.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small> -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <input class="form-control" type="text" name="descripcion" id="descripcion" [class.is-invalid]="descripcion. invalid && descripcion.touched" [(ngModel)]="modeloCliente.descripcion" #descripcion="ngModel" required>
+                    <small *ngIf="descripcion.invalid && descripcion.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <input class="form-control" type="number" name="telefono" id="telefono" [class.is-invalid]="telefono. invalid && telefono.touched" [(ngModel)]="modeloCliente.telefono" #telefono="ngModel" required>
+                    <small *ngIf="telefono.invalid && telefono.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input class="form-control" type="text" name="direccion" id="direccion" [class.is-invalid]="direccion. invalid && direccion.touched" [(ngModel)]="modeloCliente.direccion" #direccion="ngModel" required>
+                    <small *ngIf="direccion.invalid && direccion.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input class="form-control" type="email" name="email" id="email" [class.is-invalid]="email. invalid && email.touched" [(ngModel)]="modeloCliente.email" #email="ngModel" required>
+                    <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="nit" class="form-label">Nit</label>
+                    <input class="form-control" type="text" name="nit" id="nit" [(ngModel)]="modeloCliente.nit" #nit="ngModel">
+                    <!-- <small *ngIf="nit.invalid && nit.touched" class="form-text text-danger">
+                  Este campo es obligatorio
+                  </small> -->
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-footer>
+        <p-button (click)="alamcenarCliente(form)" type="button" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="form.invalid"></p-button>
+        <p-button type="button" (click)="cerrarDialog(form)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+    </p-footer>
+</p-dialog>
+
+<p-toast [style]="{width: '80vw'}"></p-toast>

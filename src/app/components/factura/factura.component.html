@@ -1,75 +1,105 @@
 <div class="contenedor">
     <h2>Facturación de servicio</h2>
-    <div class="formulario">
-        <div class="form">
-            <form>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="form" id="form" novalidate autocomplete="off" #form="ngForm">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="cliente" class="form-label">Cliente</label>
-                        <select id="cliente" class="form-control">
-                      <option selected>Seleccionar...</option>
-                      <option>...</option>
-                      </select>
+                        <select class="form-control" name="idClientes" id="cliente" [disabled]="clientes.length === 0" [class.is-invalid]="idClientes.invalid && idClientes.touched" [(ngModel)]="servicioModel.idClientes" #idClientes="ngModel" required>
+                        <option *ngFor="let item of clientes" [value]="item.id">{{item.nombre}} {{item.apellido}} </option>
+                       </select>
+                        <small *ngIf="idClientes.invalid && idClientes.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
                     </div>
+
                     <div class="form-group col-md-4">
                         <label for="empleado" class="form-label">Empleado</label>
-                        <select id="empleado" class="form-control">
-                    <option selected>Seleccionar...</option>
-                    <option>...</option>
-                    </select>
+                        <select class="form-control" name="idEmpleados" id="empleado" [disabled]="empleados.length === 0" [class.is-invalid]="idEmpleados.invalid && idEmpleados.touched" [(ngModel)]="servicioModel.idEmpleados" #idEmpleados="ngModel" required>
+                        <option *ngFor="let item of empleados" [value]="item.id">{{item.nombre}} {{item.apellido}} </option>
+                       </select>
+                        <small *ngIf="idEmpleados.invalid && idEmpleados.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
                     </div>
+
                     <div class="form-group col-md-4">
                         <label for="fechaS" class="form-label">Fecha servicio</label>
-                        <input type="date" class="form-control" id="fechaS">
+                        <input class="form-control" type="date" name="fechaServicio" id="fechaS" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" [(ngModel)]="servicioModel.fechaServicio" #fechaServicio="ngModel" required>
+                        <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
                     </div>
                 </div>
 
                 <div class="form-row">
 
                     <div class="form-group col-md-3">
-                        <label for="fechaM" class="form-label">Fecha mantenimiento</label>
-                        <input type="date" class="form-control" id="fechaM">
+                        <label for="fechaMante" class="form-label">Fecha mantenimiento</label>
+                        <input class="form-control" type="date" name="fechaServicio" id="fechaMante" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" required>
+                        <!-- <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                      </small> -->
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="fechaV" class="form-label">Fecha vencimiento</label>
-                        <input type="date" class="form-control" id="fechaV">
+                        <label for="fechaVen" class="form-label">Fecha vencimiento</label>
+                        <input class="form-control" type="date" name="fechaServicio" id="fechaVen" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" required>
+                        <!--  <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                      </small> -->
                     </div>
+
                     <div class="form-group col-md-3">
                         <label for="estado" class="form-label">Estado</label>
                         <select id="estado" class="form-control">
-                        <option selected>Seleccionar...</option>
-                        <option>...</option>
+                        <option selected>  </option>
+                        <option> Cancelado </option>
+                        <option> Pendiente </option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="abono" class="form-label">Abono</label>
-                        <input type="number" class="form-control" id="abono">
+                        <input class="form-control" type="number" name="fechaServicio" id="abono" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" required>
+                        <!--  <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                        </small> -->
                     </div>
                 </div>
 
                 <div>
-                    <h4>Seleccionar servicio
+                    <h4>
+                        Seleccionar servicio
                     </h4>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion">
+                        <input class="form-control" type="text" name="descripcion" id="descripcion" [class.is-invalid]="descripcion.invalid && descripcion.touched" [(ngModel)]="detalleServicio.descripcion" #descripcion="ngModel" required>
+                        <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
+                      Este campo es obligatorio
+                      </small>
                     </div>
+
                     <div class="form-group col-md-4">
                         <label for="peso" class="form-label">Peso extintor</label>
-                        <select id="peso" class="form-control">
-                <option selected>Seleccionar...</option>
-                <option>...</option>
-              </select>
+                        <select class="form-control" name="pesoXlibras" id="peso" [disabled]="pesoExti.length === 0" [class.is-invalid]="pesoXlibras.invalid && pesoXlibras.touched" [(ngModel)]="detalleServicio.pesoXlibras" #pesoXlibras="ngModel" required>
+                        <option *ngFor="let item of pesoExti" [value]="item.id">{{item.pesoXlibras}} </option>
+                      </select>
+                        <small *ngIf="pesoXlibras.invalid && pesoXlibras.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
                     </div>
+
                     <div class="form-group col-md-4">
                         <label for="tipo" class="form-label">Tipo extintor</label>
-                        <select id="tipo" class="form-control">
-                <option selected>Seleccionar...</option>
-                <option>...</option>
-                </select>
+                        <select class="form-control" name="tipoExtintor" id="tipo" [disabled]="tipoExti.length === 0" [class.is-invalid]="tipoExtintor.invalid && tipoExtintor.touched" [(ngModel)]="detalleServicio.tipoExtintor" #tipoExtintor="ngModel" required>
+                      <option *ngFor="let item of tipoExti" [value]="item.id">{{item.tipo_Extintor}} </option>
+                      </select>
+                        <small *ngIf="tipoExtintor.invalid && tipoExtintor.touched" class="form-text text-danger">
+                        Este campo es obligatorio
+                      </small>
                     </div>
                 </div>
 
@@ -77,16 +107,22 @@
 
                     <div class="form-group col-md-6">
                         <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad">
+                        <input class="form-control" type="number" name="cantidad" id="cantidad" [class.is-invalid]="cantidad.invalid && cantidad.touched" [(ngModel)]="detalleServicio.cantidad" #cantidad="ngModel" required>
+                        <small *ngIf="cantidad.invalid && cantidad.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="valor" class="form-label">Valor</label>
-                        <input type="number" class="form-control" id="valor">
+                        <input class="form-control" type="number" name="valor" id="valor" [class.is-invalid]="valor.invalid && valor.touched" [(ngModel)]="detalleServicio.valor" #valor="ngModel" required>
+                        <small *ngIf="cantidad.invalid && cantidad.touched" class="form-text text-danger">
+                          Este campo es obligatorio
+                        </small>
                     </div>
                 </div>
 
                 <div class="btnform-servicio">
-                    <button type="button" class="btn btn-outline-primary btn-servicio">Agregar</button>
+                    <button (click)="agregarDetalle(form)" type="button" class="btn btn-outline-primary btn-servicio">Agregar</button>
                     <button type="button" class="btn btn-outline-secondary btn-servicio">Guardar</button>
                 </div>
             </form>

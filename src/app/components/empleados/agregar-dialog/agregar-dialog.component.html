@@ -61,11 +61,11 @@
                 <div class="form-group col-md-6">
                     <label for="idEmpresa" class="form-label">Empresa</label>
                     <select class="form-control" name="idEmpresa" id="idEmpresa" [disabled]="empresa.length === 0" [class.is-invalid]="idEmpresa.invalid && idEmpresa.touched" [(ngModel)]="employee.idEmpresa" #idEmpresa="ngModel" required>
-                          <option *ngFor="let item of empresa" [value]="item.id">{{item.nombre}} </option>
-                        </select>
+                      <option *ngFor="let item of empresa" [value]="item.id">{{item.nombre}} </option>
+                    </select>
                     <small *ngIf="idEmpresa.invalid && idEmpresa.touched" class="form-text text-danger">
-                          Este campo es obligatorio
-                        </small>
+                         Este campo es obligatorio
+                       </small>
                 </div>
             </div>
         </form>
