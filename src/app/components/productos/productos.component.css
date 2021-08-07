@@ -196,3 +196,21 @@
         cursor: pointer;
     }
 }
+
+.p-text-center{
+  text-align: center;
+}
+
+.botonesConfir{
+  display: inline-flex;
+}
+
+.buttonSuccess{
+  width: 120px;
+  height: 30px;
+}
+
+.buttonSecondary{
+  width: 120px;
+  height: 30px;
+}

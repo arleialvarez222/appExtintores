@@ -23,6 +23,7 @@ export class FacturaComponent implements OnInit {
   empleados: EmployeeModel[]= [];
   pesoExti: PesoModel[] = [];
   tipoExti: TipoModel[] = [];
+  detalleFactura: DetalleServicioModel[] = [];
 
   constructor(private _clienteService: ClientesService,
               private _empleadoService: EmpleadoService,
@@ -78,8 +79,9 @@ export class FacturaComponent implements OnInit {
   }
 
   agregarDetalle(form:NgForm){
-    console.log("valor de los campos");
-    console.log(form);
-  }
+    this.detalleFactura.push(this.detalleServicio);
+
+}
+
 
 }

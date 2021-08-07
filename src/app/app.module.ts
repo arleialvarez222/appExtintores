@@ -15,13 +15,16 @@ import { PreciosModule } from './components/precios/precios.module';
 import { ServiciosModule } from './components/servicios/servicios.module';
 import { ProductosModule } from './components/productos/productos.module';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './components/seguridad/login/login.module';
+import { RegistroUsuarioModule } from './components/seguridad/registroUsuario/registro-usuario.module';
 
 //servicios
 
 //Components
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component'
+
 
 
 @NgModule({
@@ -43,6 +46,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ProductosModule,
     PreciosModule,
     ServiciosModule,
+    LoginModule,
+    RegistroUsuarioModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ButtonModule,

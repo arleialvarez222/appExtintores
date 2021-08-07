@@ -1,0 +1,17 @@
+.form-control.login-user {
+    border: 0px solid #fff !important;
+}
+
+.contenedor {
+    padding-top: 50px;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+.icono-placeholder::placeholder {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f007";
+}

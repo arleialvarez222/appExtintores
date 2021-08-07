@@ -38,7 +38,6 @@ export class ProductosComponent implements OnInit {
     this.verProductos();
   }
 
-
   buscarProducto(){
     this._productosService.busquedaProducto(this.busquedaProducto).subscribe(data => {
       let arrayRes;
@@ -47,7 +46,31 @@ export class ProductosComponent implements OnInit {
     })
   }
 
+  onReject() {
+    this.messageService.clear('c');
+  }
+
+  showConfirm(producto) {
+    console.log(producto);
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed', closable: false, data: producto, id: producto});
+  }
+
   eliminarProducto(productoData){
+
+    console.log(productoData)
+    this._productosService.eliminarProducto(productoData?.id).subscribe((data) => {
+      this.productoDelet = this.productoDelet?.filter((item) => {
+        return item?.id !== productoData?.id
+      })
+      this.verProductos();
+      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
+        }, (error) => {
+          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
+        })
+  }
+
+  eliminarProducto2(productoData){
     this.confirmationService.confirm({
       message: 'Esta seguro que decea eliminar este dato?',
       header: 'Confirmar',
