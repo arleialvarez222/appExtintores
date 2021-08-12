@@ -29,7 +29,7 @@
                             <td data-titulo="Peso"> {{ peso.pesoXlibras }} </td>
                             <td class="td-iconos">
                                 <i (click)="showPositionDialogPeso(peso)" class="pi pi-pencil btn-outline-primary icono-table"></i>
-                                <i (click)="eliminarPeso(peso)" class="pi pi-trash btn-outline-danger icono-table"></i>
+                                <i (click)="confirmarElimPeso(peso)" class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
                     </ng-template>
@@ -60,7 +60,7 @@
                             <td data-titulo="tipo"> {{ tipo.tipo_Extintor }} </td>
                             <td class="td-iconos">
                                 <i (click)="showPositionDialog(tipo)" class="pi pi-pencil btn-outline-primary icono-table"></i>
-                                <i (click)="eliminarTipo(tipo)" class="pi pi-trash btn-outline-danger icono-table"></i>
+                                <i (click)="confirmarElimTipo(tipo)" class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
                     </ng-template>
@@ -70,6 +70,45 @@
     </div>
 
     <p-toast [style]="{width: '80vw'}"></p-toast>
-    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+    <p-toast position="top-center" (onClose)="onReject()" key="b"  [baseZIndex]="5000">
+      <ng-template let-message pTemplate="message">
+          <div class="p-flex p-flex-column" style="flex: 1">
+              <div class="p-text-center-botones">
+                  <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                  <h4>{{message.summary}}</h4>
+                  <p>{{message.detail}}</p>
+              </div>
+              <div class="row botonesConfirmacion ">
+                  <div class="col-md-6">
+                      <button type="button" pButton (click)="eliminarTipo(tipo)" label="Yes" class="p-button-success buttonSuccess"></button>
+                  </div>
+                  <div class="col-md-6">
+                      <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary buttonSecondary"></button>
+                  </div>
+              </div>
+          </div>
+        </ng-template>
+    </p-toast>
+
+    <p-toast position="top-center" (onClose)="onRejectPeso()" key="d"  [baseZIndex]="5000">
+      <ng-template let-message pTemplate="message">
+          <div class="p-flex p-flex-column" style="flex: 1">
+              <div class="p-text-center-botones">
+                  <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                  <h4>{{message.summary}}</h4>
+                  <p>{{message.detail}}</p>
+              </div>
+              <div class="row botonesConfirmacion ">
+                  <div class="col-md-6">
+                      <button type="button" pButton (click)="eliminarPeso(peso)" label="Yes" class="p-button-success buttonSuccess"></button>
+                  </div>
+                  <div class="col-md-6">
+                      <button type="button" pButton (click)="onRejectPeso()" label="No" class="p-button-secondary buttonSecondary"></button>
+                  </div>
+              </div>
+          </div>
+        </ng-template>
+    </p-toast>
 
 </div>

@@ -48,7 +48,7 @@
                             <td data-titulo="Nit"> {{ empresa.nit }} </td>
                             <td class="td-iconos">
                                 <i (click)="showPositionDialog(empresa)" class="pi pi-pencil btn-outline-primary icono-table"></i>
-                                <i (click)="eliminarEmpresaId(empresa)" class="pi pi-trash btn-outline-danger icono-table"></i>
+                                <i (click)="confirmarElimEmpresa(empresa)" class="pi pi-trash btn-outline-danger icono-table"></i>
                             </td>
                         </tr>
                     </ng-template>
@@ -57,5 +57,24 @@
         </div>
     </div>
     <p-toast [style]="{width: '80vw'}"></p-toast>
-    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+    <p-toast position="top-center" (onClose)="onReject()" key="a"  [baseZIndex]="5000">
+      <ng-template let-message pTemplate="message">
+          <div class="p-flex p-flex-column" style="flex: 1">
+              <div class="p-text-center-botones">
+                  <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                  <h4>{{message.summary}}</h4>
+                  <p>{{message.detail}}</p>
+              </div>
+              <div class="row botonesConfirmacion ">
+                  <div class="col-md-6">
+                      <button type="button" pButton (click)="eliminarEmpresaId(producto)" label="Yes" class="p-button-success buttonSuccess"></button>
+                  </div>
+                  <div class="col-md-6">
+                      <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary buttonSecondary"></button>
+                  </div>
+              </div>
+          </div>
+        </ng-template>
+    </p-toast>
 </div>

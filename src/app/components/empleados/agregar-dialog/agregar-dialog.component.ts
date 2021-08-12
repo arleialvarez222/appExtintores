@@ -36,20 +36,20 @@ export class AgregarDialogComponent implements OnInit {
     }else{
       if(this.employee?.id > 0){
         this._empleadoService.editEmployee(this.employee).subscribe( data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Se actualizó con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
           this.newEmployeeEvent.emit(this.employee)
           forma.resetForm();
          this.displayPosition = false;
         }, (error) =>{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar datos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se actualizaron', life: 1500});
         })
       }else{
         this._empleadoService.addEmployee$(this.employee).subscribe( data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación exitosa, los datos se guardaron', life: 1500});
           this.newEmployeeEvent.emit(this.employee)
           forma.resetForm()
         }, (error) =>{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Verificar que los campos esten completos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se guardaron', life: 1500});
         })
       }
     }

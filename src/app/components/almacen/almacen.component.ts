@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 import { InventarioModel } from './modelos/invantarioModel';
 import { InventarioService } from '../../services/inventario.service';
@@ -13,16 +13,18 @@ import { AlmacenDialogComponent } from './almacen-dialog/almacen-dialog.componen
   providers: [ HttpClient, MessageService, ConfirmationService, NgForm ]
 })
 export class AlmacenComponent implements OnInit {
+
   public inventariado = new InventarioModel();
   inventario: InventarioModel[] = [];
   inventarioDelet: InventarioModel[] = [];
   busquedaInventario = '';
   position: string;
   displayPosition: boolean = false;
+  inventarioDataItem;
   @ViewChild('componentInventario') ad: AlmacenDialogComponent;
+
   constructor(private _inventarioService: InventarioService,
-              private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private messageService: MessageService,) { }
 
   ngOnInit(): void {
     this.mostrarInventario();
@@ -33,7 +35,9 @@ export class AlmacenComponent implements OnInit {
       let resp;
       resp = data;
       this.inventario = resp?.data;
-    })
+    }), (error) => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos en la consulta', life: 1500});
+    }
   }
 
   buscarInventario(){
@@ -48,34 +52,28 @@ export class AlmacenComponent implements OnInit {
     this.mostrarInventario();
   }
 
-  eliminarInventarios(eliminarData){
-    this.confirmationService.confirm({
-      message: 'Esta seguro que decea eliminar este dato?',
-      header: 'Confirmar',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this._inventarioService.eliminarInventario(eliminarData.id).subscribe(
-        (data) => {
-          this.inventarioDelet = this.inventarioDelet.filter((item) => {
-            return item.id !== eliminarData.id
-          })
-          this.mostrarInventario();
-          this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
-        }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
-        })
-      },
-      reject: (type) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({severity:'error', summary:'Cancelado', detail:'Se canceló la operación'});
-              break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Operación cancelada'});
-              break;
-          }
-      }
-    });
+  onReject() {
+    this.messageService.clear('e');
+    this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Se canceló la operación', life: 1500});
+  }
+
+  confirmarElimInventario(inventarioId) {
+    this.inventarioDataItem = inventarioId;
+    this.messageService.clear();
+    this.messageService.add({key: 'e', sticky: true, severity:'warn', summary:'Estas seguro de esta acción?', detail:'Confirmas que deceas eliminar esta información?', closable: false, data: inventarioId, id: inventarioId});
+  }
+
+  eliminarInventarios(){
+    this._inventarioService.eliminarInventario(this?.inventarioDataItem.id).subscribe((data) => {
+      this.inventarioDelet = this.inventarioDelet.filter((item) => {
+        return item?.id !== this?.inventarioDataItem.id
+      })
+      this.mostrarInventario();
+      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});
+    }, (error) => {
+      this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida, los datos no se eliminaron', life: 1500});
+    })
+    this.messageService.clear();
   }
 
   showPositionDialog(inventario){

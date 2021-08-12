@@ -28,23 +28,21 @@ export class DialogGastoComponent implements OnInit {
       })
     }else{
       if(this.gastosModel?.id > 0){
-        this._gastosServices.putGastos(this.gastosModel).subscribe(
-          (data) => {
-            this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+        this._gastosServices.putGastos(this.gastosModel).subscribe((data) => {
+            this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
             this.verEvento.emit(this.gastosModel)
             form.resetForm()
             this.displayPosition = false;
           }, (error) => {
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo en la operación'});
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo en la operación', life: 1500});
           });
       }else{
-        this._gastosServices.addGastos(this.gastosModel).subscribe(
-          (data) => {
-            this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+        this._gastosServices.addGastos(this.gastosModel).subscribe((data) => {
+            this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación exitosa, los datos se han guardado', life: 1500});
             this.verEvento.emit(this.gastosModel)
             form.resetForm()
           }, (error) => {
-            this.messageService.add({severity:'warn', summary: 'Error', detail: 'Todos los campos deben estar completos'});
+            this.messageService.add({severity:'warn', summary: 'Error', detail: 'Error, los datos no se guardaron!', life: 1500});
           });
         }
       }

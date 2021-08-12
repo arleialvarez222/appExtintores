@@ -1,4 +1,4 @@
-<div class="contenedor">
+<div class="contenedor" *ngIf="isLogged">
 
     <nav class="navbar navbar-light  clase-navbar ">
         <div class="container-fluid">
@@ -89,7 +89,7 @@
 
             <div class=" login">
                 <div class="div-login">
-                    <label for=""><i class="pi pi-sign-in iconologin" routerLink="/login"></i></label>
+                    <label for=""><i class="pi pi-sign-in iconologin" (click)="cerrarSesion()"></i></label>
                 </div>
             </div>
 

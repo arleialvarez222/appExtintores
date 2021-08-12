@@ -4,18 +4,20 @@
             <div class="card_login">
                 <div class="card">
                     <div class="card-body">
-                        <form #form="ngForm">
+                        <form name="form" id="form" novalidate #form="ngForm">
                             <h1 class="text-center">Inicio de sesión</h1>
 
                             <div class="form-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input class="form-control icono-placeholder" type="email" id="email" name="email" placeholder=" " required>
+                              <label for="email" class="form-label">Email</label>
+                              <input class="form-control icono-placeholder" type="email" id="email" name="email" placeholder=" "
+                              [(ngModel)]="user.email" #email="ngModel" required>
                             </div>
                             <div class="form-group">
-                                <label for="contraseña" class="form-label">Contraseña</label>
-                                <input class="form-control icono-placeholder" type="password" id="contraseña" name="contraseña" placeholder=" " required>
-                            </div>
-                            <button type="button" class="btn btn-lg btn-primary btn-block">Ingresar </button>
+                              <label for="password" class="form-label">Contraseña</label>
+                              <input class="form-control icono-placeholder" type="password" id="password" name="password" placeholder=" "
+                              [(ngModel)]="user.password" #password="ngModel" required>
+                          </div>
+                            <button type="button" (click)="loginUsuario(form)" class="btn btn-lg btn-primary btn-block">Ingresar </button>
 
                             <a routerLink="/registro" class="btn btn-lg btn-secondary btn-block">Registrate</a>
 

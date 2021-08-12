@@ -1,6 +1,6 @@
 <div class="contenedor">
     <div>
-        <h2>Facturación de servicio</h2>
+        <h1 class="tituloPincipal">Facturación de servicio</h1>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -10,7 +10,7 @@
                         <label for="cliente" class="form-label">Cliente</label>
                         <select class="form-control" name="idClientes" id="cliente" [disabled]="clientes.length === 0" [class.is-invalid]="idClientes.invalid && idClientes.touched" [(ngModel)]="servicioModel.idClientes" #idClientes="ngModel" required>
                         <option *ngFor="let item of clientes" [value]="item.id">{{item.nombre}} {{item.apellido}} </option>
-                       </select>
+                        </select>
                         <small *ngIf="idClientes.invalid && idClientes.touched" class="form-text text-danger">
                         Este campo es obligatorio
                       </small>
@@ -37,14 +37,14 @@
 
                 <div class="form-row">
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="fechaMante" class="form-label">Fecha mantenimiento</label>
                         <input class="form-control" type="date" name="fechaServicio" id="fechaMante" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" required>
                         <!-- <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
                       Este campo es obligatorio
                       </small> -->
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="fechaVen" class="form-label">Fecha vencimiento</label>
                         <input class="form-control" type="date" name="fechaServicio" id="fechaVen" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" required>
                         <!--  <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
@@ -52,7 +52,7 @@
                       </small> -->
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="estado" class="form-label">Estado</label>
                         <select id="estado" class="form-control">
                         <option selected>  </option>
@@ -60,7 +60,7 @@
                         <option> Pendiente </option>
                         </select>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="abono" class="form-label">Abono</label>
                         <input class="form-control" type="number" name="fechaServicio" id="abono" [class.is-invalid]="fechaServicio.invalid && fechaServicio.touched" required>
                         <!--  <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
@@ -70,9 +70,9 @@
                 </div>
 
                 <div>
-                    <h4>
+                    <h2 class="subtitulo">
                         Seleccionar servicio
-                    </h4>
+                    </h2>
                 </div>
 
                 <div class="form-row">
@@ -107,14 +107,14 @@
 
                 <div class="form-row">
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="cantidad" class="form-label">Cantidad</label>
                         <input class="form-control" type="number" name="cantidad" id="cantidad" [class.is-invalid]="cantidad.invalid && cantidad.touched" [(ngModel)]="detalleServicio.cantidad" #cantidad="ngModel" required>
                         <small *ngIf="cantidad.invalid && cantidad.touched" class="form-text text-danger">
                           Este campo es obligatorio
                         </small>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="valor" class="form-label">Valor</label>
                         <input class="form-control" type="number" name="valor" id="valor" [class.is-invalid]="valor.invalid && valor.touched" [(ngModel)]="detalleServicio.valor" #valor="ngModel" required>
                         <small *ngIf="cantidad.invalid && cantidad.touched" class="form-text text-danger">
@@ -140,6 +140,7 @@
                         <th> Peso </th>
                         <th> Tipo </th>
                         <th> Cantidad </th>
+                        <th> Valor unit </th>
                         <th> Total </th>
                         <th></th>
                     </tr>
@@ -152,6 +153,7 @@
                         <td data-titulo="Tipo"> {{ detalleFactura.tipoExtintor }} </td>
                         <td data-titulo="Cantidad"> {{ detalleFactura.cantidad }} </td>
                         <td data-titulo="Total"> {{ detalleFactura.valor | currency }} </td>
+                        <td data-titulo="Total"> {{ detalleFactura.total | currency }} </td>
                         <td class="td-iconos">
                             <i class="pi pi-pencil btn-outline-primary icono-table"></i>
                             <i class="pi pi-trash btn-outline-danger icono-table"></i>

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GastosService } from '../../services/gastos.service';
 import { GastosModel } from './models/gastos.model';
-import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 import { DialogGastoComponent } from './dialog-gasto/dialog-gasto.component';
 
@@ -21,12 +21,12 @@ export class GastosComponent implements OnInit {
   position: string;
   displayPosition: boolean;
   buscarDescripcion = '';
+  gastosDataItem;
   @ViewChild('verDialogGasto') ad: DialogGastoComponent
 
   constructor(
               private _gastosServices: GastosService,
-              private messageService: MessageService,
-              private confirmationService: ConfirmationService) {}
+              private messageService: MessageService,) {}
 
   ngOnInit(): void {
     this.getGastos();
@@ -56,34 +56,28 @@ export class GastosComponent implements OnInit {
     });
   }
 
-  deletGastoDb(gastoData){
-    this.confirmationService.confirm({
-      message: 'Esta seguro que decea eliminar este dato?',
-      header: 'Confirmar',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this._gastosServices.deleteGastos(gastoData.id).subscribe(
-        (data) => {
-          this.gastosDelet = this.gastosDelet.filter((item) => {
-            return item.id !== gastoData.id
-          })
-          this.getGastos();
-          this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
-        }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
-        })
-      },
-      reject: (type) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({severity:'error', summary:'Cancelado', detail:'Se canceló la operación'});
-              break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Operación cancelada'});
-              break;
-          }
-      }
-    });
+  onReject() {
+    this.messageService.clear('f');
+    this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Se canceló la operación', life: 1500});
+  }
+
+  confirmarElimGasto(gastosId) {
+    this.gastosDataItem = gastosId;
+    this.messageService.clear();
+    this.messageService.add({key: 'f', sticky: true, severity:'warn', summary:'Estas seguro de esta acción?', detail:'Confirmas que deceas eliminar esta información?', closable: false, data: gastosId, id: gastosId});
+  }
+
+  deletGastoDb(){
+    this._gastosServices.deleteGastos(this?.gastosDataItem?.id).subscribe((data) => {
+      this.gastosDelet = this.gastosDelet.filter((item) => {
+        return item?.id !== this?.gastosDataItem?.id
+      })
+      this.getGastos();
+      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});
+    }, (error) => {
+      this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida, los datos no se eliminaron', life: 1500});
+    })
+    this.messageService.clear();
   }
 
   showPositionDialog(gastos) {

@@ -69,25 +69,27 @@ export class AlmacenDialogComponent implements OnInit {
           this.inventariado.fecha).toDate();
         this.inventariado.fechaVencimiento = moment(
           this.inventariado.fechaVencimiento).toDate();
+
         this._inventarioService.editarInventario(this.inventariado).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Actualización éxitosa'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
           this.verInventarioComponent.emit(this.inventariado);
           form.resetForm();
           this.displayPosition = false;
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar datos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se actualizaron', life: 1500});
         })
       }else{
         this.inventariado.fecha  = moment(
           this.inventariado.fecha).toDate();
         this.inventariado.fechaVencimiento = moment(
           this.inventariado.fechaVencimiento).toDate();
+
         this._inventarioService.guardarInventario(this.inventariado).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito, los datos se han guardado', life: 1500});
           this.verInventarioComponent.emit(this.inventariado);
           form.resetForm();
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo!!!, revisar que los campos esten completos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se guardaron', life: 1500});
         })
       }
     }

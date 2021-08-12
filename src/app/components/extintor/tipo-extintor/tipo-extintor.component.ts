@@ -19,9 +19,7 @@ export class TipoExtintorComponent implements OnInit {
   constructor(
     private _tipoService: ExtintorService,
     private messageService: MessageService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {}
 
@@ -32,44 +30,24 @@ export class TipoExtintorComponent implements OnInit {
       });
     } else {
       if (this.tipoExt?.id > 0) {
-        this._tipoService.editarTipo(this.tipoExt).subscribe(
-          (data) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'OK',
-              detail: 'Datos actualizados',
-            });
+        this._tipoService.editarTipo(this.tipoExt).subscribe((data) => {
+            this.messageService.add({severity: 'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500 });
             this.nuevoExtintor.emit(this.tipoExt);
             form.resetForm();
             this.display = false;
           },
           (error) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Fallo al actualizar',
-            });
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Se encontró un error, fallo al actualizar los datos', life: 1500});
           }
         );
       } else {
-
-
-        this._tipoService.guardarTipo(this.tipoExt).subscribe(
-          (data) => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'OK',
-              detail: 'Los datos se guardaron con éxito',
-            });
+        this._tipoService.guardarTipo(this.tipoExt).subscribe((data) => {
+            this.messageService.add({severity: 'success', summary: 'OK', detail: 'Los datos se guardaron con éxito', life: 1500});
             this.nuevoExtintor.emit(this.tipoExt);
             form.resetForm();
           },
           (error) => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Verificar que los campos esten completos',
-            });
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Verificar que los campos esten completos', life: 1500});
           }
         );
       }

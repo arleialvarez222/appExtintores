@@ -43,6 +43,7 @@
 .imput-buscar {
     height: 30px;
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .boton-buscar {
@@ -197,20 +198,4 @@
     }
 }
 
-.p-text-center{
-  text-align: center;
-}
 
-.botonesConfir{
-  display: inline-flex;
-}
-
-.buttonSuccess{
-  width: 120px;
-  height: 30px;
-}
-
-.buttonSecondary{
-  width: 120px;
-  height: 30px;
-}

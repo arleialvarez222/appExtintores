@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component'
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +17,13 @@ import { LoginComponent } from './login.component'
   imports: [
     CommonModule,
     LoginRoutingModule,
-    FormsModule
+    FormsModule,
+    ButtonModule,
+    ToastModule,
+    HttpClientModule
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class LoginModule { }

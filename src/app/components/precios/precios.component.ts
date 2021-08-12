@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PreciosService } from '../../services/precios.service';
-import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 import { PrecioDialogComponent } from './precio-dialog/precio-dialog.component';
 import { PreciosModel } from './models/precio-models';
@@ -20,10 +20,11 @@ export class PreciosComponent implements OnInit {
   position: string;
   displayPosition: boolean;
   buscarDescripcion = '';
+  preciosDataItem;
   @ViewChild('agregarDialog') ad:PrecioDialogComponent;
+
   constructor(private _precioService: PreciosService,
-              private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.vistaPrecios();
@@ -34,7 +35,9 @@ export class PreciosComponent implements OnInit {
       let resp;
       resp = data;
       this.precios = resp?.data;
-    })
+    }), (error) => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos en la consulta', life: 1500});
+    }
   }
 
   addItem($event){
@@ -42,41 +45,35 @@ export class PreciosComponent implements OnInit {
   }
 
   buscarPrecio(){
-this._precioService.busquedaPrecio(this.buscarDescripcion).subscribe(data => {
-  let result;
-  result = data;
-  this.precios = result?.data;
-})
+    this._precioService.busquedaPrecio(this.buscarDescripcion).subscribe(data => {
+      let result;
+      result = data;
+      this.precios = result?.data;
+    })
   }
 
-  eliminarPrecios(preciosData){
-    this.confirmationService.confirm({
-      message: 'Esta seguro que decea eliminar este dato?',
-      header: 'Confirmar',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this._precioService.eliminarPrecio(preciosData.id).subscribe(
-        (data) => {
-          this.preciosList = this.preciosList.filter((item) => {
-            return item.id !== preciosData.id
-          })
-          this.vistaPrecios();
-          this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
-        }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
-        })
-      },
-      reject: (type) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({severity:'error', summary:'Cancelado', detail:'Se canceló la operación'});
-              break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Operación cancelada'});
-              break;
-          }
-      }
-    });
+  onReject() {
+    this.messageService.clear('g');
+    this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Se canceló la operación', life: 1500});
+  }
+
+  confirmarElimPrecio(precioId) {
+    this.preciosDataItem = precioId;
+    this.messageService.clear();
+    this.messageService.add({key: 'g', sticky: true, severity:'warn', summary:'Estas seguro de esta acción?', detail:'Confirmas que deceas eliminar esta información?', closable: false, data: precioId, id: precioId});
+  }
+
+  eliminarPrecios(){
+    this._precioService.eliminarPrecio(this?.preciosDataItem?.id).subscribe((data) => {
+      this.preciosList = this.preciosList.filter((item) => {
+        return item.id !== this?.preciosDataItem?.id
+      })
+      this.vistaPrecios();
+      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});
+    }, (error) => {
+      this.messageService.add({severity:'error', summary:'Error', detail:'Error, los datos no se eliminaron', life: 1500});
+    })
+    this.messageService.clear();
   }
 
   showPositionDialog(precios){

@@ -24,6 +24,8 @@ import { RegistroUsuarioModule } from './components/seguridad/registroUsuario/re
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component'
+//import { HTTP_INTERCEPTORS } from '@angular/common/http';
+//import { Interceptor } from './interceptors/interceptor';
 
 
 
@@ -53,7 +55,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
     ButtonModule,
   ],
   providers: [
-
+    //{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi:true},
   ],
   bootstrap: [AppComponent]
 })

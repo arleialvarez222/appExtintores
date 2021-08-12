@@ -30,20 +30,20 @@ export class PesoExtintorComponent implements OnInit {
     }else{
       if(this.pesoExt?.id > 0){
         this._extintorPeso.editarPeso(this.pesoExt).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizarón con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizarón con éxito', life: 1500});
           this.verpeso.emit(this.pesoExt);
           formu.resetForm();
           this.displayPeso = false;
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar datos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Los datos no se actualizaron correctamente', life: 1500});
         })
       }else{
         this._extintorPeso.guardarPeso(this.pesoExt).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se guardaron con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se guardaron con éxito', life: 1500});
           this.verpeso.emit(this.pesoExt);
           formu.resetForm();
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'OK', detail: 'Error al guardar los datos'});
+          this.messageService.add({severity:'error', summary: 'OK', detail: 'Ocurrio un error al guardar los datos', life: 1500});
         }
         )
       }

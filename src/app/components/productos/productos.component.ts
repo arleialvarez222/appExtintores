@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 import { ProductosModel } from './modelos/productoModel';
 import { ProductoService } from '../../services/producto.service';
@@ -17,10 +17,10 @@ export class ProductosComponent implements OnInit {
   producto: ProductosModel[] = [];
   productoDelet: ProductosModel[] = [];
   busquedaProducto = '';
+  productoDataItem;
   @ViewChild('productodialogo') ad: ProductosDialogComponent
   constructor(private _productosService: ProductoService,
-              private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private messageService: MessageService,) { }
 
   ngOnInit(): void {
     this.verProductos();
@@ -31,7 +31,9 @@ export class ProductosComponent implements OnInit {
       let result;
       result = data;
       this.producto = result?.data;
-    })
+    }),(error)=> {
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos para mostrar'});
+    }
   }
 
   addItem($event){
@@ -48,56 +50,27 @@ export class ProductosComponent implements OnInit {
 
   onReject() {
     this.messageService.clear('c');
+    this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Se canceló la operación', life: 1500});
   }
 
-  showConfirm(producto) {
-    console.log(producto);
+  confirmarElimProducto(productoId) {
+    this.productoDataItem = productoId;
     this.messageService.clear();
-    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed', closable: false, data: producto, id: producto});
+    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Estas seguro de esta acción?', detail:'Confirmas que deceas eliminar esta información?', closable: false, data: productoId, id: productoId});
+
   }
 
-  eliminarProducto(productoData){
-
-    console.log(productoData)
-    this._productosService.eliminarProducto(productoData?.id).subscribe((data) => {
+  eliminarProducto(){
+    this._productosService.eliminarProducto(this.productoDataItem?.id).subscribe((data) => {
       this.productoDelet = this.productoDelet?.filter((item) => {
-        return item?.id !== productoData?.id
+        return item?.id !== this.productoDataItem?.id
       })
       this.verProductos();
-      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
+      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life:1500 });
         }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
+          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida, los datos no se eliminaron', life: 1500});
         })
-  }
-
-  eliminarProducto2(productoData){
-    this.confirmationService.confirm({
-      message: 'Esta seguro que decea eliminar este dato?',
-      header: 'Confirmar',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this._productosService.eliminarProducto(productoData.id).subscribe(
-        (data) => {
-          this.productoDelet = this.productoDelet.filter((item) => {
-            return item.id !== productoData.id
-          })
-          this.verProductos();
-          this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito'});
-        }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
-        })
-      },
-      reject: (type) => {
-          switch(type) {
-              case ConfirmEventType.REJECT:
-                  this.messageService.add({severity:'error', summary:'Cancelado', detail:'Se canceló la operación'});
-              break;
-              case ConfirmEventType.CANCEL:
-                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Operación cancelada'});
-              break;
-          }
-      }
-    });
+       this.messageService.clear('c');
   }
 
   showPositionDialog(producto){

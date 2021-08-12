@@ -42,20 +42,20 @@ export class PrecioDialogComponent implements OnInit {
     }else{
       if(this.preciosModel.id > 0){
         this._precioService.editarPrecio(this.preciosModel).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron correctamente', life: 1500});
           this.verPrecio.emit(this.preciosModel)
           form.resetForm();
           this.displayPosition = false;
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo en la operación'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, fallas en la actualización', life: 1500});
         })
       }else{
         this._precioService.guardarPrecio(this.preciosModel).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Datos agregados con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se guardaron correctamente', life: 1500});
               this.verPrecio.emit(this.preciosModel);
               form.resetForm();
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Verificar que los campos esten completos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error en la operacion, los datos no se guardaron', life: 1500});
         })
       }
     }

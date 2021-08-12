@@ -28,20 +28,20 @@ export class ClientesDialogComponent implements OnInit {
     }else{
       if(this.modeloCliente?.id > 0){
         this._clienteService.editarCliente(this.modeloCliente).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Datos actualizados con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
           this.verClienteComponent.emit(this.modeloCliente);
           form.resetForm();
           this.displayPosition = false;
         }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida, no se actualizó'});
+          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida, los datos no se actualizaron', life: 1500});
         })
       }else{
         this._clienteService.guardarCliente(this.modeloCliente).subscribe(data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación exitosa, los datos se guardaron exitosamente', life: 1500});
           this.verClienteComponent.emit(this.modeloCliente);
           form.resetForm();
         }, (error) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
+          this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida, los datos no se guardaron', life: 1500});
         })
       }
     }

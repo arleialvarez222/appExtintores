@@ -4,6 +4,26 @@
 /* html, body { height: 100%; } */
 
 body {
-    margin-top: 52px;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-top: 52px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* dialogo de confirmacion (eliminar) */
+
+.p-text-center-botones{
+  text-align: center;
+}
+
+.buttonSuccess{
+  width: 120px;
+  height: 30px;
+}
+
+.buttonSecondary{
+  width: 120px;
+  height: 30px;
+}
+
+.botonesConfirmacion{
+  text-align: center;
 }

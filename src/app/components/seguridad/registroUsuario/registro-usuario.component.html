@@ -4,21 +4,38 @@
             <div class="card_register">
                 <div class="card">
                     <div class="card-body">
-                        <form action="">
+                        <form name="form" id="form" novalidate #form="ngForm">
                             <h1 class="text-center">Regístrate</h1>
                             <div class="form-group">
-                                <label for="nombre" class="form-label">Nombre usuario</label>
-                                <input class="form-control icono-placeholder" type="text" id="nombre" name="Nombre" placeholder=" " required>
+                                <label for="nombres" class="form-label">Nombre</label>
+                                <input class="form-control icono-placeholder" type="text" id="nombres" name="nombres" placeholder=" "
+                                [(ngModel)]="user.nombres" #nombres="ngModel" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                <input class="form-control icono-placeholder" type="text" id="apellidos" name="apellidos" placeholder=" "
+                                [(ngModel)]="user.apellidos" #apellidos="ngModel" required>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control icono-placeholder" type="email" id="email" name="email" placeholder=" " required>
+                                <input class="form-control icono-placeholder" type="email" id="email" name="email" placeholder=" "
+                                [(ngModel)]="user.email" #email="ngModel" required>
                             </div>
                             <div class="form-group">
-                                <label for="contraseña" class="form-label">Contraseña</label>
-                                <input class="form-control icono-placeholder" type="password" id="contraseña" name="contraseña" placeholder=" " required>
+                              <label for="userName" class="form-label">Usuario</label>
+                              <input class="form-control icono-placeholder" type="text" id="userName" name="userName" placeholder=" "
+                              [(ngModel)]="user.userName" #userName="ngModel" required>
                             </div>
-                            <button type="button" class="btn btn-lg btn-primary btn-block">Guardar</button>
+                            <div class="form-group">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input class="form-control icono-placeholder" type="password" id="password" name="password" placeholder=" "
+                                [(ngModel)]="user.password" #password="ngModel" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                                <input class="form-control icono-placeholder" type="password" id="confirmPassword" name="confirmPassword" placeholder=" " [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required>
+                            </div>
+                            <button type="button" (click)="registrarUsuario(form)" class="btn btn-lg btn-primary btn-block">Guardar</button>
 
                             <a routerLink="/login" class="btn btn-lg btn-secondary btn-block">Iniciar sesión</a>
                         </form>

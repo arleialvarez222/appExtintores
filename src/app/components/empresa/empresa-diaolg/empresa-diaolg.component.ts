@@ -29,20 +29,20 @@ export class EmpresaDiaolgComponent implements OnInit {
     }else{
       if(this.empresaModel?.id > 0){
         this._empresaService.editarEmpresa(this.empresaModel).subscribe( data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Se actualizó con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
           this.verEmpresa.emit(this.empresaModel)
           form.resetForm()
          this.displayPosition = false
         }, (error) =>{
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar datos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo al actualizar los datos', life: 1500});
         })
       }else{
         this._empresaService.guardarEmpresa(this.empresaModel).subscribe( data => {
-          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
+          this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación exitosa, los datos se han guardado', life: 1500});
               this.verEmpresa.emit(this.empresaModel)
               form.resetForm()
         }, (error) => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Verificar que los campos esten completos'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: ' Se encontro un error, verificar que los campos esten completos', life: 1500});
         })
       }
     }

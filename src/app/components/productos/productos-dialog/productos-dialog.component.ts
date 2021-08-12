@@ -43,7 +43,6 @@ export class ProductosDialogComponent implements OnInit {
       let resp;
       resp = data;
       this.tipo = resp?.data;
-      console.log(this.tipo)
     })
   }
 

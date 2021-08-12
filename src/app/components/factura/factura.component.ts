@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api'
+import { MessageService, ConfirmationService } from 'primeng/api'
 import { ClientesService } from 'src/app/services/clientes.service';
 import { NgForm } from '@angular/forms';
 import { ClienteModel } from '../clientes/models/clienteModel';
@@ -28,8 +28,7 @@ export class FacturaComponent implements OnInit {
   constructor(private _clienteService: ClientesService,
               private _empleadoService: EmpleadoService,
               private _extintorService: ExtintorService,
-              private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.clienteConsulta();
@@ -79,9 +78,20 @@ export class FacturaComponent implements OnInit {
   }
 
   agregarDetalle(form:NgForm){
-    this.detalleFactura.push(this.detalleServicio);
+   /*  if(form.invalid){
+      this.messageService.add({severity:'warn', summary:'Alerta', detail:'Todos los campos son obligatorios', life: 1500});
+    }else{
+      let itemProducto = this?.detalleFactura?.filter(
+        (c) => c?.id === this?.facturaServicio.id
+      )
+    }
+    this.detalleFactura.push(this.detalleServicio); */
 
-}
+  }
 
+  /* operacionesDetalle(){
+    this.detalleFactura.total = 0;
+  }
+ */
 
 }
