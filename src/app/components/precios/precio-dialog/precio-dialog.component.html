@@ -10,7 +10,7 @@
                 <div class="form-group col-md-12">
                     <label for="idProductos" class="form-label">Producto</label>
                     <select class="form-control" name="idProductos" id="idProductos" [disabled]="productos.length === 0" [class.is-invalid]="idProductos.invalid && idProductos.touched" [(ngModel)]="preciosModel.idProductos" #idProductos="ngModel" required>
-                      <option *ngFor="let item of productos" [value]="item.id">{{item.tipoProducto}} </option>
+                      <option *ngFor="let item of productos" [value]="item.idProductos">{{item.tipoProducto}} </option>
                     </select>
                 </div>
                 <div class="form-group col-md-12">

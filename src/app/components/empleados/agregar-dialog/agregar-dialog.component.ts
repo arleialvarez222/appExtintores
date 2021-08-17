@@ -34,19 +34,19 @@ export class AgregarDialogComponent implements OnInit {
         control.markAsTouched()
       })
     }else{
-      if(this.employee?.id > 0){
-        this._empleadoService.editEmployee(this.employee).subscribe( data => {
+      if(this.employee?.idEmpleados > 0){
+        this._empleadoService.editEmployee(this?.employee).subscribe( data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
-          this.newEmployeeEvent.emit(this.employee)
+          this.newEmployeeEvent.emit(this?.employee)
           forma.resetForm();
          this.displayPosition = false;
         }, (error) =>{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se actualizaron', life: 1500});
         })
       }else{
-        this._empleadoService.addEmployee$(this.employee).subscribe( data => {
+        this._empleadoService.addEmployee$(this?.employee).subscribe( data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación exitosa, los datos se guardaron', life: 1500});
-          this.newEmployeeEvent.emit(this.employee)
+          this.newEmployeeEvent.emit(this?.employee)
           forma.resetForm()
         }, (error) =>{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se guardaron', life: 1500});

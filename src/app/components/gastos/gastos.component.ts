@@ -68,9 +68,9 @@ export class GastosComponent implements OnInit {
   }
 
   deletGastoDb(){
-    this._gastosServices.deleteGastos(this?.gastosDataItem?.id).subscribe((data) => {
+    this._gastosServices.deleteGastos(this?.gastosDataItem?.idGastos).subscribe((data) => {
       this.gastosDelet = this.gastosDelet.filter((item) => {
-        return item?.id !== this?.gastosDataItem?.id
+        return item?.idGastos !== this?.gastosDataItem?.idGastos
       })
       this.getGastos();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});

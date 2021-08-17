@@ -25,7 +25,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-peso>
                         <tr>
-                            <td data-titulo="#"> {{ peso.id }} </td>
+                            <td data-titulo="#"> {{ peso.idPesoExtintor }} </td>
                             <td data-titulo="Peso"> {{ peso.pesoXlibras }} </td>
                             <td class="td-iconos">
                                 <i (click)="showPositionDialogPeso(peso)" class="pi pi-pencil btn-outline-primary icono-table"></i>
@@ -56,7 +56,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-tipo>
                         <tr>
-                            <td data-titulo="#"> {{ tipo.id }} </td>
+                            <td data-titulo="#"> {{ tipo.idTipoExtintor }} </td>
                             <td data-titulo="tipo"> {{ tipo.tipo_Extintor }} </td>
                             <td class="td-iconos">
                                 <i (click)="showPositionDialog(tipo)" class="pi pi-pencil btn-outline-primary icono-table"></i>
@@ -71,7 +71,7 @@
 
     <p-toast [style]="{width: '80vw'}"></p-toast>
 
-    <p-toast position="top-center" (onClose)="onReject()" key="b"  [baseZIndex]="5000">
+    <p-toast position="center" (onClose)="onReject()" key="b"  [baseZIndex]="5000">
       <ng-template let-message pTemplate="message">
           <div class="p-flex p-flex-column" style="flex: 1">
               <div class="p-text-center-botones">
@@ -91,7 +91,7 @@
         </ng-template>
     </p-toast>
 
-    <p-toast position="top-center" (onClose)="onRejectPeso()" key="d"  [baseZIndex]="5000">
+    <p-toast position="center" (onClose)="onRejectPeso()" key="d"  [baseZIndex]="5000">
       <ng-template let-message pTemplate="message">
           <div class="p-flex p-flex-column" style="flex: 1">
               <div class="p-text-center-botones">

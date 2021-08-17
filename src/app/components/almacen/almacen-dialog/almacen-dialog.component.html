@@ -19,7 +19,7 @@
                 <div class="form-group col-md-6">
                     <label for="idProductos" class="form-label">Producto</label>
                     <select class="form-control" name="idProductos" id="idProductos" [disabled]="producto?.length === 0" [class.is-invalid]="idProductos.invalid && idProductos.touched" [(ngModel)]="inventariado.idProductos" #idProductos="ngModel" required>
-                  <option *ngFor="let item of producto" [value]="item.id">{{item.tipoProducto}} </option>
+                  <option *ngFor="let item of producto" [value]="item.idProductos">{{item.tipoProducto}} </option>
                   </select>
                     <small *ngIf="idProductos.invalid && idProductos.touched" class="form-text text-danger">
                   Este campo es obligatorio

@@ -14,7 +14,6 @@ import { AlmacenDialogComponent } from './almacen-dialog/almacen-dialog.componen
 })
 export class AlmacenComponent implements OnInit {
 
-  public inventariado = new InventarioModel();
   inventario: InventarioModel[] = [];
   inventarioDelet: InventarioModel[] = [];
   busquedaInventario = '';
@@ -22,6 +21,8 @@ export class AlmacenComponent implements OnInit {
   displayPosition: boolean = false;
   inventarioDataItem;
   @ViewChild('componentInventario') ad: AlmacenDialogComponent;
+  public inventariado = new InventarioModel();
+
 
   constructor(private _inventarioService: InventarioService,
               private messageService: MessageService,) { }
@@ -31,9 +32,10 @@ export class AlmacenComponent implements OnInit {
   }
 
   mostrarInventario(){
-    this._inventarioService.verInventario().subscribe(data => {
+    this._inventarioService?.verInventario().subscribe(data => {
       let resp;
       resp = data;
+      console.log(resp)
       this.inventario = resp?.data;
     }), (error) => {
       this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos en la consulta', life: 1500});
@@ -64,9 +66,9 @@ export class AlmacenComponent implements OnInit {
   }
 
   eliminarInventarios(){
-    this._inventarioService.eliminarInventario(this?.inventarioDataItem.id).subscribe((data) => {
-      this.inventarioDelet = this.inventarioDelet.filter((item) => {
-        return item?.id !== this?.inventarioDataItem.id
+    this._inventarioService.eliminarInventario(this?.inventarioDataItem?.idInventario).subscribe((data) => {
+      this.inventarioDelet = this.inventarioDelet?.filter((item) => {
+        return item?.idInventario !== this?.inventarioDataItem?.idInventario
       })
       this.mostrarInventario();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});

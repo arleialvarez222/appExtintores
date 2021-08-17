@@ -4,7 +4,7 @@
         <h1 class="titulo-prin">Lista de servicios</h1>
     </div>
     <div class="card">
-        <p-table [value]="paises" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
+        <p-table [value]="servicios" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
             <ng-template pTemplate="header">
                 <tr class="header">
                     <th> # </th>
@@ -12,19 +12,22 @@
                     <th> Cliente </th>
                     <th> Total </th>
                     <th> Estado </th>
+                    <th> Empleado </th>
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-paises>
+            <ng-template pTemplate="body" let-servicios>
                 <tr>
-                    <td data-titulo="#">{{paises.nombre}}</td>
-                    <td data-titulo="Fecha">{{paises.capital}}</td>
-                    <td data-titulo="Clente">{{paises.codigo}}</td>
-                    <td data-titulo="Total">{{paises.region}}</td>
-                    <td data-titulo="Estado">{{paises.area}}</td>
+                    <td data-titulo="#">{{servicios?.idServicios}}</td>
+                    <td data-titulo="Fecha">{{servicios?.fechaServicio | date}}</td>
+                    <td data-titulo="Clente">{{servicios?.cliente?.nombre | titlecase}} {{servicios?.cliente?.apellido | titlecase}}</td>
+                    <td data-titulo="Total">{{servicios?.valor | currency }}</td>
+                    <td data-titulo="Estado">{{servicios?.estado}}</td>
+                    <td data-titulo="Clente">{{servicios?.empleado?.nombre | titlecase}} {{servicios?.empleado?.apellido | titlecase}}</td>
                     <td>
-                        <i (click)="showPositionDialog('center')" class="pi pi-list btn-outline-primary icono-table"></i>
-                        <i class="pi pi-trash btn-outline-danger icono-table"></i>
+                      <i (click)="showPositionDialog(servicios)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                      <i (click)="confirmarElimServicio(servicios)" class="pi pi-trash btn-outline-danger icono-table"></i>
+                      <i (click)="showPositionDialog('center')" class="pi pi-list btn-outline-primary icono-table"></i>
                     </td>
                 </tr>
             </ng-template>
@@ -38,7 +41,7 @@
                 <i class="pi pi-list "></i> DETALLE DEL SERVICIO
             </h3>
         </ng-template>
-        <p-table [value]="paises" class="table-detalle">
+        <p-table [value]="servicios" class="table-detalle">
             <ng-template pTemplate="header">
                 <tr class="header1">
                     <th> # </th>
@@ -67,4 +70,26 @@
         <ng-template pTemplate="footer">
         </ng-template>
     </p-dialog>
+
+    <p-toast [style]="{width: '80vw'}"></p-toast>
+
+      <p-toast position="center" (onClose)="onReject()" key="k"  [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="p-flex p-flex-column" style="flex: 1">
+                <div class="p-text-center-botones">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                    <h4>{{message.summary}}</h4>
+                    <p>{{message.detail}}</p>
+                </div>
+                <div class="row botonesConfirmacion ">
+                    <div class="col-md-6">
+                        <button type="button" pButton (click)="eliminarServicioId(servicios)" label="Yes" class="p-button-success buttonSuccess"></button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary buttonSecondary"></button>
+                    </div>
+                </div>
+            </div>
+          </ng-template>
+      </p-toast>
 </div>

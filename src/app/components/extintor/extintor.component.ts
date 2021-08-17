@@ -76,9 +76,9 @@ export class ExtintorComponent implements OnInit {
   }
 
   eliminarTipo(){
-    this._extintorService.eliminarTipo(this?.tipoDataItem.id).subscribe((data) => {
-      this.tipoList = this.tipoList.filter((item) => {
-        return item.id !== this?.tipoDataItem.id
+    this._extintorService.eliminarTipo(this?.tipoDataItem?.idTipoExtintor).subscribe((data) => {
+      this.tipoList = this.tipoList?.filter((item) => {
+        return item?.idTipoExtintor !== this?.tipoDataItem?.idTipoExtintor
       })
       this.verTipoExtintor();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});
@@ -100,9 +100,9 @@ export class ExtintorComponent implements OnInit {
   }
 
   eliminarPeso(){
-    this._extintorService.eliminarPeso(this?.pesoDataItem.id).subscribe((data) => {
-      this.pesoList = this.pesoList.filter((item) => {
-        return item.id !== this?.pesoDataItem.id
+    this._extintorService.eliminarPeso(this?.pesoDataItem?.idPesoExtintor).subscribe((data) => {
+      this.pesoList = this.pesoList?.filter((item) => {
+        return item?.idPesoExtintor !== this?.pesoDataItem?.idPesoExtintor
       })
       this.verPesoExtintor();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});

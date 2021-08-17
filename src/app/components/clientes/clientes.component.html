@@ -55,9 +55,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row divBuscador">
         <div class="col-md-4 ml-3 mb-2 abc">
-            <input type="search" placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaCliente" (input)="busquedaCliente = $event.target.value">
+            <input type="search" placeholder="Ingresar nombre" id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaCliente" (input)="busquedaCliente = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
             <button class="btn btn-primary boton-buscar">Buscar</button>
@@ -82,14 +82,14 @@
             </ng-template>
             <ng-template pTemplate="body" let-cliente>
                 <tr>
-                    <td data-titulo="#"> {{ cliente.id }} </td>
-                    <td data-titulo="Nombre"> {{ cliente.nombre | titlecase }} {{ cliente.apellido | titlecase }} </td>
-                    <td data-titulo="Documento"> {{ cliente.docCliente }} {{ cliente.nit }}</td>
-                    <td data-titulo="Descripción"> {{ cliente.descripcion | titlecase }} </td>
-                    <td data-titulo="Dirección"> {{ cliente.direccion | titlecase }} </td>
-                    <td data-titulo="Teléfono"> {{ cliente.telefono }} </td>
-                    <td data-titulo="Email"> {{ cliente.email }} </td>
-                    <!--     <td data-titulo="Nit"> {{ cliente.nit }} </td> -->
+                    <td data-titulo="#"> {{ cliente?.idCliente }} </td>
+                    <td data-titulo="Nombre"> {{ cliente?.nombre | titlecase }} {{ cliente?.apellido | titlecase }} </td>
+                    <td data-titulo="Documento"> {{ cliente?.docCliente }} {{ cliente?.nit }}</td>
+                    <td data-titulo="Descripción"> {{ cliente?.descripcion | titlecase }} </td>
+                    <td data-titulo="Dirección"> {{ cliente?.direccion | titlecase }} </td>
+                    <td data-titulo="Teléfono"> {{ cliente?.telefono }} </td>
+                    <td data-titulo="Email"> {{ cliente?.email }} </td>
+                    <!--     <td data-titulo="Nit"> {{ cliente?.nit }} </td> -->
                     <td class="td-iconos">
                         <i (click)="showPositionDialog(cliente)" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i (click)="confirmarElimCliente(cliente)" class="pi pi-trash btn-outline-danger icono-table"></i>

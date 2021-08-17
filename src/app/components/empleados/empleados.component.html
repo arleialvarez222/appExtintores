@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row divBuscador">
         <div class="col-md-4 ml-3 mb-2 abc">
             <input type="search" placeholder="Ingresar Nombre" id="buscador" name="buscador" class="form-control imput-buscar" [value]="buscarNombre" (input)="buscarNombre = $event.target.value">
         </div>
@@ -39,7 +39,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-empleado>
                 <tr>
-                    <td data-titulo="#"> {{ empleado.id }} </td>
+                    <td data-titulo="#"> {{ empleado.idEmpleados }} </td>
                     <td data-titulo="Nombre"> {{ empleado.nombre | titlecase }} </td>
                     <td data-titulo="Apellido"> {{ empleado.apellido | titlecase }} </td>
                     <td data-titulo="Dirección"> {{ empleado.direccion | titlecase }} </td>

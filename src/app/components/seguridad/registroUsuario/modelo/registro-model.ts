@@ -5,6 +5,7 @@ export class RegistroModel{
   public userName: string;
   public password: string;
   public confirmPassword: string;
+  public clientURI: string;
 }
 
 export class LoginModel{

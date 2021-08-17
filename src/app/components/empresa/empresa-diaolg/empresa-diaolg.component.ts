@@ -27,7 +27,7 @@ export class EmpresaDiaolgComponent implements OnInit {
         control.markAsTouched()
       })
     }else{
-      if(this.empresaModel?.id > 0){
+      if(this.empresaModel?.idEmpresa > 0){
         this._empresaService.editarEmpresa(this.empresaModel).subscribe( data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
           this.verEmpresa.emit(this.empresaModel)

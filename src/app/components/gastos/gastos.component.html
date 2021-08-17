@@ -13,9 +13,9 @@
             <app-dialog-gasto #verDialogGasto (verEvento)="addItem($event)"></app-dialog-gasto>
         </div>
     </div>
-    <div class="row">
+    <div class="row divBuscador">
         <div class="col-md-4 ml-3 mb-2 abc">
-            <input type="search" placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="buscarDescripcion" (input)="buscarDescripcion = $event.target.value">
+            <input type="search" placeholder="Ingresar descripción" id="buscador" name="buscador" class="form-control imput-buscar" [value]="buscarDescripcion" (input)="buscarDescripcion = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
             <button class="btn btn-primary boton-buscar" (click)="buscarGasto()">Buscar</button>
@@ -35,11 +35,11 @@
             </ng-template>
             <ng-template pTemplate="body" let-gastos>
                 <tr>
-                    <td data-titulo="#"> {{ gastos.id}}</td>
-                    <td data-titulo="Descripción"> {{ gastos.descripcion }}</td>
-                    <td data-titulo="Fecha"> {{ gastos.fecha | date : 'dd-MM-yyyy'}}</td>
-                    <td data-titulo="Cantidad"> {{ gastos.cantidad }}</td>
-                    <td data-titulo="Total"> {{ gastos.total | currency }}</td>
+                    <td data-titulo="#"> {{ gastos?.idGastos}}</td>
+                    <td data-titulo="Descripción"> {{ gastos?.descripcion }}</td>
+                    <td data-titulo="Fecha"> {{ gastos?.fecha | date : 'dd-MM-yyyy'}}</td>
+                    <td data-titulo="Cantidad"> {{ gastos?.cantidad }}</td>
+                    <td data-titulo="Total"> {{ gastos?.total | currency }}</td>
                     <td class="td-iconos">
                         <i (click)="showPositionDialog(gastos)" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i (click)="confirmarElimGasto(gastos)" class="pi pi-trash btn-outline-danger icono-table"></i>

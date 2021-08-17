@@ -53,9 +53,9 @@ export class EmpresaComponent implements OnInit {
   }
 
   eliminarEmpresaId(){
-    this._empresaService.eliminarEmpresa(this?.empresaDataItem.id).subscribe((data) => {
+    this._empresaService.eliminarEmpresa(this?.empresaDataItem?.idEmpresa).subscribe((data) => {
       this.empresaDelet = this.empresaDelet.filter((item) => {
-        return item.id !== this?.empresaDataItem.id
+        return item.idEmpresa !== this?.empresaDataItem?.idEmpresa
       })
       this.verEmpresas();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito, datos eliminados'});

@@ -1,5 +1,5 @@
 export class ClienteModel{
-  public id: number;
+  public idCliente: number;
   public docCliente: number;
   public nombre: string;
   public apellido: string;

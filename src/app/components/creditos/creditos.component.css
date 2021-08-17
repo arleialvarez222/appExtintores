@@ -8,11 +8,55 @@
     margin: 15px;
 }
 
+.contenedor2 {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
 .titulo-prin {
     text-transform: uppercase;
     margin-top: 0px;
     margin-left: 10px;
     padding-top: 15px;
+}
+
+.btn-servicio {
+  width: 150px;
+  height: 40px;
+  margin-left: 15px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+
+/* estilos buscador */
+
+.divBuscador{
+  margin-top: 20px;
+}
+
+.abc {
+  margin-right: 15px;
+}
+
+.div-boton {
+  margin-left: 5px;
+}
+
+.imput-buscar {
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.boton-buscar {
+  width: 70px;
+  height: 40px;
+}
+
+::placeholder {
+  padding-left: 5px;
+  color: rgb(163, 159, 159);
 }
 
 
@@ -65,9 +109,7 @@
 
 /* fin estilos tabla */
 
-p-dialog {
-    display: flex;
-}
+
 
 .input-dialog {
     height: 39px;

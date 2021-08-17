@@ -1,26 +1,62 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicePaisService } from '../../services/service-pais.service';
 import { HttpClient } from '@angular/common/http';
+import { ServiciosService } from '../../services/servicios.service';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-servicios',
   templateUrl: './servicios.component.html',
   styleUrls: ['./servicios.component.css'],
-  providers: [HttpClient],
+  providers: [HttpClient, MessageService, ConfirmationService, NgForm ],
 })
 export class ServiciosComponent implements OnInit {
-  paises: any[] =[]
+  servicios: any[] =[]
+  serviciosList: any[] =[]
   position: string
   displayPosition: boolean;
+  servicioDataItem;
 
-  constructor(private paisService: ServicePaisService) { }
+  constructor(private _httpServicio: ServiciosService,
+              private messageService: MessageService ) { }
 
   ngOnInit(): void {
-    this.paisService.getPaises()
-    .subscribe( paises => {
-      this.paises = paises
+    this.obtenerServicio();
+  }
+
+  obtenerServicio(){
+    this._httpServicio.consultarServicios().subscribe(data => {
+      let respuesta;
+      respuesta = data;
+      this.servicios = respuesta?.data;
     })
   }
+
+  onReject() {
+    this.messageService.clear('k');
+    this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Se canceló la operación', life: 1500});
+  }
+
+  confirmarElimServicio(servicioId) {
+    this.servicioDataItem = servicioId;
+    this.messageService.clear();
+    this.messageService.add({key: 'k', sticky: true, severity:'warn', summary:'Estas seguro de esta acción?', detail:'Confirmas que deceas eliminar esta información?', closable: false, data: servicioId, id: servicioId});
+  }
+
+  eliminarServicioId(){
+    this._httpServicio.eliminarServicios(this?.servicioDataItem?.idServicios).subscribe(data => {
+      this.serviciosList = this?.serviciosList?.filter(item => {
+        return item?.idServicios !== this?.servicioDataItem?.idServicios;
+      });
+      this.obtenerServicio();
+      this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});
+    }), (error) => {
+      this.messageService.add({severity:'error', summary:'Error', detail:'Error, los datos no se eliminaron', life: 1500});
+    }
+    this.messageService.clear();
+  }
+
+
   showPositionDialog(position: string) {
     this.position = position;
     this.displayPosition = true;

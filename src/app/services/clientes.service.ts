@@ -12,22 +12,18 @@ export class ClientesService {
   constructor(private _http: HttpClient) { }
 
   consultarCliente(){
-    let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.get<ClienteModel>(`${this.apiEndpoint}/Clientes`, {headers: headers})
+    return this._http.get<ClienteModel>(`${this?.apiEndpoint}/Clientes`);
   }
 
   guardarCliente(cliente: ClienteModel){
-    let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.post<ClienteModel>(`${this.apiEndpoint}/Clientes`, {...cliente}, {headers: headers})
+    return this._http.post<ClienteModel>(`${this?.apiEndpoint}/Clientes`, {...cliente});
   }
 
   editarCliente(cliente: ClienteModel){
-    let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.put<ClienteModel>(`${this.apiEndpoint}/Clientes/${cliente?.id}`, {...cliente}, {headers: headers})
+    return this._http.put<ClienteModel>(`${this?.apiEndpoint}/Clientes/${cliente?.idCliente}`, {...cliente});
   }
 
   eliminarClientes(id: ClienteModel){
-    let headers = new HttpHeaders({'content-type': 'application/json'})
-    return this._http.delete<ClienteModel>(`${this.apiEndpoint}/Clientes/${id}`, {headers: headers})
+    return this._http.delete<ClienteModel>(`${this?.apiEndpoint}/Clientes/${id}`);
   }
 }

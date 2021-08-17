@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   private subscripcion : Subscription = new Subscription();
 
   public user: LoginModel = {
-    email: '',
-    password: '',
+    email: 'alvarezarlei222@gmail.com',
+    password: 'Baronrojo222$',
     clientURI: 'login usuario',
   }
 
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.loginUsuario(this?.user).subscribe(resp => {
 
         if(resp){
-          this.router.navigate(['servicios']);
+          this.router.navigate(['gastos']);
         }else{
           this.router.navigate(['login']);
         }

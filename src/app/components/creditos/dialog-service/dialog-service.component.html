@@ -1,0 +1,46 @@
+<p-dialog [(visible)]="displayPosition" [position]="position" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [modal]="true" [style]="{width: '70vw'} " [baseZIndex]="2" [draggable]="false" [resizable]="false" [closable]="false">
+  <ng-template pTemplate="header">
+      <h3 class="titulo-h3">
+          <i class="pi pi-dollar "></i> DATOS DE PRECIO
+      </h3>
+  </ng-template>
+  <div class="form">
+      <form name="form" id="form" novalidate #form="ngForm">
+          <div class="form-row">
+
+            <div class="form-group col-md-12">
+              <label for="cliente" class="form-label">Cliente</label>
+              <select class="form-control" name="idClientes" id="cliente" [disabled]="servicios.length === 0" [class.is-invalid]="idClientes.invalid && idClientes.touched" [(ngModel)]="creditoModel.idServicio" #idClientes="ngModel" required>
+              <option *ngFor="let item of servicios" [value]="item.idServicios">{{item.nombre}} {{item.apellido}} </option>
+              </select>
+              <small *ngIf="idClientes.invalid && idClientes.touched" class="form-text text-danger">
+              Este campo es obligatorio
+            </small>
+          </div>
+
+          <div class="form-group col-md-6">
+              <label for="abono" class="form-label">Abono</label>
+              <input class="form-control" type="text" id="abono" name="abono" [class.is-invalid]="abono.invalid && abono.touched" [(ngModel)]="creditoModel.abono" #abono="ngModel" required>
+              <small *ngIf="abono.invalid && abono.touched" class="form-text text-danger">
+                Este campo es obligatorio
+              </small>
+          </div>
+
+          <div class="form-group col-md-6">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input class="form-control" type="number" id="fecha" name="fecha" [class.is-invalid]="fecha.invalid && fecha.touched" [(ngModel)]="creditoModel.deuda" #fecha="ngModel" required>
+              <small *ngIf="fecha.invalid && fecha.touched" class="form-text text-danger">
+                Este campo es obligatorio
+              </small>
+          </div>
+      </div>
+    </form>
+  </div>
+  <p-footer>
+      <p-button type="button"  icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="form.invalid"></p-button>
+
+      <p-button type="button" (click)="cerrarDialog(form)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
+  </p-footer>
+</p-dialog>
+
+<p-toast [style]="{width: '80vw'}"></p-toast>

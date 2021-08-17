@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
 
   {
-    path: '', redirectTo: '/factura', pathMatch: 'full'
+    path: '', redirectTo: '/login', pathMatch: 'full'
   },
 
-  { path: '**', redirectTo: '/factura', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 
 ];
 

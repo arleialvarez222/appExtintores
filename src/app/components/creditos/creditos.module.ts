@@ -6,14 +6,19 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { CreditosRoutingModule } from './creditos-routing.module';
 import { CreditosComponent } from './creditos.component';
+import { DialogServiceComponent } from './dialog-service/dialog-service.component';
 
 
 @NgModule({
   declarations: [
-    CreditosComponent
+    CreditosComponent,
+    DialogServiceComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,10 @@ import { CreditosComponent } from './creditos.component';
     ButtonModule,
     DialogModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    FormsModule,
+    ToastModule,
+    ConfirmDialogModule,
   ]
 })
 export class CreditosModule { }

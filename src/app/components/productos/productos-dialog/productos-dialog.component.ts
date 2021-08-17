@@ -52,10 +52,10 @@ export class ProductosDialogComponent implements OnInit {
         control.markAsTouched();
       })
     }else{
-      if(this.productoss?.id > 0){
-        this._productoService.editarProducto(this.productoss).subscribe(data => {
+      if(this.productoss?.idProductos > 0){
+        this._productoService.editarProducto(this?.productoss).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Actualización éxitosa'});
-          this.verProducto.emit(this.productoss);
+          this.verProducto.emit(this?.productoss);
           formulario.resetForm();
           this.displayPosition = false;
         }, (error) => {
@@ -63,9 +63,9 @@ export class ProductosDialogComponent implements OnInit {
         }
         )
       }else{
-        this._productoService.guardarProducto(this.productoss).subscribe(data => {
+        this._productoService.guardarProducto(this?.productoss).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
-          this.verProducto.emit(this.productoss);
+          this.verProducto.emit(this?.productoss);
           formulario.resetForm();
         }, (error) => {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo!!!, revisar que los campos esten completos'});

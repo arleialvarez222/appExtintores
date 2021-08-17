@@ -1,5 +1,5 @@
 export class GastosModel {
-    public id: number;
+    public idGastos: number;
     public descripcion: string;
     public fecha: Date;
     public cantidad: number;

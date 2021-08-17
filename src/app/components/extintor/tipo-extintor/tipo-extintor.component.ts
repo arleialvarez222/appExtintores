@@ -29,10 +29,10 @@ export class TipoExtintorComponent implements OnInit {
         control.markAsTouched();
       });
     } else {
-      if (this.tipoExt?.id > 0) {
-        this._tipoService.editarTipo(this.tipoExt).subscribe((data) => {
+      if (this.tipoExt?.idTipoExtintor > 0) {
+        this._tipoService.editarTipo(this?.tipoExt).subscribe((data) => {
             this.messageService.add({severity: 'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500 });
-            this.nuevoExtintor.emit(this.tipoExt);
+            this.nuevoExtintor.emit(this?.tipoExt);
             form.resetForm();
             this.display = false;
           },
@@ -41,9 +41,9 @@ export class TipoExtintorComponent implements OnInit {
           }
         );
       } else {
-        this._tipoService.guardarTipo(this.tipoExt).subscribe((data) => {
+        this._tipoService.guardarTipo(this?.tipoExt).subscribe((data) => {
             this.messageService.add({severity: 'success', summary: 'OK', detail: 'Los datos se guardaron con éxito', life: 1500});
-            this.nuevoExtintor.emit(this.tipoExt);
+            this.nuevoExtintor.emit(this?.tipoExt);
             form.resetForm();
           },
           (error) => {

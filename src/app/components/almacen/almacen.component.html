@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row divBuscador">
         <div class="col-md-4 ml-3 mb-2 abc">
             <input type="search" placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaInventario" (input)="busquedaInventario = $event.target.value">
         </div>
@@ -41,12 +41,12 @@
             </ng-template>
             <ng-template pTemplate="body" let-inventario>
                 <tr>
-                    <td data-titulo="#"> {{ inventario.id }} </td>
+                    <td data-titulo="#"> {{ inventario.idInventario }} </td>
                     <td data-titulo="Fecha"> {{ inventario.fecha | date:'yyyy/M/d' }} </td>
                     <!--      <td data-titulo="Descripción"> {{ inventario.descripcion | titlecase }} </td> -->
                     <td data-titulo="IdProducto"> {{ inventario.idProductos }} </td>
-                    <td data-titulo="Tipo"> {{ inventario.tipo | titlecase }} </td>
-                    <td data-titulo="Peso"> {{ inventario.pesoXlibras }} </td>
+                    <td data-titulo="Tipo"> {{ inventario.tipoExtintor.tipo_Extintor | titlecase }} </td>
+                    <td data-titulo="Peso"> {{ inventario.pesoExtintor.pesoXlibras }} </td>
                     <td data-titulo="Cantidad"> {{ inventario.cantidad }} </td>
                     <td data-titulo="F.Vencimiento"> {{ inventario.fechaVencimiento | date:'yyyy/M/d' }} </td>
                     <td class="td-iconos">
@@ -60,7 +60,7 @@
 
     <p-toast [style]="{width: '80vw'}"></p-toast>
 
-    <p-toast position="top-center" (onClose)="onReject()" key="e"  [baseZIndex]="5000">
+    <p-toast position="center" (onClose)="onReject()" key="e"  [baseZIndex]="5000">
       <ng-template let-message pTemplate="message">
           <div class="p-flex p-flex-column" style="flex: 1">
               <div class="p-text-center-botones">

@@ -8,28 +8,24 @@ import { environment } from 'src/environments/environment';
 })
 export class EmpresaService {
 
-  private apiEndpoint = `${environment.apiUrl}/api`;
+  private apiEndpoint = `${environment?.apiUrl}/api`;
 
   constructor( private _http: HttpClient ) { }
 
   consultarEmpresa(){
-    let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.get<EmpresaModel>(`${this.apiEndpoint}/Empresas`,  {headers: headers})
+    return this._http.get<EmpresaModel>(`${this?.apiEndpoint}/Empresas`);
   }
 
   guardarEmpresa(empresa: EmpresaModel){
-    let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.post<EmpresaModel>(`${this.apiEndpoint}/Empresas`,JSON.stringify(empresa),  {headers: headers})
+    return this._http.post<EmpresaModel>(`${this?.apiEndpoint}/Empresas`,JSON.stringify(empresa));
   }
 
   editarEmpresa(empresa: EmpresaModel){
-    let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.put<EmpresaModel>(`${this.apiEndpoint}/Empresas/${empresa.id}`, JSON.stringify(empresa),  {headers: headers})
+    return this._http.put<EmpresaModel>(`${this?.apiEndpoint}/Empresas/${empresa?.idEmpresa}`, JSON.stringify(empresa));
   }
 
   eliminarEmpresa(id){
-    let headers = new HttpHeaders({ 'content-type': 'application/json' })
-    return this._http.delete<EmpresaModel>(`${this.apiEndpoint}/Empresas/${id}`, {headers: headers})
+    return this._http.delete<EmpresaModel>(`${this?.apiEndpoint}/Empresas/${id}`);
   }
 
 }

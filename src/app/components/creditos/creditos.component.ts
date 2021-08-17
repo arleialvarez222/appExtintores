@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DialogServiceComponent } from './dialog-service/dialog-service.component';
+import { CreditoModel } from './models/creditoModel';
+import { CreditosService } from '../../services/creditos.service';
 
 @Component({
   selector: 'app-creditos',
@@ -6,17 +9,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./creditos.component.css']
 })
 export class CreditosComponent implements OnInit {
-  position:string
-  displayPosition: boolean
-  value1: string;
-  value6: string;
-  constructor() { }
+  public creditoModel = new CreditoModel();
+  creditos:CreditoModel[] = [];
+  position:string;
+  displayPosition: boolean;
+  buscarDescripcion = '';
+  @ViewChild('agregarDialogServicio') ad:DialogServiceComponent;
+
+  constructor(private _creditoService: CreditosService) { }
 
   ngOnInit(): void {
+    this.obtenerCredito();
   }
 
-  showPositionDialog(position: string) {
-    this.position = position;
-    this.displayPosition = true;
+  obtenerCredito(){
+    this._creditoService.consultarCredito().subscribe(data => {
+      let resp;
+      resp = data;
+      this.creditos = resp?.data;
+    })
+  }
+
+  buscarServicio(){
+
+  }
+
+  addItem($event){
+    this.obtenerCredito();
+  }
+
+  showPositionDialog(servicios){
+    this.ad.showPositionDialog(servicios);
   }
 }

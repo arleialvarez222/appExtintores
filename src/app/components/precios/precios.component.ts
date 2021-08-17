@@ -64,10 +64,10 @@ export class PreciosComponent implements OnInit {
   }
 
   eliminarPrecios(){
-    this._precioService.eliminarPrecio(this?.preciosDataItem?.id).subscribe((data) => {
+    this._precioService.eliminarPrecio(this?.preciosDataItem?.idPrecios).subscribe((data) => {
       this.preciosList = this.preciosList.filter((item) => {
-        return item.id !== this?.preciosDataItem?.id
-      })
+        return item.idPrecios !== this?.preciosDataItem?.idPrecios
+      });
       this.vistaPrecios();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});
     }, (error) => {

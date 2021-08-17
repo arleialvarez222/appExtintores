@@ -10,17 +10,24 @@ import { NgForm } from '@angular/forms';
 })
 export class RegistroUsuarioComponent implements OnInit {
 
-  public user = new RegistroModel();
+  public user: RegistroModel = {
+    nombres: '',
+    apellidos: '',
+    email: '',
+    userName: '',
+    password: '',
+    confirmPassword: '',
+    clientURI: 'registro de usuario',
+  }
 
-  constructor(private authService: AuthService) { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   registrarUsuario(form: NgForm){
-    //console.log(form.value);
 
-    this.authService.registrarUsuario(this?.user).subscribe(data => {
+    this._authService.registrarUsuario(this?.user).subscribe(data => {
       console.log(data);
     }, (error) => {
       console.log(error);

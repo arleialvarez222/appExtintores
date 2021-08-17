@@ -4,10 +4,14 @@ import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { ServiciosRoutingModule } from './servicios-routing.module';
 import { ServiciosComponent } from './servicios.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { ServiciosService } from '../../services/servicios.service';
 
 
 
@@ -22,7 +26,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TableModule,
     ButtonModule,
     HttpClientModule,
-    DialogModule
+    DialogModule,
+    FormsModule,
+    ToastModule,
+    ConfirmDialogModule
+  ],
+  providers: [
+    ServiciosService
   ]
 })
 export class ServiciosModule { }

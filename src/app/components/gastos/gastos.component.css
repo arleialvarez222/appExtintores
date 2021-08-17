@@ -17,7 +17,7 @@
 
 .btn-gasto {
     width: 150px;
-    height: 30px;
+    height: 40px;
     margin-left: 15px;
     font-size: 13px;
     text-transform: uppercase;
@@ -100,6 +100,10 @@ p-toast {
 
 /* estilos buscador */
 
+.divBuscador{
+  margin-top: 20px;
+}
+
 .abc {
     margin-right: 15px;
 }
@@ -109,14 +113,14 @@ p-toast {
 }
 
 .imput-buscar {
-    height: 30px;
+    height: 40px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
 .boton-buscar {
     width: 70px;
-    height: 30px;
+    height: 40px;
 }
 
 ::placeholder {

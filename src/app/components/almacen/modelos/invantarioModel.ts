@@ -1,5 +1,5 @@
 export class InventarioModel {
-  public id : number;
+  public idInventario : number;
   public idProductos : number;
   public fecha : Date;
   public descripcion : string;

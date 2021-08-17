@@ -1,10 +1,10 @@
 export class TipoModel{
-  public id: number;
+  public idTipoExtintor: number;
   public tipo_Extintor: string
 }
 
 export class PesoModel{
-  public id: number;
+  public idPesoExtintor: number;
  public pesoXlibras: number;
 }
 

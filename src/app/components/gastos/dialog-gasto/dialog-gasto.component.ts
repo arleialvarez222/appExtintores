@@ -27,7 +27,7 @@ export class DialogGastoComponent implements OnInit {
         control.markAsTouched()
       })
     }else{
-      if(this.gastosModel?.id > 0){
+      if(this.gastosModel?.idGastos > 0){
         this._gastosServices.putGastos(this.gastosModel).subscribe((data) => {
             this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
             this.verEvento.emit(this.gastosModel)
@@ -37,6 +37,7 @@ export class DialogGastoComponent implements OnInit {
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo en la operación', life: 1500});
           });
       }else{
+        console.log(this.gastosModel);
         this._gastosServices.addGastos(this.gastosModel).subscribe((data) => {
             this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación exitosa, los datos se han guardado', life: 1500});
             this.verEvento.emit(this.gastosModel)

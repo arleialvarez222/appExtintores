@@ -1,5 +1,5 @@
 export class PreciosModel {
-    public id: number;
+    public idPrecios: number;
     public idProductos: number;
     public descripcion: string;
     public valor: number;

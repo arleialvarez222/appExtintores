@@ -14,9 +14,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row divBuscador">
         <div class="col-md-4 ml-3 mb-2 abc">
-            <input type="search" placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaProducto" (input)="busquedaProducto = $event.target.value">
+            <input type="search" placeholder="Nombre producto" id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaProducto" (input)="busquedaProducto = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
             <button class="btn btn-primary boton-buscar" (click)="buscarProducto()">Buscar</button>
@@ -30,17 +30,17 @@
                 <tr class="header">
                     <th class="identificador"> # </th>
                     <th> Tipo de producto </th>
-                    <th> Peso x Libras </th>
                     <th> Tipo extintor </th>
+                    <th> Peso x Libras </th>
                     <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-producto>
                 <tr>
-                    <td data-titulo="#"> {{ producto.id }} </td>
-                    <td data-titulo="Tipo extintor"> {{ producto.tipoProducto }} </td>
-                    <td data-titulo="Peso extintor"> {{ producto.idPesoExtintor }} </td>
-                    <td data-titulo="Producto"> {{ producto.idTipoExtintor }} </td>
+                    <td data-titulo="#"> {{ producto?.idProductos }} </td>
+                    <td data-titulo="Producto"> {{ producto?.tipoProducto }} </td>
+                    <td data-titulo="Tipo extintor"> {{ producto?.tipoExtintor?.tipo_Extintor }} </td>
+                    <td data-titulo="Peso extintor"> {{ producto?.pesoExtintor?.pesoXlibras }} </td>
                     <td class="td-iconos">
                         <i (click)="showPositionDialog(producto)" class="pi pi-pencil btn-outline-primary icono-table"></i>
                         <i (click)="confirmarElimProducto(producto)" class="pi pi-trash btn-outline-danger icono-table"></i>
@@ -52,7 +52,7 @@
 
     <p-toast [style]="{width: '80vw'}"></p-toast>
 
-    <p-toast position="top-center" (onClose)="onReject()" key="c"  [baseZIndex]="5000">
+    <p-toast position="center" (onClose)="onReject()" key="c"  [baseZIndex]="5000">
       <ng-template let-message pTemplate="message">
           <div class="p-flex p-flex-column" style="flex: 1">
               <div class="p-text-center-botones">

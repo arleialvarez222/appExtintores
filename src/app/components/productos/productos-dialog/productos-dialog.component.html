@@ -23,7 +23,7 @@
                 <div class="form-group col-md-6">
                     <label for="idPesoExtintor" class="form-label">Peso extintor</label>
                     <select class="form-control" name="idPesoExtintor" id="idPesoExtintor" [disabled]="pesoE.length === 0" [class.is-invalid]="idPesoExtintor.invalid && idPesoExtintor.touched" [(ngModel)]="productoss.idPesoExtintor" #idPesoExtintor="ngModel" required>
-                        <option *ngFor="let item of pesoE" [value]="item.id">{{item.pesoXlibras}} </option>
+                        <option *ngFor="let item of pesoE" [value]="item.idPesoExtintor">{{item.pesoXlibras}} </option>
                       </select>
                     <small *ngIf="idPesoExtintor.invalid && idPesoExtintor.touched" class="form-text text-danger">
                         Este campo es obligatorio
@@ -33,7 +33,7 @@
                 <div class="form-group col-md-6">
                     <label for="idTipoExtintor" class="form-label">Tipo extintor</label>
                     <select class="form-control" name="idTipoExtintor" id="idTipoExtintor" [disabled]="tipo.length === 0" [class.is-invalid]="idTipoExtintor.invalid && idTipoExtintor.touched" [(ngModel)]="productoss.idTipoExtintor" #idTipoExtintor="ngModel" required>
-                        <option *ngFor="let item of tipo" [value]="item.id">{{item.tipo_Extintor}} </option>
+                        <option *ngFor="let item of tipo" [value]="item.idTipoExtintor">{{item.tipo_Extintor}} </option>
                       </select>
                     <small *ngIf="idTipoExtintor.invalid && idTipoExtintor.touched" class="form-text text-danger">
                         Este campo es obligatorio

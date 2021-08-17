@@ -16,17 +16,10 @@ export class AuthService {
 
   private apiEndpoint = `${environment.apiUrl}/api`;
   private loggedIn = new BehaviorSubject<boolean>(false);
-  private tokenUsuario = new BehaviorSubject<string>(null);
 
   constructor(private http: HttpClient,
               private router: Router) {
     this.checkToken();
-  }
-
-  headers:HttpHeaders = new HttpHeaders({"Content-Type": "application/json"});
-
-  get tokenUsuarioValue(): string {
-    return this.tokenUsuario.getValue();
   }
 
   get isLogged(): Observable<boolean>{
@@ -34,20 +27,21 @@ export class AuthService {
   }
 
   registrarUsuario(user: RegistroModel){
-    return this.http.post<RegistroModel>(`${this.apiEndpoint}/Usuarios/Registrar`, JSON.stringify(user), {headers: this.headers})
-    .pipe(map(data => data));
+    return this.http.post<RegistroModel>(`${this.apiEndpoint}/Usuarios/Registrar`, user)
+    .pipe(
+      map(usuario => {
+        console.log(usuario)
+        return usuario;
+      })
+    );
   }
 
-
-
-
   loginUsuario(user:LoginModel): Observable<UserResponse>{
-    return this.http.post<UserResponse>(`${this.apiEndpoint}/Usuarios/InicioSeccion`, user, {headers: this.headers})
+    return this.http.post<UserResponse>(`${this.apiEndpoint}/Usuarios/InicioSeccion`, user)
     .pipe(
       map((usuario: UserResponse) => {
-        this.saveToken(usuario?.token)
+        this.saveToken(usuario?.token);
         this.loggedIn.next(true);
-        //this.tokenUsuario.next(usuario.token);
         return usuario;
       }),catchError((error) => this.handlerError(error))
     );
@@ -56,18 +50,13 @@ export class AuthService {
   logout(): void{
     localStorage.removeItem("token");
     this.loggedIn.next(false);
-    //this.tokenUsuario.next(null);
     this.router.navigate(['/login']);
   }
 
   private checkToken(): void {
     const userToken = localStorage.getItem("token");
-    console.log(userToken)
     const isExpired = helper.isTokenExpired(userToken);
-    //this.tokenUsuario.next(usuario.token);
-    //console.log('isExired==>', isExpired)
     isExpired ? this.logout :  this.loggedIn.next(true);
-
   }
 
   private saveToken(token: string): void {

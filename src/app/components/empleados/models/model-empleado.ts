@@ -1,6 +1,6 @@
 
 export class EmployeeModel {
-    public id: number;
+    public idEmpleados: number;
     public idEmpresa: number;
     public nombre: string;
     public apellido: string;

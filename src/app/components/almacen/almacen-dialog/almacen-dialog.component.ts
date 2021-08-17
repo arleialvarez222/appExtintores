@@ -64,15 +64,15 @@ export class AlmacenDialogComponent implements OnInit {
         control.markAsTouched();
       })
     }else{
-      if(this.inventariado?.id > 0){
+      if(this.inventariado?.idInventario > 0){
         this.inventariado.fecha  = moment(
-          this.inventariado.fecha).toDate();
+          this.inventariado?.fecha).toDate();
         this.inventariado.fechaVencimiento = moment(
-          this.inventariado.fechaVencimiento).toDate();
+          this.inventariado?.fechaVencimiento).toDate();
 
-        this._inventarioService.editarInventario(this.inventariado).subscribe(data => {
+        this._inventarioService.editarInventario(this?.inventariado).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
-          this.verInventarioComponent.emit(this.inventariado);
+          this.verInventarioComponent.emit(this?.inventariado);
           form.resetForm();
           this.displayPosition = false;
         }, (error) => {
@@ -80,13 +80,13 @@ export class AlmacenDialogComponent implements OnInit {
         })
       }else{
         this.inventariado.fecha  = moment(
-          this.inventariado.fecha).toDate();
+          this.inventariado?.fecha).toDate();
         this.inventariado.fechaVencimiento = moment(
-          this.inventariado.fechaVencimiento).toDate();
+          this.inventariado?.fechaVencimiento).toDate();
 
-        this._inventarioService.guardarInventario(this.inventariado).subscribe(data => {
+        this._inventarioService.guardarInventario(this?.inventariado).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito, los datos se han guardado', life: 1500});
-          this.verInventarioComponent.emit(this.inventariado);
+          this.verInventarioComponent.emit(this?.inventariado);
           form.resetForm();
         }, (error) => {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se guardaron', life: 1500});

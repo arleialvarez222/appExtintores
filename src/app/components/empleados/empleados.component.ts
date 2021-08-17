@@ -66,9 +66,9 @@ export class EmpleadosComponent implements OnInit {
   }
 
   deleteEmployee(){
-    this._empleadoService.deleteEmployees(this?.empleadoDataItem?.id).subscribe((data) => {
+    this._empleadoService.deleteEmployees(this?.empleadoDataItem?.idEmpleados).subscribe((data) => {
       this.employeesList = this.employeesList.filter((item) => {
-        return item.id !== this?.empleadoDataItem?.id
+        return item?.idEmpleados !== this?.empleadoDataItem?.idEmpleados
       })
       this.buscarEmpleado();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});

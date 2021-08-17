@@ -1,5 +1,5 @@
 export class ProductosModel {
-  public id: number;
+  public idProductos: number;
   public idTipoExtintor: number;
   public idPesoExtintor: number;
   public tipoProducto: string;

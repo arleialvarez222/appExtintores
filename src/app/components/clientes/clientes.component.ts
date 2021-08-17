@@ -57,9 +57,9 @@ export class ClientesComponent implements OnInit {
   }
 
   eliminarCliente(){
-    this._clienteService.eliminarClientes(this?.clienteDataItem?.id).subscribe((data) => {
+    this._clienteService.eliminarClientes(this?.clienteDataItem?.idCliente).subscribe((data) => {
       this.clienteDelet = this.clienteDelet.filter((item) => {
-        return item.id !== this?.clienteDataItem?.id
+        return item.idCliente !== this?.clienteDataItem?.idCliente
       })
       this.consultandoCliente();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life: 1500});

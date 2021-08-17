@@ -31,6 +31,7 @@ export class ProductosComponent implements OnInit {
       let result;
       result = data;
       this.producto = result?.data;
+      console.log(result)
     }),(error)=> {
       this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos para mostrar'});
     }
@@ -41,7 +42,7 @@ export class ProductosComponent implements OnInit {
   }
 
   buscarProducto(){
-    this._productosService.busquedaProducto(this.busquedaProducto).subscribe(data => {
+    this._productosService.busquedaProducto(this?.busquedaProducto).subscribe(data => {
       let arrayRes;
       arrayRes = data;
       this.producto = arrayRes?.data;
@@ -61,9 +62,9 @@ export class ProductosComponent implements OnInit {
   }
 
   eliminarProducto(){
-    this._productosService.eliminarProducto(this.productoDataItem?.id).subscribe((data) => {
+    this._productosService.eliminarProducto(this?.productoDataItem?.idProductos).subscribe((data) => {
       this.productoDelet = this.productoDelet?.filter((item) => {
-        return item?.id !== this.productoDataItem?.id
+        return item?.idProductos !== this.productoDataItem?.idProductos
       })
       this.verProductos();
       this.messageService.add({severity:'success', summary:'Exelente', detail:'Operación realizada con éxito', life:1500 });
