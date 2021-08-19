@@ -4,11 +4,13 @@ import { LoginModel } from '../registroUsuario/modelo/registro-model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [ MessageService, NgForm ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private subscripcion : Subscription = new Subscription();
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private messageService: MessageService,) { }
 
   ngOnInit(): void {
   }
@@ -32,14 +35,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginUsuario(form: NgForm){
     this.subscripcion.add(
       this.authService.loginUsuario(this?.user).subscribe(resp => {
+        this.router.navigate(['gastos']);
 
-        if(resp){
+        /* if(resp){
           this.router.navigate(['gastos']);
         }else{
           this.router.navigate(['login']);
-        }
+        } */
       }, (error) => {
         console.log(error);
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Se encontraron problemas con el usuario'});
+        this.router.navigate(['login']);
       })
     );
   }

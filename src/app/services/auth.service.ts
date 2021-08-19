@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { RegistroModel, LoginModel, UserResponse } from '../components/seguridad/registroUsuario/modelo/registro-model';
 import { catchError, map } from 'rxjs/Operators';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 
@@ -28,12 +28,7 @@ export class AuthService {
 
   registrarUsuario(user: RegistroModel){
     return this.http.post<RegistroModel>(`${this.apiEndpoint}/Usuarios/Registrar`, user)
-    .pipe(
-      map(usuario => {
-        console.log(usuario)
-        return usuario;
-      })
-    );
+      .pipe(map(data => data));
   }
 
   loginUsuario(user:LoginModel): Observable<UserResponse>{

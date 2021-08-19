@@ -9,7 +9,7 @@
                     <div class="form-group col-md-4">
                         <label for="cliente" class="form-label">Cliente</label>
                         <select class="form-control" name="idClientes" id="cliente" [disabled]="clientes.length === 0" [class.is-invalid]="idClientes.invalid && idClientes.touched" [(ngModel)]="servicioModel.idClientes" #idClientes="ngModel" required>
-                        <option *ngFor="let item of clientes" [value]="item.id">{{item.nombre}} {{item.apellido}} </option>
+                        <option *ngFor="let item of clientes" [value]="item.idCliente">{{item.nombre}} {{item.apellido}} </option>
                         </select>
                         <small *ngIf="idClientes.invalid && idClientes.touched" class="form-text text-danger">
                         Este campo es obligatorio
@@ -19,7 +19,7 @@
                     <div class="form-group col-md-4">
                         <label for="empleado" class="form-label">Empleado</label>
                         <select class="form-control" name="idEmpleados" id="empleado" [disabled]="empleados.length === 0" [class.is-invalid]="idEmpleados.invalid && idEmpleados.touched" [(ngModel)]="servicioModel.idEmpleados" #idEmpleados="ngModel" required>
-                        <option *ngFor="let item of empleados" [value]="item.id">{{item.nombre}} {{item.apellido}} </option>
+                        <option *ngFor="let item of empleados" [value]="item.idEmpleados">{{item.nombre}} {{item.apellido}} </option>
                        </select>
                         <small *ngIf="idEmpleados.invalid && idEmpleados.touched" class="form-text text-danger">
                         Este campo es obligatorio
@@ -79,27 +79,27 @@
                     <div class="form-group col-md-4">
                         <label for="descripcion" class="form-label">Descripción</label>
                         <input class="form-control" type="text" name="descripcion" id="descripcion" [class.is-invalid]="descripcion.invalid && descripcion.touched" [(ngModel)]="detalleServicio.descripcion" #descripcion="ngModel" required>
-                        <small *ngIf="fechaServicio.invalid && fechaServicio.touched" class="form-text text-danger">
+                        <small *ngIf="descripcion.invalid && descripcion.touched" class="form-text text-danger">
                       Este campo es obligatorio
                       </small>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="peso" class="form-label">Peso extintor</label>
-                        <select class="form-control" name="pesoXlibras" id="peso" [disabled]="pesoExti.length === 0" [class.is-invalid]="pesoXlibras.invalid && pesoXlibras.touched" [(ngModel)]="detalleServicio.pesoXlibras" #pesoXlibras="ngModel" required>
-                        <option *ngFor="let item of pesoExti" [value]="item.id">{{item.pesoXlibras}} </option>
+                        <select class="form-control" name="pesoXlibras" id="peso" [disabled]="pesoExti.length === 0" [class.is-invalid]="idPesoExtintor.invalid && idPesoExtintor.touched" [(ngModel)]="detalleServicio.idPesoExtintor" #idPesoExtintor="ngModel" required>
+                        <option *ngFor="let item of pesoExti" [value]="item.idPesoExtintor">{{item.pesoXlibras}} </option>
                       </select>
-                        <small *ngIf="pesoXlibras.invalid && pesoXlibras.touched" class="form-text text-danger">
+                        <small *ngIf="idPesoExtintor.invalid && idPesoExtintor.touched" class="form-text text-danger">
                         Este campo es obligatorio
                       </small>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="tipo" class="form-label">Tipo extintor</label>
-                        <select class="form-control" name="tipoExtintor" id="tipo" [disabled]="tipoExti.length === 0" [class.is-invalid]="tipoExtintor.invalid && tipoExtintor.touched" [(ngModel)]="detalleServicio.tipoExtintor" #tipoExtintor="ngModel" required>
-                      <option *ngFor="let item of tipoExti" [value]="item.id">{{item.tipo_Extintor}} </option>
+                        <select class="form-control" name="tipoExtintor" id="tipo" [disabled]="tipoExti.length === 0" [class.is-invalid]="idTipoExtintor.invalid && idTipoExtintor.touched" [(ngModel)]="detalleServicio.idTipoExtintor" #idTipoExtintor="ngModel" required>
+                      <option *ngFor="let item of tipoExti" [value]="item.idTipoExtintor">{{item.tipo_Extintor}} </option>
                       </select>
-                        <small *ngIf="tipoExtintor.invalid && tipoExtintor.touched" class="form-text text-danger">
+                        <small *ngIf="idTipoExtintor.invalid && idTipoExtintor.touched" class="form-text text-danger">
                         Este campo es obligatorio
                       </small>
                     </div>
@@ -117,7 +117,7 @@
                     <div class="form-group col-md-4">
                         <label for="valor" class="form-label">Valor</label>
                         <input class="form-control" type="number" name="valor" id="valor" [class.is-invalid]="valor.invalid && valor.touched" [(ngModel)]="detalleServicio.valor" #valor="ngModel" required>
-                        <small *ngIf="cantidad.invalid && cantidad.touched" class="form-text text-danger">
+                        <small *ngIf="valor.invalid && valor.touched" class="form-text text-danger">
                           Este campo es obligatorio
                         </small>
                     </div>
@@ -135,7 +135,6 @@
             <p-table [(value)]="detalleFactura" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowHover]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
                 <ng-template pTemplate="header">
                     <tr class="header">
-                        <th class="identificador"> # </th>
                         <th> Descripción </th>
                         <th> Peso </th>
                         <th> Tipo </th>
@@ -147,28 +146,56 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-detalleFactura>
                     <tr>
-                        <td data-titulo="#"> {{ detalleFactura.id }} </td>
                         <td data-titulo="Descripción"> {{ detalleFactura.descripcion }} </td>
-                        <td data-titulo="Peso"> {{ detalleFactura.pesoXlibras }} </td>
-                        <td data-titulo="Tipo"> {{ detalleFactura.tipoExtintor }} </td>
+                        <td data-titulo="Peso"> {{ detalleFactura.idPesoExtintor }} </td>
+                        <td data-titulo="Tipo"> {{ detalleFactura.idTipoExtintor }} </td>
                         <td data-titulo="Cantidad"> {{ detalleFactura.cantidad }} </td>
                         <td data-titulo="Total"> {{ detalleFactura.valor | currency }} </td>
-                        <td data-titulo="Total"> {{ detalleFactura.total | currency }} </td>
+                        <td data-titulo="Total"> {{ detalleFactura.cantidad * detalleFactura.valor | currency }} </td>
                         <td class="td-iconos">
-                            <i class="pi pi-pencil btn-outline-primary icono-table"></i>
-                            <i class="pi pi-trash btn-outline-danger icono-table"></i>
-                            <i class="pi pi-list btn-outline-success icono-table"></i>
+                            <i (click)="editarDetalle(detalleFactura)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                            <i (click)="eliminarDetalle(detalleFactura)" class="pi pi-trash btn-outline-danger icono-table"></i>
                         </td>
                     </tr>
-                    <!--   <tr>
+                  </ng-template>
+                  <ng-template pTemplate="footer">
+                    <tr >
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>Total</td>
-                        <td>$44.000</td>
-                    </tr> -->
-                </ng-template>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>SUBTOTAL $</td>
+                        <td>{{ totalN | currency }}</td>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>IVA(19%)$</td>
+                        <td> {{ iva | currency }} </td>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>TOTAL $</td>
+                        <td> {{ detalleServicio.total | currency }} </td>
+                        <td></td>
+                    </tr>
+                  </ng-template>
             </p-table>
         </div>
     </div>
