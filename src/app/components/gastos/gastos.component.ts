@@ -38,7 +38,7 @@ export class GastosComponent implements OnInit {
       respuesta = data;
         this.gastos = respuesta?.data;
       }, (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos'});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos', life:1500});
       });
   }
 

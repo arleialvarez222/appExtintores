@@ -22,28 +22,28 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="idPesoExtintor" class="form-label">Peso extintor</label>
-                    <select class="form-control" name="idPesoExtintor" id="idPesoExtintor" [disabled]="pesoE.length === 0" [class.is-invalid]="idPesoExtintor.invalid && idPesoExtintor.touched" [(ngModel)]="productoss.idPesoExtintor" #idPesoExtintor="ngModel" required>
+                    <select class="form-control" name="idPesoExtintor" id="idPesoExtintor" [disabled]="pesoE.length === 0" [(ngModel)]="productoss.idPesoExtintor" #idPesoExtintor="ngModel" >
                         <option *ngFor="let item of pesoE" [value]="item.idPesoExtintor">{{item.pesoXlibras}} </option>
                       </select>
-                    <small *ngIf="idPesoExtintor.invalid && idPesoExtintor.touched" class="form-text text-danger">
+                    <!-- <small *ngIf="idPesoExtintor.invalid && idPesoExtintor.touched" class="form-text text-danger">
                         Este campo es obligatorio
-                      </small>
+                      </small> -->
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="idTipoExtintor" class="form-label">Tipo extintor</label>
-                    <select class="form-control" name="idTipoExtintor" id="idTipoExtintor" [disabled]="tipo.length === 0" [class.is-invalid]="idTipoExtintor.invalid && idTipoExtintor.touched" [(ngModel)]="productoss.idTipoExtintor" #idTipoExtintor="ngModel" required>
+                    <select class="form-control" name="idTipoExtintor" id="idTipoExtintor" [disabled]="tipo.length === 0" [(ngModel)]="productoss.idTipoExtintor" #idTipoExtintor="ngModel" >
                         <option *ngFor="let item of tipo" [value]="item.idTipoExtintor">{{item.tipo_Extintor}} </option>
                       </select>
-                    <small *ngIf="idTipoExtintor.invalid && idTipoExtintor.touched" class="form-text text-danger">
+                    <!-- <small *ngIf="idTipoExtintor.invalid && idTipoExtintor.touched" class="form-text text-danger">
                         Este campo es obligatorio
-                      </small>
+                      </small> -->
                 </div>
             </div>
         </form>
     </div>
     <p-footer>
-        <p-button type="button" (click)="guardarProducto(formulario)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" [disabled]="formulario.invalid"></p-button>
+        <p-button type="button" (click)="guardarProducto(formulario)" icon="pi pi-save" label="Guardar" styleClass="p-button-primary" ></p-button>
         <p-button type="button" (click)="cerrarDialog(formulario)" icon="pi pi-times" label="Cancelar" styleClass="p-button-secondary"></p-button>
     </p-footer>
 </p-dialog>

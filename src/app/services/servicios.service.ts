@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { ServiciosModel } from '../components/factura/modelos/servicioModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,16 @@ export class ServiciosService {
   constructor(private _http: HttpClient) { }
 
   consultarServicios (){
-    return this._http.get(`${this?.apiEndpoint}/Servicios`);
+    return this._http.get<ServiciosModel>(`${this?.apiEndpoint}/Servicios`);
+  }
+
+  agregarServicio(servicio: ServiciosModel){
+    return this._http.post<ServiciosModel>(`${this.apiEndpoint}/Servicios`, JSON.stringify(servicio));
+
   }
 
   eliminarServicios (idServicio){
-    return this._http.delete(`${this?.apiEndpoint}/Servicios/${idServicio}`);
+    return this._http.delete<ServiciosModel>(`${this?.apiEndpoint}/Servicios/${idServicio}`);
   }
 
 

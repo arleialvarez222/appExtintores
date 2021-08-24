@@ -70,6 +70,7 @@ export class AlmacenDialogComponent implements OnInit {
         this.inventariado.fechaVencimiento = moment(
           this.inventariado?.fechaVencimiento).toDate();
 
+        this.inventariado.descripcion = 'descripcion del producto';
         this._inventarioService.editarInventario(this?.inventariado).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se actualizaron con éxito', life: 1500});
           this.verInventarioComponent.emit(this?.inventariado);
@@ -84,9 +85,11 @@ export class AlmacenDialogComponent implements OnInit {
         this.inventariado.fechaVencimiento = moment(
           this.inventariado?.fechaVencimiento).toDate();
 
+        this.inventariado.descripcion = 'descripcion del producto';
         this._inventarioService.guardarInventario(this?.inventariado).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito, los datos se han guardado', life: 1500});
           this.verInventarioComponent.emit(this?.inventariado);
+          console.log(data);
           form.resetForm();
         }, (error) => {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Error, los datos no se guardaron', life: 1500});

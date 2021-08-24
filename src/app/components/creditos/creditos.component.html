@@ -1,27 +1,32 @@
 <div class="contenedor">
 
-    <div>
-        <h2 class="titulo-prin">
-            Lista de créditos
-        </h2>
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="titulo-prin">
+        Lista de créditos
+      </h2>
     </div>
-    <div class="contenedor2">
-      <div class="col-md-12">
-          <div class="btn">
-              <button (click)="showPositionDialog(creditoModel)" type="button" class="btn btn-primary btn-servicio">
-               <i class="pi pi-dollar icono-btn"></i>Agregar precio</button>
-          </div>
-          <app-dialog-service #agregarDialogServicio (verCredito)="addItem($event)"></app-dialog-service>
-      </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button (click)="showPositionDialog(creditoModel)" type="button" class="btn btn-primary btn-servicio">
+        <i class="pi pi-credit-card icono-btn"></i>Agregar crédito
+      </button>
+      <app-dialog-service #agregarDialogServicio (verCredito)="addItem($event)"></app-dialog-service>
+    </div>
+  </div>
+
   <div class="row divBuscador">
-    <div class="col-md-4 ml-3 mb-2 abc">
+    <div class="col-md-4 ">
         <input type="search" placeholder="Ingresar descripción" id="buscador" name="buscador" class="form-control imput-buscar" [value]="buscarDescripcion" (input)="buscarDescripcion = $event.target.value">
     </div>
     <div class="col-md-1 div-boton">
-        <button class="btn btn-primary boton-buscar" (click)="buscarServicio()">Buscar</button>
+        <button class="btn btn-primary boton-buscar" (click)="buscarServicio()">
+          <i class="pi pi-search icono-btn"></i>
+        </button>
     </div>
-</div>
+  </div>
 
     <div class="card">
         <p-table [(value)]="creditos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">

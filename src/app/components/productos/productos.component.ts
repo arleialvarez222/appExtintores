@@ -31,7 +31,6 @@ export class ProductosComponent implements OnInit {
       let result;
       result = data;
       this.producto = result?.data;
-      console.log(result)
     }),(error)=> {
       this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos para mostrar'});
     }

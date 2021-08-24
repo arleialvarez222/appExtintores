@@ -4,7 +4,10 @@ export class ServiciosModel{
   public fechaServicio : Date;
   public valor : number;
   public estado : string;
-  public detalleServicios : DetalleServicioModel;
+  public fechaVencimiento : Date;
+  public fechaMantenimiento : Date;
+  public abono : number;
+  public detalleServicios : any;
 }
 
 export class DetalleServicioModel{

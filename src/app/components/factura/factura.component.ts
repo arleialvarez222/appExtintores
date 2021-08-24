@@ -9,12 +9,14 @@ import { ServiciosModel, DetalleServicioModel } from './modelos/servicioModel';
 import { PesoModel, TipoModel } from '../extintor/models/tipo-interface';
 import { ExtintorService } from '../../services/extintor.service';
 import * as shortid from 'shortid';
+import { ServiciosService } from 'src/app/services/servicios.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
   styleUrls: ['./factura.component.css'],
-  providers: [MessageService, ConfirmationService, NgForm]
+  providers: [HttpClient, MessageService, ConfirmationService, NgForm]
 })
 export class FacturaComponent implements OnInit {
   public servicioModel = new ServiciosModel();
@@ -29,10 +31,14 @@ export class FacturaComponent implements OnInit {
   totalN: number;
   iva: number;
 
-  constructor(private _clienteService: ClientesService,
-              private _empleadoService: EmpleadoService,
-              private _extintorService: ExtintorService,
-              private messageService: MessageService) { }
+  constructor
+    (
+      private _clienteService: ClientesService,
+      private _empleadoService: EmpleadoService,
+      private _extintorService: ExtintorService,
+      private messageService: MessageService,
+      private _serviciosService:ServiciosService,
+    ) { }
 
   ngOnInit(): void {
     this.clienteConsulta();
@@ -46,7 +52,6 @@ export class FacturaComponent implements OnInit {
       let respuesta;
       respuesta = data;
       this.clientes = respuesta?.data;
-      console.log(respuesta.data)
     }, (error) => {
       this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
     })
@@ -57,7 +62,6 @@ export class FacturaComponent implements OnInit {
       let resp;
       resp = data;
       this.empleados = resp?.data;
-      console.log(resp.data)
     }, (error) => {
       this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
     })
@@ -68,7 +72,6 @@ export class FacturaComponent implements OnInit {
       let resp;
       resp = data;
       this.pesoExti = resp?.data;
-      console.log(resp.data)
     }, (error) => {
       this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
     })
@@ -79,7 +82,6 @@ export class FacturaComponent implements OnInit {
       let result;
       result = data;
       this.tipoExti = result?.data;
-      console.log(result.data)
     }, (error) => {
       this.messageService.add({severity:'error', summary:'Error', detail:'Operación fallida'});
     })
@@ -87,19 +89,25 @@ export class FacturaComponent implements OnInit {
 
   agregarDetalle(form:NgForm){
      /* if(form.invalid){
-      this.messageService.add({severity:'warn', summary:'Alerta', detail:'Todos los campos son obligatorios', life: 1500});
-    }else{
-      console.log(this.detalleFactura);
-      this.detalleFactura.push(this.detalleServicio.clone());
-    } */
-    this.detalleFactura.push(this?.detalleServicio?.clone());
-    let respuesta = [...this.detalleFactura];
-    for (let i = 0; i < respuesta.length; i++) {
-       respuesta[i]['key'] = shortid?.generate();
-    }
-    this.operacionesDetalle();
-    form.resetForm();
-    console.log(this?.detalleFactura);
+      Object.values(form.controls).forEach(control => {
+        control.markAsTouched()
+      })
+    }else{ */
+      let resultado = this.detalleFactura.filter(
+        (c) => c?.key === this?.detalleServicio?.key
+      );
+      if(resultado?.length > 0){
+        this.messageService.add({severity:'warn', summary: 'OK', detail: 'Esta información ya existe', life: 1500});
+      }
+      this.detalleServicio.total = this?.detalleServicio?.cantidad * this?.detalleServicio?.valor;
+      this.detalleFactura.push(this?.detalleServicio?.clone());
+      let respuesta = [...this.detalleFactura];
+      for (let i = 0; i < respuesta.length; i++) {
+        respuesta[i]['key'] = shortid?.generate();
+      }
+      this.operacionesDetalle();
+      //form.resetForm();
+    /* } */
   }
 
   operacionesDetalle(){
@@ -111,16 +119,46 @@ export class FacturaComponent implements OnInit {
     })
   }
 
+  guardarServicio(form: NgForm){
+    if(form.invalid){
+      Object.values(form.controls).forEach(control => {
+        control.markAsTouched()
+      });
+    }else{
+      this.servicioModel.detalleServicios = this?.detalleFactura;
+      this.servicioModel.valor = this?.detalleServicio?.total;
+      this._serviciosService.agregarServicio(this?.servicioModel).subscribe(data => {
+        this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se guardaron correctamente', life: 1500});
+        console.log(data);
+        form.resetForm();
+        this.detalleFactura = [];
+      }), (error) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error en la operacion, los datos no se guardaron', life: 1500});
+      }
+    }
+  }
+
   editarDetalle(item: DetalleServicioModel){
-    console.log(item);
+    //console.log(item);
     this.detalleServicio = item.clone();
     this.modalEditarDetalle(this?.detalleServicio);
   }
 
+  /* modalEditarDetalle(detalleServicio: DetalleServicioModel){
+    let resp = this?.detalleFactura.find(
+      (c) => c?.key === this?.detalleServicio?.key
+    );
+    resp.cantidad = detalleServicio?.cantidad;
+    resp.valor = detalleServicio?.valor;
+    this.operacionesDetalle();
+  } */
+
   modalEditarDetalle(detalleServicio: DetalleServicioModel){
     let respuesta = detalleServicio;
-    let item = this.detalleFactura;
-    item.map(resp => {
+    console.log(detalleServicio);
+    let itemData = this.detalleFactura;
+    console.log(itemData);
+    itemData.map(resp => {
       if(resp?.key === this.detalleServicio?.key){
         resp.descripcion = respuesta?.descripcion;
         resp.cantidad = respuesta?.cantidad;
@@ -129,9 +167,10 @@ export class FacturaComponent implements OnInit {
         resp.total = respuesta?.total;
         resp.valor = respuesta?.valor;
       }
+      this.operacionesDetalle();
+
       return respuesta;
     })
-
   }
 
   eliminarDetalle(item: DetalleServicioModel){

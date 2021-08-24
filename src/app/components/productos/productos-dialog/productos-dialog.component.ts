@@ -66,6 +66,7 @@ export class ProductosDialogComponent implements OnInit {
         this._productoService.guardarProducto(this?.productoss).subscribe(data => {
           this.messageService.add({severity:'success', summary: 'OK', detail: 'Operación realizada con éxito'});
           this.verProducto.emit(this?.productoss);
+          console.log(data)
           formulario.resetForm();
         }, (error) => {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Fallo!!!, revisar que los campos esten completos'});

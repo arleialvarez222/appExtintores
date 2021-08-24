@@ -35,8 +35,8 @@ export class AlmacenComponent implements OnInit {
     this._inventarioService?.verInventario().subscribe(data => {
       let resp;
       resp = data;
-      console.log(resp)
       this.inventario = resp?.data;
+      console.log(resp?.data);
     }), (error) => {
       this.messageService.add({severity:'error', summary: 'Error', detail: 'No se encontraron datos en la consulta', life: 1500});
     }

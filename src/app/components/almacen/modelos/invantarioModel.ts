@@ -3,8 +3,8 @@ export class InventarioModel {
   public idProductos : number;
   public fecha : Date;
   public descripcion : string;
-  public tipo : string;
-  public pesoXlibras : number;
+  public idTipoExtintor : string;
+  public idPesoExtintor : number;
   public cantidad : number;
   public fechaVencimiento : Date;
 }

@@ -44,9 +44,9 @@
                     <td data-titulo="#"> {{ inventario.idInventario }} </td>
                     <td data-titulo="Fecha"> {{ inventario.fecha | date:'yyyy/M/d' }} </td>
                     <!--      <td data-titulo="Descripción"> {{ inventario.descripcion | titlecase }} </td> -->
-                    <td data-titulo="IdProducto"> {{ inventario.idProductos }} </td>
-                    <td data-titulo="Tipo"> {{ inventario.tipoExtintor.tipo_Extintor | titlecase }} </td>
-                    <td data-titulo="Peso"> {{ inventario.pesoExtintor.pesoXlibras }} </td>
+                    <td data-titulo="IdProducto"> {{ inventario?.producto?.tipoProducto }} </td>
+                    <td data-titulo="Tipo"> {{ inventario?.tipoExtintor?.tipo_Extintor | titlecase }} </td>
+                    <td data-titulo="Peso"> {{ inventario?.pesoExtintor?.pesoXlibras }} </td>
                     <td data-titulo="Cantidad"> {{ inventario.cantidad }} </td>
                     <td data-titulo="F.Vencimiento"> {{ inventario.fechaVencimiento | date:'yyyy/M/d' }} </td>
                     <td class="td-iconos">

@@ -38,8 +38,8 @@
             <ng-template pTemplate="body" let-producto>
                 <tr>
                     <td data-titulo="#"> {{ producto?.idProductos }} </td>
-                    <td data-titulo="Producto"> {{ producto?.tipoProducto }} </td>
-                    <td data-titulo="Tipo extintor"> {{ producto?.tipoExtintor?.tipo_Extintor }} </td>
+                    <td data-titulo="Producto"> {{ producto?.tipoProducto | titlecase }} </td>
+                    <td data-titulo="Tipo extintor"> {{ producto?.tipoExtintor?.tipo_Extintor | titlecase }} </td>
                     <td data-titulo="Peso extintor"> {{ producto?.pesoExtintor?.pesoXlibras }} </td>
                     <td class="td-iconos">
                         <i (click)="showPositionDialog(producto)" class="pi pi-pencil btn-outline-primary icono-table"></i>

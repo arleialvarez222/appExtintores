@@ -40,27 +40,32 @@
 
 
 <div class="contenedor">
-    <div>
+
+    <div class="row">
+      <div class="col-md-12">
         <h2 class="titulo-prin">
             Lista de clientes
         </h2>
+      </div>
     </div>
-    <div class="contenedor-dos">
-        <div class="col-md-12">
-            <div class="btn">
-                <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-emple">
-            <i class="pi pi-plus icono-btn"></i>Agregar cliente</button>
-            </div>
-            <app-clientes-dialog #clienteComponent (verClienteComponent)="AddItem($event)"></app-clientes-dialog>
-        </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <button (click)="showPositionDialog('center')" type="button" class="btn btn-primary btn-emple">
+          <i class="pi pi-users icono-btn"></i>Agregar cliente
+        </button>
+        <app-clientes-dialog #clienteComponent (verClienteComponent)="AddItem($event)"></app-clientes-dialog>
+      </div>
     </div>
 
     <div class="row divBuscador">
-        <div class="col-md-4 ml-3 mb-2 abc">
+        <div class="col-md-4 ml-3 mb-2 ">
             <input type="search" placeholder="Ingresar nombre" id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaCliente" (input)="busquedaCliente = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
-            <button class="btn btn-primary boton-buscar">Buscar</button>
+            <button class="btn btn-primary boton-buscar">
+              <i class="pi pi-search icono-btn"></i>
+            </button>
         </div>
     </div>
 
