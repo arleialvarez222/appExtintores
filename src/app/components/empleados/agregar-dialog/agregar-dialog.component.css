@@ -1,11 +1,10 @@
-.btn-emple {
-    text-transform: uppercase;
-    font-size: 13px;
+.icono-btn {
+  margin-right: 6px;
+  font-size: 20px;
 }
 
-.icono-btn {
-    font-size: 13px;
-    margin-right: 6px;
+.titulo-h3{
+  font-size: 20px;
 }
 
 p-toast {

@@ -6,39 +6,32 @@
 
 .titulo-prin {
     text-transform: uppercase;
-    margin-top: 0px;
+    margin-top: 15px;
     margin-left: 15px;
-}
-
-.contenedor1 {
-    margin-top: -10px;
-}
-
-.contenedor2 {
-    margin-top: 38px;
+    font-size: 30px;
 }
 
 .btn-extintor {
-    width: 150px;
+    width: 200px;
     height: 40px;
     margin-left: 15px;
     color: #ffffff;
-    font-size: 13px;
+    font-size: 16px;
     text-transform: uppercase;
 }
 
 .btn-extintor-t {
-    width: 150px;
+    width: 200px;
     height: 40px;
     margin-left: 15px;
     color: #ffffff;
-    font-size: 13px;
+    font-size: 16px;
     text-transform: uppercase;
 }
 
 .icono-btn {
-    font-size: 12px;
-    margin-right: 6px;
+    font-size: 16px;
+    margin-right: 8px;
 }
 
 

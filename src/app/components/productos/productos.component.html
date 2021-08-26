@@ -1,26 +1,30 @@
 <div class="contenedor">
-    <div>
+
+    <div class="row">
+      <div class="col-md-12">
         <h2 class="titulo-prin">
             Lista de productos
         </h2>
+      </div>
     </div>
-    <div class="contenedor-dos">
-        <div class="col-md-12">
-            <div class="btn">
-                <button (click)="showPositionDialog(productoss)" type="button" class="btn btn-primary btn-emple">
-            <i class="pi pi-plus icono-btn"></i>Agregar producto</button>
-            </div>
-            <app-productos-dialog #productodialogo (verProducto)=" addItem($event)"></app-productos-dialog>
-        </div>
+
+    <div class="row">
+      <div class class="col-md-12">
+        <button (click)="showPositionDialog(productoss)" type="button" class="btn btn-primary btn-producto">
+        <i class="pi pi-list icono-btn"></i>Agregar producto</button>
+        <app-productos-dialog #productodialogo (verProducto)=" addItem($event)"></app-productos-dialog>
+      </div>
     </div>
 
     <div class="row divBuscador">
-        <div class="col-md-4 ml-3 mb-2 abc">
-            <input type="search" placeholder="Nombre producto" id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaProducto" (input)="busquedaProducto = $event.target.value">
-        </div>
-        <div class="col-md-1 div-boton">
-            <button class="btn btn-primary boton-buscar" (click)="buscarProducto()">Buscar</button>
-        </div>
+      <div class="col-md-4">
+        <input type="search" placeholder="Nombre producto" id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaProducto" (input)="busquedaProducto = $event.target.value">
+      </div>
+      <div class="col-md-1 div-boton">
+        <button class="btn btn-primary boton-buscar" (click)="buscarProducto()">
+          <i class="pi pi-search icono-btn"></i>
+        </button>
+      </div>
     </div>
 
     <div class="card">

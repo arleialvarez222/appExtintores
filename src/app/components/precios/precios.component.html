@@ -1,25 +1,29 @@
 <div class="contenedor">
 
-    <div>
+    <div class="row">
+      <div class="col-md-12">
         <h2 class="titulo-prin">
             Lista de precios
         </h2>
+      </div>
     </div>
-    <div class="contenedor2">
+    <div class="row">
         <div class="col-md-12">
-            <div class="btn">
-                <button (click)="showPositionDialog(preciosModel)" type="button" class="btn btn-primary btn-precio">
-                 <i class="pi pi-dollar icono-btn"></i>Agregar precio</button>
-            </div>
-            <app-precio-dialog #agregarDialog (verPrecio)="addItem($event)"></app-precio-dialog>
+          <button (click)="showPositionDialog(preciosModel)" type="button" class="btn btn-primary btn-precio">
+            <i class="pi pi-dollar icono-btn"></i>Agregar precio
+          </button>
+
+          <app-precio-dialog #agregarDialog (verPrecio)="addItem($event)"></app-precio-dialog>
         </div>
     </div>
     <div class="row divBuscador">
-        <div class="col-md-4 ml-3 mb-2 abc">
+        <div class="col-md-4">
             <input type="search" placeholder="Ingresar descripción" id="buscador" name="buscador" class="form-control imput-buscar" [value]="buscarDescripcion" (input)="buscarDescripcion = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
-            <button class="btn btn-primary boton-buscar" (click)="buscarPrecio()">Buscar</button>
+            <button class="btn btn-primary boton-buscar" (click)="buscarPrecio()">
+              <i class="pi pi-search icono-btn"></i>
+            </button>
         </div>
     </div>
     <div class="card">

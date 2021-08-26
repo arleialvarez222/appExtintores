@@ -1,25 +1,29 @@
 <div class="contenedor">
-    <div>
+
+    <div class="row">
+      <div class="col-md-12">
         <h2 class="titulo-prin">
             inventario
         </h2>
+      </div>
     </div>
-    <div class="contenedor-dos">
-        <div class="col-md-12">
-            <div class="btn">
-                <button (click)="showPositionDialog(inventariado)" type="button" class="btn btn-primary btn-emple">
-              <i class="pi pi-plus icono-btn"></i>Agregar producto</button>
-            </div>
-            <app-almacen-dialog #componentInventario (verInventarioComponent)="AddItem($event)"></app-almacen-dialog>
-        </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <button (click)="showPositionDialog(inventariado)" type="button" class="btn btn-primary btn-inventario">
+        <i class="pi pi-plus icono-btn"></i>Agregar producto</button>
+        <app-almacen-dialog #componentInventario (verInventarioComponent)="AddItem($event)"></app-almacen-dialog>
+      </div>
     </div>
 
     <div class="row divBuscador">
-        <div class="col-md-4 ml-3 mb-2 abc">
+        <div class="col-md-4">
             <input type="search" placeholder="buscar..." id="buscador" name="buscador" class="form-control imput-buscar" [value]="busquedaInventario" (input)="busquedaInventario = $event.target.value">
         </div>
         <div class="col-md-1 div-boton">
-            <button (click)="buscarInventario()" class="btn btn-primary boton-buscar">Buscar</button>
+            <button (click)="buscarInventario()" class="btn btn-primary boton-buscar">
+              <i class="pi pi-search icono-btn"></i>
+            </button>
         </div>
     </div>
 

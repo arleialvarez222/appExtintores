@@ -5,3 +5,12 @@ p-button {
 p-toast {
     z-index: 1;
 }
+
+.icono-btn{
+  margin-right: 6px;
+  font-size: 20px;
+}
+
+.titulo-h3{
+  font-size: 20px;
+}

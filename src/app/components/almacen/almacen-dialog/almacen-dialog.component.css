@@ -8,10 +8,17 @@ p-button {
     }
 }
 
-h3 {
-    text-transform: uppercase;
-}
-
 p-toast {
     z-index: 1;
+}
+
+/* estilos del titulo e icono del modal agregar */
+
+.icono-btn{
+  margin-right: 6px;
+  font-size: 20px;
+}
+
+.titulo-h3{
+  font-size: 20px;
 }

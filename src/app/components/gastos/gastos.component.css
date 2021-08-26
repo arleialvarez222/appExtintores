@@ -4,28 +4,29 @@
     box-sizing: border-box;
 }
 
+/* titulo principal */
+
 .titulo-prin {
-    text-transform: uppercase;
-    margin-top: 0px;
-    margin-left: 15px;
+  text-transform: uppercase;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
-.contenedor-dos {
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
+/* button main */
 
 .btn-gasto {
-    width: 150px;
-    height: 40px;
-    margin-left: 15px;
-    font-size: 13px;
-    text-transform: uppercase;
+  width: 200px;
+  height: 40px;
+  margin-left: 15px;
+  font-size: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
 }
 
 .icono-btn {
-    font-size: 12px;
-    margin-right: 6px;
+    font-size: 16px;
+    margin-right: 8px;
 }
 
 ::placeholder {
@@ -102,14 +103,11 @@ p-toast {
 
 .divBuscador{
   margin-top: 20px;
-}
-
-.abc {
-    margin-right: 15px;
+  margin-left: 15px;
 }
 
 .div-boton {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .imput-buscar {

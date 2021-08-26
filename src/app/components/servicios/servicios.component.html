@@ -1,8 +1,13 @@
 <div class="contenedor">
 
-    <div>
-        <h1 class="titulo-prin">Lista de servicios</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="titulo-prin">
+          Lista de servicios
+        </h2>
+      </div>
     </div>
+
     <div class="card">
         <p-table [value]="servicios" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Item {first} al {last} de {totalRecords} Items" [rowsPerPageOptions]="[5,8,10,25,50]">
             <ng-template pTemplate="header">
