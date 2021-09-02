@@ -22,7 +22,7 @@ export class AgregarDialogComponent implements OnInit {
   displayPosition = false;
   constructor( private _empleadoService: EmpleadoService,
                private _empresaService: EmpresaService,
-               private messageService: MessageService) {  }
+               private messageService: MessageService ) {  }
 
   ngOnInit(): void {
     this.verEmpresa()

@@ -4,44 +4,78 @@
             <div class="card_register">
                 <div class="card">
                     <div class="card-body">
-                        <form name="form" id="form" novalidate #form="ngForm">
+                        <form name="form" id="form" novalidate autocomplete="off" #form="ngForm">
+
                             <h1 class="text-center">Regístrate</h1>
+
                             <div class="form-group">
                                 <label for="nombres" class="form-label">Nombre</label>
-                                <input class="form-control icono-placeholder" type="text" id="nombres" name="nombres" placeholder=" "
+                                <input class="form-control icono-placeholder" type="text" id="nombres" name="nombres" [class.is-invalid]="nombres.invalid && nombres.touched" placeholder=" "
                                 [(ngModel)]="user.nombres" #nombres="ngModel" required>
+                                <small *ngIf="nombres.invalid && nombres.touched" class="form-text text-danger">
+                                  Este campo es obligatorio
+                                </small>
                             </div>
+
                             <div class="form-group">
                                 <label for="apellidos" class="form-label">Apellidos</label>
-                                <input class="form-control icono-placeholder" type="text" id="apellidos" name="apellidos" placeholder=" "
+                                <input class="form-control icono-placeholder" type="text" id="apellidos" name="apellidos" [class.is-invalid]="apellidos.invalid && apellidos.touched"  placeholder=" "
                                 [(ngModel)]="user.apellidos" #apellidos="ngModel" required>
+                                <small *ngIf="apellidos.invalid && apellidos.touched" class="form-text text-danger">
+                                  Este campo es obligatorio
+                                </small>
                             </div>
+
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control icono-placeholder" type="email" id="email" name="email" placeholder=" "
+                                <input class="form-control icono-placeholder" type="email" id="email" name="email" [class.is-invalid]="email.invalid && email.touched"  placeholder=" "
                                 [(ngModel)]="user.email" #email="ngModel" required>
+                                <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
+                                  Este campo es obligatorio
+                                </small>
                             </div>
+
                             <div class="form-group">
                               <label for="userName" class="form-label">Usuario</label>
-                              <input class="form-control icono-placeholder" type="text" id="userName" name="userName" placeholder=" "
+                              <input class="form-control icono-placeholder" type="text" id="userName" name="userName" [class.is-invalid]="userName.invalid && userName.touched"  placeholder=" "
                               [(ngModel)]="user.userName" #userName="ngModel" required>
+                              <small *ngIf="userName.invalid && userName.touched" class="form-text text-danger">
+                                Este campo es obligatorio
+                              </small>
                             </div>
+
                             <div class="form-group">
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input class="form-control icono-placeholder" type="password" id="password" name="password" placeholder=" "
+                                <input class="form-control icono-placeholder" type="password" id="password" name="password" [class.is-invalid]="password.invalid && password.touched"  placeholder=" "
                                 [(ngModel)]="user.password" #password="ngModel" required>
+                                <small *ngIf="password.invalid && password.touched" class="form-text text-danger">
+                                  Este campo es obligatorio
+                                </small>
                             </div>
+
                             <div class="form-group">
                                 <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-                                <input class="form-control icono-placeholder" type="password" id="confirmPassword" name="confirmPassword" placeholder=" " [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required>
+                                <input class="form-control icono-placeholder" type="password" id="confirmPassword" name="confirmPassword" [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched"  placeholder=" " [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" required>
+                                <small *ngIf="confirmPassword.invalid && confirmPassword.touched" class="form-text text-danger">
+                                  Este campo es obligatorio
+                                </small>
                             </div>
-                            <button type="button" (click)="registrarUsuario(form)" class="btn btn-lg btn-primary btn-block">Guardar</button>
 
-                            <a routerLink="/login" class="btn btn-lg btn-secondary btn-block">Iniciar sesión</a>
+                            <button type="button" (click)="registrarUsuario(form)" class="btn btn-lg btn-primary btn-block" [disabled]="form.invalid">
+                              Guardar
+                            </button>
+
+                            <a routerLink="/login" class="btn btn-lg btn-secondary btn-block">
+                              Iniciar sesión
+                            </a>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <p-toast position="top-center"></p-toast>
+
 </div>

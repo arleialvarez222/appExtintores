@@ -10,7 +10,7 @@ export class ServiciosModel{
   public detalleServicios : any;
 }
 
-export class DetalleServicioModel{
+export class DetalleServicioModel {
 
   public idServicios : number;
   public descripcion : string;
@@ -20,6 +20,7 @@ export class DetalleServicioModel{
   public cantidad : number;
   public total : number;
   public key : number;
+
 
   init(_data?: any) {
     if (_data) {
@@ -55,3 +56,5 @@ export class DetalleServicioModel{
   }
 
 }
+
+

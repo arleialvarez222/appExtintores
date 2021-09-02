@@ -9,15 +9,23 @@
 
                             <div class="form-group">
                               <label for="email" class="form-label">Email</label>
-                              <input class="form-control icono-placeholder" type="email" id="email" name="email" placeholder=" "
+                              <input class="form-control icono-placeholder" type="email" id="email" name="email" [class.is-invalid]="email.invalid && email.touched" placeholder=" "
                               [(ngModel)]="user.email" #email="ngModel" required>
+                              <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
+                                Este campo es obligatorio
+                              </small>
                             </div>
                             <div class="form-group">
                               <label for="password" class="form-label">Contraseña</label>
-                              <input class="form-control icono-placeholder" type="password" id="password" name="password" placeholder=" "
+                              <input class="form-control icono-placeholder" type="password" id="password" name="password" [class.is-invalid]="password.invalid && password.touched" placeholder=" "
                               [(ngModel)]="user.password" #password="ngModel" required>
+                              <small *ngIf="password.invalid && password.touched" class="form-text text-danger">
+                                Este campo es obligatorio
+                              </small>
                           </div>
-                            <button type="button" (click)="loginUsuario(form)" class="btn btn-lg btn-primary btn-block">Ingresar </button>
+                            <button type="button" (click)="loginUsuario(form)" class="btn btn-lg btn-primary btn-block" [disabled]="form.invalid">
+                              Ingresar
+                            </button>
 
                             <a routerLink="/registro" class="btn btn-lg btn-secondary btn-block">Registrate</a>
 
@@ -27,4 +35,7 @@
             </div>
         </div>
     </div>
+
+    <p-toast position="top-center"></p-toast>
+
 </div>

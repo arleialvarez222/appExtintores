@@ -33,21 +33,33 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginUsuario(form: NgForm){
-    this.subscripcion.add(
-      this.authService.loginUsuario(this?.user).subscribe(resp => {
-        this.router.navigate(['gastos']);
-
-        /* if(resp){
-          this.router.navigate(['gastos']);
-        }else{
-          this.router.navigate(['login']);
-        } */
-      }, (error) => {
-        console.log(error);
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Se encontraron problemas con el usuario'});
-        this.router.navigate(['login']);
+    if(form.invalid){
+      Object.values(form.controls).forEach(control => {
+        control.markAsTouched();
       })
-    );
+    }else{
+      this.subscripcion.add(
+        this.authService.loginUsuario(this?.user).subscribe(resp => {
+
+          this.router.navigate(['factura']);
+
+        }, (error) => {
+          this.validacionContraseña(error);
+        })
+      );
+    }
+  }
+
+  validacionContraseña(error){
+    if(error?.error == "El usuario no existe."){
+      this.messageService.add({severity:'warn', summary: 'Alerta', detail: 'El usuario no existe', life: 2000});
+
+    }else if(error?.error?.mensajeError == "Autentificacion invalida"){
+      this.messageService.add({severity:'warn', summary: 'Alerta', detail: 'La contrseña no es correcta', life: 2000});
+
+    }else if(error?.error?.errores == "A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 65.254.244.176:25"){
+      this.messageService.add({severity:'warn', summary: 'Alerta', detail: 'No se obtubo respuesta del servidor, revisa tu conexión', life: 2000});
+    }
   }
 
 }

@@ -37,7 +37,7 @@ export class PrecioDialogComponent implements OnInit {
   agregarPrecio(form: NgForm){
     if(form.invalid){
         Object.values(form.controls).forEach(control => {
-          control.markAsTouched()
+          control.markAsTouched();
         })
     }else{
       if(this.preciosModel.idPrecios > 0){

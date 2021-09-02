@@ -88,17 +88,12 @@ export class FacturaComponent implements OnInit {
   }
 
   agregarDetalle(form:NgForm){
-     /* if(form.invalid){
-      Object.values(form.controls).forEach(control => {
-        control.markAsTouched()
-      })
-    }else{ */
-      let resultado = this.detalleFactura.filter(
-        (c) => c?.key === this?.detalleServicio?.key
-      );
-      if(resultado?.length > 0){
-        this.messageService.add({severity:'warn', summary: 'OK', detail: 'Esta información ya existe', life: 1500});
-      }
+     if(this?.detalleServicio?.key != null){
+      this.modalEditarDetalle(this.detalleServicio);
+      form.resetForm();
+      this.detalleServicio.key = null;
+    }else{
+
       this.detalleServicio.total = this?.detalleServicio?.cantidad * this?.detalleServicio?.valor;
       this.detalleFactura.push(this?.detalleServicio?.clone());
       let respuesta = [...this.detalleFactura];
@@ -107,8 +102,9 @@ export class FacturaComponent implements OnInit {
       }
       this.operacionesDetalle();
       //form.resetForm();
-    /* } */
+     }
   }
+
 
   operacionesDetalle(){
     this.detalleServicio.total = 0;
@@ -129,9 +125,12 @@ export class FacturaComponent implements OnInit {
       this.servicioModel.valor = this?.detalleServicio?.total;
       this._serviciosService.agregarServicio(this?.servicioModel).subscribe(data => {
         this.messageService.add({severity:'success', summary: 'OK', detail: 'Los datos se guardaron correctamente', life: 1500});
-        console.log(data);
+        //console.log(data);
         form.resetForm();
         this.detalleFactura = [];
+        this.detalleServicio.total = 0;
+        this.iva = 0;
+        this.totalN = 0;
       }), (error) => {
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Error en la operacion, los datos no se guardaron', life: 1500});
       }
@@ -139,25 +138,13 @@ export class FacturaComponent implements OnInit {
   }
 
   editarDetalle(item: DetalleServicioModel){
-    //console.log(item);
     this.detalleServicio = item.clone();
     this.modalEditarDetalle(this?.detalleServicio);
   }
 
-  /* modalEditarDetalle(detalleServicio: DetalleServicioModel){
-    let resp = this?.detalleFactura.find(
-      (c) => c?.key === this?.detalleServicio?.key
-    );
-    resp.cantidad = detalleServicio?.cantidad;
-    resp.valor = detalleServicio?.valor;
-    this.operacionesDetalle();
-  } */
-
   modalEditarDetalle(detalleServicio: DetalleServicioModel){
     let respuesta = detalleServicio;
-    console.log(detalleServicio);
     let itemData = this.detalleFactura;
-    console.log(itemData);
     itemData.map(resp => {
       if(resp?.key === this.detalleServicio?.key){
         resp.descripcion = respuesta?.descripcion;
@@ -178,6 +165,13 @@ export class FacturaComponent implements OnInit {
       (c) => c?.key !== item?.key
     );
     this.operacionesDetalle();
+
+    if(this.detalleFactura?.length == 0){
+      this.detalleFactura = [];
+      this.detalleServicio.total = 0;
+      this.iva = 0;
+      this.totalN = 0;
+    }
   }
 
 }

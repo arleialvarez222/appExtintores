@@ -38,7 +38,7 @@ export class AuthService {
         this.saveToken(usuario?.token);
         this.loggedIn.next(true);
         return usuario;
-      }),catchError((error) => this.handlerError(error))
+      })
     );
   }
 
@@ -58,14 +58,14 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  private handlerError(error): Observable<never>{
+  /* private handlerError(error): Observable<never>{
     let errorMessage = 'Ocurrio un error';
     if(error){
       errorMessage = `Error: code ${error.message}`;
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-  }
+  } */
 
 
 
