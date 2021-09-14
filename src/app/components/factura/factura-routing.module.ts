@@ -4,7 +4,8 @@ import { GuardsComponentGuard } from 'src/app/guards/guards-component.guard';
 import { FacturaComponent } from './factura.component';
 
 const routes: Routes = [
-  { path: 'factura', component: FacturaComponent, canActivate: [GuardsComponentGuard] }
+  { path: 'factura', component: FacturaComponent, canActivate: [GuardsComponentGuard] },
+  { path: 'factura/:idServicios', component: FacturaComponent, canActivate: [GuardsComponentGuard] },
 ];
 
 @NgModule({

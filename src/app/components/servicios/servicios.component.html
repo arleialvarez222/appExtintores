@@ -30,7 +30,7 @@
                     <td data-titulo="Estado">{{servicios?.estado}}</td>
                     <td data-titulo="Clente">{{servicios?.empleado?.nombre | titlecase}} {{servicios?.empleado?.apellido | titlecase}}</td>
                     <td>
-                      <i (click)="showPositionDialog(servicios)" class="pi pi-pencil btn-outline-primary icono-table"></i>
+                      <i (click)="showPositionService(servicios?.idServicios)" class="pi pi-pencil btn-outline-primary icono-table"></i>
                       <i (click)="confirmarElimServicio(servicios)" class="pi pi-trash btn-outline-danger icono-table"></i>
                       <i (click)="showPositionDialog('center')" class="pi pi-list btn-outline-primary icono-table"></i>
                     </td>

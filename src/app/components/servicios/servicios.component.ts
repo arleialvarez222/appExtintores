@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ServiciosService } from '../../services/servicios.service';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-servicios',
@@ -11,14 +12,15 @@ import { NgForm } from '@angular/forms';
   providers: [HttpClient, MessageService, ConfirmationService, NgForm ],
 })
 export class ServiciosComponent implements OnInit {
-  servicios: any[] =[]
+  public servicios: any[] =[]
   serviciosList: any[] =[]
   position: string
   displayPosition: boolean;
   servicioDataItem;
 
   constructor(private _httpServicio: ServiciosService,
-              private messageService: MessageService ) { }
+              private messageService: MessageService,
+              private router: Router ) { }
 
   ngOnInit(): void {
     this.obtenerServicio();
@@ -29,6 +31,7 @@ export class ServiciosComponent implements OnInit {
       let respuesta;
       respuesta = data;
       this.servicios = respuesta?.data;
+      //console.log(respuesta.data);
     })
   }
 
@@ -56,10 +59,10 @@ export class ServiciosComponent implements OnInit {
     this.messageService.clear();
   }
 
+  showPositionService(idServicio: number) {
+    this.router.navigate([`factura/${idServicio}`])
+    console.log(idServicio);
 
-  showPositionDialog(position: string) {
-    this.position = position;
-    this.displayPosition = true;
   }
 
 }

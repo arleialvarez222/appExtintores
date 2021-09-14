@@ -11,6 +11,7 @@ import { ExtintorService } from '../../services/extintor.service';
 import * as shortid from 'shortid';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-factura',
@@ -19,10 +20,12 @@ import { HttpClient } from '@angular/common/http';
   providers: [HttpClient, MessageService, ConfirmationService, NgForm]
 })
 export class FacturaComponent implements OnInit {
+
   public servicioModel = new ServiciosModel();
   public detalleServicio = new DetalleServicioModel();
   public detalleEdicionServicio = new DetalleServicioModel();
 
+  servicios: [];
   clientes: ClienteModel[]= [];
   empleados: EmployeeModel[]= [];
   pesoExti: PesoModel[] = [];
@@ -31,20 +34,42 @@ export class FacturaComponent implements OnInit {
   totalN: number;
   iva: number;
 
-  constructor
-    (
+  constructor(
+      private route: ActivatedRoute,
       private _clienteService: ClientesService,
       private _empleadoService: EmpleadoService,
       private _extintorService: ExtintorService,
       private messageService: MessageService,
       private _serviciosService:ServiciosService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
+    this.pasarIdServicio();
     this.clienteConsulta();
     this.empleadoConsulta();
     this.pesoConsulta();
     this.tipoConsulta();
+  }
+
+  pasarIdServicio(){
+    this.route.params.subscribe((params: Params) => {
+      this.servicios = params.idServicios;
+      if(this.servicios){
+        this._serviciosService.consultarPorId(params.idServicios).subscribe(servicio => {
+          let ser;
+          ser = servicio;
+          this.servicios = ser?.data;
+          console.log(ser.data)
+          this.servicioModel = ser?.data;
+        })
+      }else{
+        this._serviciosService.consultarServicios().subscribe(servicio => {
+          let ser;
+          ser = servicio;
+          this.servicios = ser?.data;
+        });
+      }
+    })
   }
 
   clienteConsulta(){
@@ -173,5 +198,6 @@ export class FacturaComponent implements OnInit {
       this.totalN = 0;
     }
   }
+
 
 }

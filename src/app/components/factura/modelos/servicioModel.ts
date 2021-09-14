@@ -1,4 +1,5 @@
 export class ServiciosModel{
+  public idServicios : number;
   public idClientes : number;
   public idEmpleados : number;
   public fechaServicio : Date;

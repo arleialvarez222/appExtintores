@@ -4,7 +4,8 @@ import { GuardsComponentGuard } from 'src/app/guards/guards-component.guard';
 import { ServiciosComponent } from './servicios.component';
 
 const routes: Routes = [
-  { path: 'servicios', component: ServiciosComponent, canActivate: [GuardsComponentGuard] }
+  { path: 'servicios', component: ServiciosComponent, canActivate: [GuardsComponentGuard] },
+  { path: 'servicios/:serviciosId', component: ServiciosComponent, canActivate: [GuardsComponentGuard] },
 ];
 
 @NgModule({
